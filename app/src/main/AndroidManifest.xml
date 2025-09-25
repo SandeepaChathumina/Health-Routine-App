@@ -39,7 +39,7 @@
             android:name=".MoodActivity"
             android:exported="false" />
         <activity
-            android:name=".HabitsActivity"
+            android:name=".Habits"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

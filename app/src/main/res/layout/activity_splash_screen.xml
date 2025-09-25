@@ -7,12 +7,13 @@
     android:background="#2563EB"
     android:padding="32dp">
 
-    <!-- Simple Text Heart Icon -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/heart_icon"
-        android:textSize="80sp"
+    <!-- Heart Icon -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_heart"
+        android:tint="#FFFFFF"
+        android:background="@drawable/bg_circle_white_transparent"
         android:layout_marginBottom="24dp" />
 
     <!-- App Name -->
