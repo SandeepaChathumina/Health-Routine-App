@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_habits"
+        android:icon="@drawable/ic_target"
+        android:title="Habits" />
+
+    <item
+        android:id="@+id/nav_mood"
+        android:icon="@drawable/ic_heart"
+        android:title="Mood" />
+
+    <item
+        android:id="@+id/nav_hydration"
+        android:icon="@drawable/ic_droplets"
+        android:title="Hydration" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_user"
+        android:title="Profile" />
+</menu>

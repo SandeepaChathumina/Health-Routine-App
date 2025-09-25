@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8FAFC">
+
+    <!-- Content Area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Habits"
+                        android:textSize="28sp"
+                        android:textColor="#1E293B"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Keep building healthy routines"
+                        android:textSize="14sp"
+                        android:textColor="#64748B"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_add_habit"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_rounded_primary"
+                    android:src="@drawable/ic_plus"
+                    android:tint="#FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Categories Filter -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="All"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/bg_rounded_primary"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"/>
+
+                    <Button
+                        android:id="@+id/btn_health"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Health"
+                        android:textColor="#64748B"
+                        android:background="@drawable/bg_rounded_white"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"/>
+
+                    <Button
+                        android:id="@+id/btn_fitness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Fitness"
+                        android:textColor="#64748B"
+                        android:background="@drawable/bg_rounded_white"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"/>
+
+                    <Button
+                        android:id="@+id/btn_mindfulness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Mindfulness"
+                        android:textColor="#64748B"
+                        android:background="@drawable/bg_rounded_white"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Stats Overview -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:background="#FFFFFF">
+
+                    <!-- Completed Today -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_target"
+                            android:tint="#2563EB"
+                            android:background="@drawable/bg_circle_light_blue"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3/5"
+                            android:textSize="18sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Completed"
+                            android:textSize="12sp"
+                            android:textColor="#64748B"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"/>
+
+                    <!-- Best Streak -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_flame"
+                            android:tint="#F59E0B"
+                            android:background="@drawable/bg_circle_light_orange"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textSize="18sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Best Streak"
+                            android:textSize="12sp"
+                            android:textColor="#64748B"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"/>
+
+                    <!-- Success Rate -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_trending_up"
+                            android:tint="#10B981"
+                            android:background="@drawable/bg_circle_light_green"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="85%"
+                            android:textSize="18sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Success Rate"
+                            android:textSize="12sp"
+                            android:textColor="#64748B"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Habits List -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Habits"
+                android:textSize="18sp"
+                android:textColor="#1E293B"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Habit 1: Drink Water -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <!-- Checkbox -->
+                        <CheckBox
+                            android:id="@+id/cb_water"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:button="@drawable/custom_checkbox"
+                            android:checked="true"
+                            android:layout_marginEnd="12dp"/>
+
+                        <!-- Habit Info -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Drink 8 glasses of water"
+                                android:textSize="16sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginTop="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Health"
+                                    android:textSize="12sp"
+                                    android:textColor="#2563EB"
+                                    android:background="@drawable/bg_rounded_tag_blue"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginStart="8dp">
+
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/ic_flame"
+                                        android:tint="#F59E0B"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="12 days"
+                                        android:textSize="12sp"
+                                        android:textColor="#F59E0B"
+                                        android:layout_marginStart="4dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- More Options -->
+                        <ImageButton
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_more_vertical"
+                            android:tint="#64748B"
+                            android:background="?attr/selectableItemBackgroundBorderless"/>
+                    </LinearLayout>
+
+                    <!-- Progress Bar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="12px"
+                        android:layout_marginStart="36dp">
+
+                        <ProgressBar
+                            android:id="@+id/progress_water"
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:progress="100"
+                            android:progressTint="#06B6D4"
+                            android:backgroundTint="#E2E8F0"
+                            android:layout_marginEnd="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✓"
+                            android:textSize="12sp"
+                            android:textColor="#06B6D4"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Habit 2: Meditation -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <CheckBox
+                            android:id="@+id/cb_meditation"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:button="@drawable/custom_checkbox"
+                            android:checked="false"
+                            android:layout_marginEnd="12dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10-minute meditation"
+                                android:textSize="16sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginTop="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mindfulness"
+                                    android:textSize="12sp"
+                                    android:textColor="#8B5CF6"
+                                    android:background="@drawable/bg_rounded_tag_purple"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginStart="8dp">
+
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/ic_flame"
+                                        android:tint="#F59E0B"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="8 days"
+                                        android:textSize="12sp"
+                                        android:textColor="#F59E0B"
+                                        android:layout_marginStart="4dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_more_vertical"
+                            android:tint="#64748B"
+                            android:background="?attr/selectableItemBackgroundBorderless"/>
+                    </LinearLayout>
+
+                    <!-- Progress Bar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="12px"
+                        android:layout_marginStart="36dp">
+
+                        <ProgressBar
+                            android:id="@+id/progress_meditation"
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:progress="0"
+                            android:progressTint="#8B5CF6"
+                            android:backgroundTint="#E2E8F0"
+                            android:layout_marginEnd="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0/1"
+                            android:textSize="12sp"
+                            android:textColor="#64748B"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Add more habit cards as needed -->
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Component -->
+    <include layout="@layout/layout_bottom_navigation"/>
+</LinearLayout>

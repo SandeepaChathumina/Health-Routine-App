@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Health App</string>
+    <string name="heart_icon">❤️</string>
+    <string name="target_icon">🎯</string>
+</resources>
