@@ -33,10 +33,10 @@
             android:name=".Splash_Screen"
             android:exported="false" />
         <activity
-            android:name=".HydrationActivity"
+            android:name=".Hydration"
             android:exported="false" />
         <activity
-            android:name=".MoodActivity"
+            android:name=".Mood"
             android:exported="false" />
         <activity
             android:name=".Habits"

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="card_add_habit" type="id">card_add_habit</item>
+    <item name="card_log_mood" type="id">card_log_mood</item>
+    <item name="card_drink_water" type="id">card_drink_water</item>
+    <item name="card_view_stats" type="id">card_view_stats</item>
+</resources>

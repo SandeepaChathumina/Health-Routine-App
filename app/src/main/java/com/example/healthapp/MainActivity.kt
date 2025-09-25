@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_mood -> {
-                    startActivity(Intent(this, MoodActivity::class.java))
+                    startActivity(Intent(this, Mood::class.java))
                     true
                 }
                 R.id.nav_hydration -> {
-                    startActivity(Intent(this, HydrationActivity::class.java))
+                    startActivity(Intent(this, Hydration::class.java))
                     true
                 }
                 R.id.nav_profile -> {
@@ -43,10 +43,10 @@ class MainActivity : AppCompatActivity() {
             // Open add habit activity
         }
         findViewById<Button>(R.id.btn_log_mood).setOnClickListener {
-            startActivity(Intent(this, MoodActivity::class.java))
+            startActivity(Intent(this, Mood::class.java))
         }
         findViewById<Button>(R.id.btn_drink_water).setOnClickListener {
-            startActivity(Intent(this, HydrationActivity::class.java))
+            startActivity(Intent(this, Hydration::class.java))
         }
     }
 }

@@ -1,91 +1,99 @@
 package com.example.healthapp
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Habits : AppCompatActivity() {
-    private lateinit var habitsRecyclerView: RecyclerView
-    private lateinit var habitsAdapter: HabitsAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habits)
 
-        setupToolbar()
-        setupRecyclerView()
-        loadHabits()
+        setupBottomNavigation()
+        setupCategoryFilters()
+        setupHabitInteractions()
     }
 
-    private fun setupToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    private fun setupBottomNavigation() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.selectedItemId = R.id.nav_habits
 
-        findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener {
-            // Open add habit activity
+        bottomNav.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, Home::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_habits -> true
+                R.id.nav_mood -> {
+                    startActivity(Intent(this, Mood::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_hydration -> {
+                    startActivity(Intent(this, Hydration::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, Profile::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
         }
     }
 
-    private fun setupRecyclerView() {
-        habitsRecyclerView = findViewById(R.id.rv_habits)
-        habitsAdapter = HabitsAdapter()
-        habitsRecyclerView.layoutManager = LinearLayoutManager(this)
-        habitsRecyclerView.adapter = habitsAdapter
-    }
-
-    private fun loadHabits() {
-        val habits = listOf(
-            Habit("Drink 8 glasses of water", "Health", 8, 8, true, 12),
-            Habit("10-minute meditation", "Mindfulness", 1, 1, true, 8),
-            Habit("Read for 30 minutes", "Learning", 0, 1, false, 5),
-            Habit("5000 steps", "Fitness", 3200, 5000, false, 15),
-            Habit("Take vitamins", "Health", 1, 1, true, 20)
+    private fun setupCategoryFilters() {
+        val categories = listOf(
+            findViewById<Button>(R.id.btn_all),
+            findViewById<Button>(R.id.btn_health),
+            findViewById<Button>(R.id.btn_fitness),
+            findViewById<Button>(R.id.btn_mindfulness)
         )
-        habitsAdapter.submitList(habits)
-    }
 
-    data class Habit(
-        val title: String,
-        val category: String,
-        val progress: Int,
-        val target: Int,
-        val completed: Boolean,
-        val streak: Int
-    )
+        categories.forEach { button ->
+            button.setOnClickListener {
+                // Update active state
+                categories.forEach { it.setTextColor(Color.parseColor("#64748B")) }
+                categories.forEach { it.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_white) }
 
-    class HabitsAdapter : ListAdapter<Habit, HabitsAdapter.ViewHolder>(DiffCallback()) {
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val title: TextView = view.findViewById(R.id.tv_title)
-            val category: TextView = view.findViewById(R.id.tv_category)
-            val progress: ProgressBar = view.findViewById(R.id.progress_bar)
-            val progressText: TextView = view.findViewById(R.id.tv_progress)
-            val streak: TextView = view.findViewById(R.id.tv_streak)
-        }
+                button.setTextColor(Color.WHITE)
+                button.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_primary)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_habit, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val habit = getItem(position)
-            holder.title.text = habit.title
-            holder.category.text = habit.category
-            holder.progress.max = habit.target
-            holder.progress.progress = habit.progress
-            holder.progressText.text = "${habit.progress}/${habit.target}"
-            holder.streak.text = "${habit.streak} days"
+                // Filter habits based on category
+                filterHabits(button.text.toString())
+            }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Habit>() {
-        override fun areItemsTheSame(oldItem: Habit, newItem: Habit): Boolean {
-            return oldItem.title == newItem.title
+    private fun setupHabitInteractions() {
+        findViewById<ImageButton>(R.id.btn_add_habit).setOnClickListener {
+            // Open add habit dialog/activity
         }
 
-        override fun areContentsTheSame(oldItem: Habit, newItem: Habit): Boolean {
-            return oldItem == newItem
+        findViewById<CheckBox>(R.id.cb_water).setOnCheckedChangeListener { _, isChecked ->
+            updateHabitProgress("water", isChecked)
         }
+
+        findViewById<CheckBox>(R.id.cb_meditation).setOnCheckedChangeListener { _, isChecked ->
+            updateHabitProgress("meditation", isChecked)
+        }
+    }
+
+    private fun filterHabits(category: String) {
+        // Implement habit filtering logic
+    }
+
+    private fun updateHabitProgress(habitId: String, completed: Boolean) {
+        // Update progress bar and save to SharedPreferences
     }
 }

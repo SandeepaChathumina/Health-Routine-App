@@ -1,12 +1,9 @@
 package com.example.healthapp
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class HydrationActivity : AppCompatActivity() {
+class Hydration : AppCompatActivity() {
     private var currentIntake = 1500
     private val dailyGoal = 2500
 
