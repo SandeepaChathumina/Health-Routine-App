@@ -4,4 +4,7 @@
     <item name="card_log_mood" type="id">card_log_mood</item>
     <item name="card_drink_water" type="id">card_drink_water</item>
     <item name="card_view_stats" type="id">card_view_stats</item>
+    <item name="tv_view_insights" type="id">tv_view_insights</item>
+    <item name="card_mood_patterns" type="id">card_mood_patterns</item>
+    <item name="card_set_reminders" type="id">card_set_reminders</item>
 </resources>

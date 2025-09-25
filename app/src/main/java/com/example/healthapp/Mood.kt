@@ -1,70 +1,132 @@
 package com.example.healthapp
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Mood : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mood)
 
-        setupToolbar()
-        setupMoodGrid()
-        setupRecentEntries()
+        setupBottomNavigation()
+        setupMoodInteractions()
     }
 
-    private fun setupToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    private fun setupBottomNavigation() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.selectedItemId = R.id.nav_mood
 
-        findViewById<FloatingActionButton>(R.id.fab_add).setOnClickListener {
-            // Open add mood activity
+        bottomNav.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, Home::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_habits -> {
+                    startActivity(Intent(this, Habits::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_mood -> true
+                R.id.nav_hydration -> {
+                    startActivity(Intent(this, Hydration::class.java))
+                    finish()
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, Profile::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
         }
     }
 
-    private fun setupMoodGrid() {
+    private fun setupMoodInteractions() {
+        findViewById<ImageButton>(R.id.btn_add_mood).setOnClickListener {
+            showAddMoodDialog()
+        }
+
+        // View Insights click
+        findViewById<TextView>(R.id.tv_view_insights).setOnClickListener {
+            // Open mood insights activity
+        }
+
+        // Quick actions
+        findViewById<CardView>(R.id.card_mood_patterns).setOnClickListener {
+            // Open mood patterns activity
+        }
+
+        findViewById<CardView>(R.id.card_set_reminders).setOnClickListener {
+            // Open mood reminders activity
+        }
+    }
+
+    private fun showAddMoodDialog() {
         val moods = listOf(
-            Mood("😊", "Happy", 15, "#10B981"),
-            Mood("😴", "Tired", 8, "#6B7280"),
-            Mood("😌", "Calm", 12, "#8B5CF6"),
-            Mood("😤", "Stressed", 5, "#EF4444"),
-            Mood("🥳", "Excited", 7, "#F59E0B")
+            MoodEntry("😊", "Happy", "#10B981"),
+            MoodEntry("😌", "Calm", "#8B5CF6"),
+            MoodEntry("😤", "Stressed", "#EF4444"),
+            MoodEntry("🥳", "Excited", "#F59E0B"),
+            MoodEntry("😴", "Tired", "#6B7280")
         )
 
-        val gridLayout = findViewById<GridLayout>(R.id.grid_moods)
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("How are you feeling?")
+
+        val moodView = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER
+        }
+
         moods.forEach { mood ->
-            val view = LayoutInflater.from(this).inflate(R.layout.item_mood, gridLayout, false)
-            view.findViewById<TextView>(R.id.tv_emoji).text = mood.emoji
-            view.findViewById<TextView>(R.id.tv_label).text = mood.label
-            view.findViewById<TextView>(R.id.tv_count).text = "${mood.count} times"
-
-            val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
-            progressBar.progress = (mood.count * 100 / 20) // Assuming 20 is max
-
-            gridLayout.addView(view)
+            val moodButton = Button(this).apply {
+                text = mood.emoji
+                textSize = 20f
+                setBackgroundColor(Color.TRANSPARENT)
+                setOnClickListener {
+                    // Save mood entry
+                    saveMoodEntry(mood)
+                    // Dismiss dialog
+                }
+            }
+            moodView.addView(moodButton)
         }
+
+        builder.setView(moodView)
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+        builder.show()
     }
 
-    private fun setupRecentEntries() {
-        val entries = listOf(
-            MoodEntry("Today, 2:30 PM", "😊", "Happy", "Had a great workout this morning!"),
-            MoodEntry("Yesterday, 8:45 PM", "😌", "Calm", "Finished all my tasks for the day"),
-            MoodEntry("Nov 15, 11:20 AM", "😤", "Stressed", "Lots of deadlines coming up")
-        )
+    private fun saveMoodEntry(mood: MoodEntry) {
+        // Save mood to SharedPreferences
+        val prefs = getSharedPreferences("mood_data", MODE_PRIVATE)
+        val editor = prefs.edit()
 
-        val container = findViewById<LinearLayout>(R.id.container_recent_entries)
-        entries.forEach { entry ->
-            val view = LayoutInflater.from(this).inflate(R.layout.item_mood_entry, container, false)
-            view.findViewById<TextView>(R.id.tv_date).text = entry.date
-            view.findViewById<TextView>(R.id.tv_emoji).text = entry.emoji
-            view.findViewById<TextView>(R.id.tv_mood).text = entry.mood
-            view.findViewById<TextView>(R.id.tv_note).text = entry.note
+        // Increment mood count
+        val currentCount = prefs.getInt(mood.label, 0)
+        editor.putInt(mood.label, currentCount + 1)
 
-            container.addView(view)
-        }
+        // Save current entry
+        editor.putString("last_mood", mood.emoji)
+        editor.putLong("last_mood_time", System.currentTimeMillis())
+        editor.apply()
+
+        Toast.makeText(this, "Mood recorded: ${mood.label}", Toast.LENGTH_SHORT).show()
     }
 
-    data class Mood(val emoji: String, val label: String, val count: Int, val color: String)
-    data class MoodEntry(val date: String, val emoji: String, val mood: String, val note: String)
+    data class MoodEntry(val emoji: String, val label: String, val color: String)
 }
