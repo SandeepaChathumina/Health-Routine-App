@@ -7,4 +7,5 @@
     <item name="tv_view_insights" type="id">tv_view_insights</item>
     <item name="card_mood_patterns" type="id">card_mood_patterns</item>
     <item name="card_set_reminders" type="id">card_set_reminders</item>
+    <item name="card_account_settings" type="id">card_account_settings</item>
 </resources>
