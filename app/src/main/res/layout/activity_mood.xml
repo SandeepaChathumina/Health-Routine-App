@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_pink"
                     android:src="@drawable/ic_plus"
-                    android:tint="#FFFFFF"/>
+                    app:tint="#FFFFFF"/>
             </LinearLayout>
 
             <!-- Quick Stats -->
@@ -87,7 +87,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_calendar"
-                            android:tint="#2563EB"
+                            app:tint="#2563EB"
                             android:background="@drawable/bg_circle_light_blue"
                             android:padding="8dp"/>
 
@@ -133,7 +133,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_trending_up"
-                            android:tint="#10B981"
+                            app:tint="#10B981"
                             android:background="@drawable/bg_circle_light_green"
                             android:padding="8dp"/>
 
@@ -176,7 +176,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_star"
-                            android:tint="#F59E0B"
+                            app:tint="#F59E0B"
                             android:background="@drawable/bg_circle_light_orange"
                             android:padding="8dp"/>
 
@@ -466,7 +466,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_heart"
-                            android:tint="#EC4899"/>
+                            app:tint="#EC4899"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -501,7 +501,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_calendar"
-                            android:tint="#2563EB"/>
+                            app:tint="#2563EB"/>
 
                         <TextView
                             android:layout_width="wrap_content"

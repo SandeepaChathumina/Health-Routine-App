@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_white"
                     android:src="@drawable/ic_settings"
-                    android:tint="#64748B"/>
+                    app:tint="#64748B"/>
             </LinearLayout>
 
             <!-- Progress Card -->
@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="space-around">
+                        >
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -241,7 +241,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_target"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_blue"/>
 
                         <TextView
@@ -278,7 +278,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_heart"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_pink"/>
 
                         <TextView
@@ -315,7 +315,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_droplets"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_teal"/>
 
                         <TextView
@@ -352,7 +352,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_trending_up"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_green"/>
 
                         <TextView

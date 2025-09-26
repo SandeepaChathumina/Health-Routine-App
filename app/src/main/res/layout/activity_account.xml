@@ -54,7 +54,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:src="@drawable/ic_user"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_primary"
                             android:padding="25dp"/>
 
@@ -63,7 +63,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_camera"
-                            android:tint="#FFFFFF"
+                            app:tint="#FFFFFF"
                             android:background="@drawable/bg_circle_primary"
                             android:padding="6dp"
                             android:layout_alignParentEnd="true"

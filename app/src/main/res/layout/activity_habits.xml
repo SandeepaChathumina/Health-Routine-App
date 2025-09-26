@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_primary"
                     android:src="@drawable/ic_plus"
-                    android:tint="#FFFFFF"/>
+                    app:tint="#FFFFFF"/>
             </LinearLayout>
 
             <!-- Categories Filter -->
@@ -144,7 +144,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_target"
-                            android:tint="#2563EB"
+                            app:tint="#2563EB"
                             android:background="@drawable/bg_circle_light_blue"
                             android:padding="8dp"/>
 
@@ -186,7 +186,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_flame"
-                            android:tint="#F59E0B"
+                            app:tint="#F59E0B"
                             android:background="@drawable/bg_circle_light_orange"
                             android:padding="8dp"/>
 
@@ -228,7 +228,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_trending_up"
-                            android:tint="#10B981"
+                            app:tint="#10B981"
                             android:background="@drawable/bg_circle_light_green"
                             android:padding="8dp"/>
 
@@ -335,7 +335,7 @@
                                         android:layout_width="12dp"
                                         android:layout_height="12dp"
                                         android:src="@drawable/ic_flame"
-                                        android:tint="#F59E0B"/>
+                                        app:tint="#F59E0B"/>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -353,7 +353,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_more_vertical"
-                            android:tint="#64748B"
+                            app:tint="#64748B"
                             android:background="?attr/selectableItemBackgroundBorderless"/>
                     </LinearLayout>
 
@@ -459,7 +459,7 @@
                                         android:layout_width="12dp"
                                         android:layout_height="12dp"
                                         android:src="@drawable/ic_flame"
-                                        android:tint="#F59E0B"/>
+                                        app:tint="#F59E0B"/>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -476,7 +476,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_more_vertical"
-                            android:tint="#64748B"
+                            app:tint="#64748B"
                             android:background="?attr/selectableItemBackgroundBorderless"/>
                     </LinearLayout>
 

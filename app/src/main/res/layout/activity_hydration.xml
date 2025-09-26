@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_white"
                     android:src="@drawable/ic_settings"
-                    android:tint="#64748B"/>
+                    app:tint="#64748B"/>
             </LinearLayout>
 
             <!-- Water Bottle Visualization -->
@@ -199,7 +199,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_minus"
-                    android:tint="#EF4444"
+                    app:tint="#EF4444"
                     android:background="@drawable/bg_rounded_white"
                     android:layout_marginEnd="16dp"/>
 
@@ -224,7 +224,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_plus"
-                    android:tint="#06B6D4"
+                    app:tint="#06B6D4"
                     android:background="@drawable/bg_rounded_white"
                     android:layout_marginStart="16dp"/>
             </LinearLayout>
@@ -266,7 +266,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_droplets"
-                            android:tint="#06B6D4"
+                            app:tint="#06B6D4"
                             android:background="@drawable/bg_circle_light_teal"
                             android:padding="8dp"/>
 
@@ -313,7 +313,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_target"
-                            android:tint="#06B6D4"
+                            app:tint="#06B6D4"
                             android:background="@drawable/bg_circle_light_teal"
                             android:padding="8dp"/>
 
@@ -359,7 +359,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/ic_award"
-                            android:tint="#06B6D4"
+                            app:tint="#06B6D4"
                             android:background="@drawable/bg_circle_light_teal"
                             android:padding="8dp"/>
 
