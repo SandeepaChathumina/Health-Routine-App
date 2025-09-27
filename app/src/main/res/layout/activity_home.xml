@@ -77,26 +77,25 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_marginBottom="24dp"
                         android:gravity="center_vertical"
-                        android:layout_marginBottom="24dp">
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:text="Today's Progress"
-                            android:textSize="18sp"
                             android:textColor="#1E293B"
-                            android:textStyle="bold"/>
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="View All"
-                            android:textSize="14sp"
                             android:textColor="#2563EB"
-                            android:textStyle="bold"/>
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <!-- Progress Circle -->
