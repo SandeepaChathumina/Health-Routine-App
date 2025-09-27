@@ -2,4 +2,7 @@
     <string name="app_name">Health App</string>
     <string name="heart_icon">❤️</string>
     <string name="target_icon">🎯</string>
+    <string name="logo">logo</string>
+    <string name="healthflow">HealthFlow</string>
+    <string name="your_daily_wellness_companion">Your Daily Wellness Companion</string>
 </resources>
