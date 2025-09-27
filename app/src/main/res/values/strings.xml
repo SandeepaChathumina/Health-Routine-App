@@ -5,4 +5,8 @@
     <string name="logo">logo</string>
     <string name="healthflow">HealthFlow</string>
     <string name="your_daily_wellness_companion">Your Daily Wellness Companion</string>
+    <string name="target_imoji">🎯</string>
+    <string name="track_your_habits">Track Your Habits</string>
+    <string name="build_healthy_routines_with_visual_progress_tracking_and_streak_counters">Build healthy routines with visual progress tracking and streak counters</string>
+    <string name="next">Next</string>
 </resources>
