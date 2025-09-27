@@ -13,4 +13,8 @@
     <string name="monitor_your_mood">Monitor Your Mood</string>
     <string name="keep_a_daily_mood_journal_with_rich_insights_and_calendar_view">Keep a daily mood journal with rich insights and calendar view</string>
     <string name="previous">Previous</string>
+    <string name="droplet_emoji">💧</string>
+    <string name="stay_hydrated">Stay Hydrated</string>
+    <string name="get_personalized_reminders_and_track_your_daily_water_intake">Get personalized reminders and track your daily water intake</string>
+    <string name="get_started">Get Started</string>
 </resources>
