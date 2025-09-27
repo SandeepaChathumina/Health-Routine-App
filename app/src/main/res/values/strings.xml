@@ -17,4 +17,25 @@
     <string name="stay_hydrated">Stay Hydrated</string>
     <string name="get_personalized_reminders_and_track_your_daily_water_intake">Get personalized reminders and track your daily water intake</string>
     <string name="get_started">Get Started</string>
+    <string name="good_morning">Good morning!</string>
+    <string name="let_s_make_today_amazing">Let\'s make today amazing</string>
+    <string name="settings">Settings</string>
+    <string name="today_s_progress">Today\'s Progress</string>
+    <string name="view_all">View All</string>
+    <string name="_75">75%</string>
+    <string name="complete">Complete</string>
+    <string name="_6_8">6/8</string>
+    <string name="today_s_habits">Today\'s Habits</string>
+    <string name="_12_days">12 days</string>
+    <string name="current_streak">Current Streak</string>
+    <string name="_1250ml">1250ml</string>
+    <string name="water_intake">Water Intake</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="edit">Edit</string>
+    <string name="add_habit">Add Habit</string>
+    <string name="log_mood">Log Mood</string>
+    <string name="drink_water">Drink Water</string>
+    <string name="view_stats">View Stats</string>
+    <string name="bmi_calculator">BMI Calculator</string>
+    <string name="daily_workout">Daily Workout</string>
 </resources>
