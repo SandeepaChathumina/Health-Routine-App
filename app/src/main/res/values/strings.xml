@@ -59,4 +59,6 @@
     <string name="_10_minute_meditation">10-minute meditation</string>
     <string name="_8_days">8 days</string>
     <string name="_0_1">0/1</string>
+    <string name="flame_icon">flame_icon</string>
+    <string name="trending_up_icon">trending_up_icon</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -182,6 +183,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/target_icon"
                 android:src="@drawable/ic_target"
                 app:tint="#2563EB"/>
         </LinearLayout>
@@ -230,6 +232,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/flame_icon"
                 android:src="@drawable/ic_flame"
                 app:tint="#F59E0B"/>
         </LinearLayout>
@@ -278,6 +281,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/trending_up_icon"
                 android:src="@drawable/ic_trending_up"
                 app:tint="#10B981"/>
         </LinearLayout>
@@ -404,13 +408,16 @@ android:gravity="center_vertical">
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginStart="8dp">
+            android:layout_marginStart="8dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
+                android:contentDescription="@string/flame_icon"
                 android:src="@drawable/ic_flame"
-                app:tint="#F59E0B"/>
+                app:tint="#F59E0B"
+                tools:ignore="TooDeepLayout" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -533,11 +540,13 @@ app:cardUseCompatPadding="true">
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="8dp">
+                    android:layout_marginStart="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
+                        android:contentDescription="@string/flame_icon"
                         android:src="@drawable/ic_flame"
                         app:tint="#F59E0B"/>
 
