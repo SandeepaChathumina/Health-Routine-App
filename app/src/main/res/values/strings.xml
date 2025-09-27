@@ -9,4 +9,8 @@
     <string name="track_your_habits">Track Your Habits</string>
     <string name="build_healthy_routines_with_visual_progress_tracking_and_streak_counters">Build healthy routines with visual progress tracking and streak counters</string>
     <string name="next">Next</string>
+    <string name="happy_face">😊</string>
+    <string name="monitor_your_mood">Monitor Your Mood</string>
+    <string name="keep_a_daily_mood_journal_with_rich_insights_and_calendar_view">Keep a daily mood journal with rich insights and calendar view</string>
+    <string name="previous">Previous</string>
 </resources>
