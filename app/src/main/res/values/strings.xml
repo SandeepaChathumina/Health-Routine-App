@@ -38,4 +38,25 @@
     <string name="view_stats">View Stats</string>
     <string name="bmi_calculator">BMI Calculator</string>
     <string name="daily_workout">Daily Workout</string>
+    <string name="my_habits">My Habits</string>
+    <string name="keep_building_healthy_routines">Keep building healthy routines</string>
+    <string name="add_new_habit">Add new habit</string>
+    <string name="all">All</string>
+    <string name="health">Health</string>
+    <string name="fitness">Fitness</string>
+    <string name="mindfulness">Mindfulness</string>
+    <string name="work">Work</string>
+    <string name="_3_5">3/5</string>
+    <string name="completed">Completed</string>
+    <string name="_12">12</string>
+    <string name="best_streak">Best Streak</string>
+    <string name="_85">85%</string>
+    <string name="success_rate">Success Rate</string>
+    <string name="your_habits">Your Habits</string>
+    <string name="sort_by_recent">Sort by: Recent</string>
+    <string name="drink_8_glasses_of_water">Drink 8 glasses of water</string>
+    <string name="more_options">More options</string>
+    <string name="_10_minute_meditation">10-minute meditation</string>
+    <string name="_8_days">8 days</string>
+    <string name="_0_1">0/1</string>
 </resources>
