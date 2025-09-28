@@ -1,6 +1,8 @@
 package com.example.healthapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,5 +14,11 @@ class DailyWorkoutActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_daily_workout)
 
+        val backButton: ImageButton = findViewById(R.id.btn_back)
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+        }
     }
 }
