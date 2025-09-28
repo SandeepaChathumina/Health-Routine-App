@@ -18,17 +18,41 @@ class Home : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-        setContentView(R.menu.bottom_navigation_menu)
+        setupBottomNavigation()
 
-        //habit button
+    }
 
-        val habit_btn: Button = findViewById(R.id.nav_habits)
-        habit_btn.setOnClickListener {
-            // ✅ Navigate to OnBoarding3 instead of OnBoarding2
-            val intent = Intent(this, Habits::class.java)
-            startActivity(intent)
+    private fun setupBottomNavigation() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    // Already on home, do nothing or refresh
+                    true
+                }
+                R.id.nav_habits -> {
+                    val intent = Intent(this, Habits::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_mood -> {
+                    val intent = Intent(this, Mood::class.java) // Replace with your Mood activity
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_hydration -> {
+                    val intent = Intent(this, Hydration::class.java) // Replace with your Hydration activity
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_profile -> {
+                    val intent = Intent(this, Profile::class.java) // Replace with your Profile activity
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
         }
-
-
     }
 }

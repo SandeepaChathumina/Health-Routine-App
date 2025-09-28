@@ -15,6 +15,48 @@ class Habits : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habits)
 
+        setupBottomNavigation()
 
+    }
+
+    private fun setupBottomNavigation() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    // Already on home, do nothing or refresh
+                    true
+                }
+
+                R.id.nav_habits -> {
+                    val intent = Intent(this, Habits::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.nav_mood -> {
+                    val intent = Intent(this, Mood::class.java) // Replace with your Mood activity
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.nav_hydration -> {
+                    val intent =
+                        Intent(this, Hydration::class.java) // Replace with your Hydration activity
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.nav_profile -> {
+                    val intent =
+                        Intent(this, Profile::class.java) // Replace with your Profile activity
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
