@@ -18,6 +18,24 @@ class Home : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
+        //quick actions
+
+        val workoutButton: Button = findViewById(R.id.card_bmi_calculator)
+        workoutButton.setOnClickListener {
+            // ✅ Navigate to OnBoarding3 instead of OnBoarding2
+            val intent = Intent(this, BmiCalculatorActivity::class.java)
+            startActivity(intent)
+        }
+
+        //next button
+
+        val nextButton: Button = findViewById(R.id.card_daily_workout)
+        nextButton.setOnClickListener {
+            // ✅ Navigate to OnBoarding3 instead of OnBoarding2
+            val intent = Intent(this, DailyWorkoutActivity::class.java)
+            startActivity(intent)
+        }
+
         setupBottomNavigation()
 
     }

@@ -32,7 +32,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Profile"
+                    android:text="@string/profile"
                     android:textSize="28sp"
                     android:textColor="#1E293B"
                     android:textStyle="bold"/>
@@ -43,16 +43,18 @@
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_white"
                     android:src="@drawable/ic_settings"
-                    app:tint="#64748B"/>
+                    app:tint="#64748B"
+                    android:contentDescription="@string/settings"/>
             </LinearLayout>
 
-            <!-- User Profile Card -->
+            <!-- User Profile Card - IMPROVED -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,21 +65,27 @@
                     android:gravity="center">
 
                     <!-- Avatar -->
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_user"
-                        app:tint="#FFFFFF"
                         android:background="@drawable/bg_circle_primary"
-                        android:padding="20dp"
-                        android:layout_marginBottom="16dp"/>
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:contentDescription="@string/user_icon"
+                            android:src="@drawable/ic_user"
+                            app:tint="#FFFFFF"/>
+                    </LinearLayout>
 
                     <!-- User Info -->
                     <TextView
                         android:id="@+id/tv_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sarah Johnson"
+                        android:text="@string/sarah_johnson"
                         android:textSize="24sp"
                         android:textColor="#1E293B"
                         android:textStyle="bold"
@@ -87,7 +95,7 @@
                         android:id="@+id/tv_user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="sarah.johnson@email.com"
+                        android:text="@string/sarah_johnson_email_com"
                         android:textSize="16sp"
                         android:textColor="#64748B"
                         android:layout_marginBottom="4dp"/>
@@ -96,36 +104,58 @@
                         android:id="@+id/tv_join_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Member since January 2024"
+                        android:text="@string/member_since_january_2024"
                         android:textSize="14sp"
                         android:textColor="#94A3B8"/>
 
-                    <!-- Edit Button -->
-                    <Button
+                    <!-- Edit Button - IMPROVED -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_edit_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="Edit"
+                        android:text="@string/edit_profile"
                         android:textColor="#2563EB"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:background="@drawable/bg_rounded_light_blue"
+                        android:backgroundTint="#FFFFFF"
+                        android:strokeColor="#2563EB"
                         android:paddingStart="24dp"
                         android:paddingEnd="24dp"
-                        android:layout_marginTop="16dp"/>
+                        android:layout_marginTop="16dp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Progress Stats -->
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your Progress"
-                android:textSize="20sp"
-                android:textColor="#1E293B"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/your_progress"
+                    android:textSize="20sp"
+                    android:textColor="#1E293B"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_view_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_details"
+                    android:textSize="14sp"
+                    android:textColor="#2563EB"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- Stats Cards - IMPROVED -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,40 +167,47 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp">
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="16dp"
+                        android:padding="20dp"
                         android:background="#FFFFFF">
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_target"
-                            app:tint="#2563EB"
+                        <LinearLayout
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:background="@drawable/bg_circle_light_blue"
-                            android:padding="8dp"/>
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="@string/target_icon"
+                                android:src="@drawable/ic_target"
+                                app:tint="#2563EB"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_total_habits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
+                            android:text="@string/_12"
                             android:textSize="18sp"
                             android:textColor="#1E293B"
                             android:textStyle="bold"
-                            android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="12dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Habits"
+                            android:text="@string/total_habits"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -183,41 +220,48 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp">
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="16dp"
+                        android:padding="20dp"
                         android:background="#FFFFFF">
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_award"
-                            app:tint="#F59E0B"
+                        <LinearLayout
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:background="@drawable/bg_circle_light_orange"
-                            android:padding="8dp"/>
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="@string/award_icon"
+                                android:src="@drawable/ic_award"
+                                app:tint="#F59E0B"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_current_streak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="15 days"
+                            android:text="@string/_15_days"
                             android:textSize="18sp"
                             android:textColor="#1E293B"
                             android:textStyle="bold"
-                            android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="12dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Current Streak"
+                            android:text="@string/current_streak"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -230,40 +274,47 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp">
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="16dp"
+                        android:padding="20dp"
                         android:background="#FFFFFF">
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_trending_up"
-                            app:tint="#10B981"
+                        <LinearLayout
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:background="@drawable/bg_circle_light_green"
-                            android:padding="8dp"/>
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="@string/trending_up_icon"
+                                android:src="@drawable/ic_trending_up"
+                                app:tint="#10B981"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tv_success_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="83%"
+                            android:text="@string/_83"
                             android:textSize="18sp"
                             android:textColor="#1E293B"
                             android:textStyle="bold"
-                            android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="12dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Success Rate"
+                            android:text="@string/success_rate"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -272,95 +323,263 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <!-- Settings Options -->
-            <TextView
+            <!-- Settings Options Header -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Settings"
-                android:textSize="20sp"
-                android:textColor="#1E293B"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
-            <!-- Account Settings -->
-            <androidx.cardview.widget.CardView
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/settings"
+                    android:textSize="20sp"
+                    android:textColor="#1E293B"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tv_manage_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manage_all"
+                    android:textSize="14sp"
+                    android:textColor="#2563EB"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- Settings List - IMPROVED -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
 
-                <LinearLayout
+                <!-- Account Settings -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp"
-                    android:background="#FFFFFF">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_user"
-                        app:tint="#64748B"
-                        android:background="@drawable/bg_circle_light_gray"
-                        android:padding="8dp"
-                        android:layout_marginEnd="12dp"/>
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Account Settings"
-                            android:textSize="16sp"
-                            android:textColor="#1E293B"
-                            android:textStyle="bold"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_circle_light_gray"
+                            android:gravity="center"
+                            android:layout_marginEnd="12dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="@string/user_icon"
+                                android:src="@drawable/ic_user"
+                                app:tint="#64748B"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Manage your account information"
-                            android:textSize="14sp"
-                            android:textColor="#64748B"
-                            android:layout_marginTop="2dp"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/account_settings"
+                                android:textSize="16sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/manage_your_account_information"
+                                android:textSize="14sp"
+                                android:textColor="#64748B"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/chevron_right"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="#CBD5E1"/>
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_chevron_right"
-                        app:tint="#CBD5E1"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                <!-- Notifications -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
 
-            <!-- Add more settings options as needed -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
-            <!-- Sign Out Button -->
-            <Button
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_circle_light_gray"
+                            android:gravity="center"
+                            android:layout_marginEnd="12dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="@string/bell_icon"
+                                android:src="@drawable/ic_bell"
+                                app:tint="#64748B"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/notifications"
+                                android:textSize="16sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/manage_notification_preferences"
+                                android:textSize="14sp"
+                                android:textColor="#64748B"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/chevron_right"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="#CBD5E1"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Privacy & Security -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="16dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_circle_light_gray"
+                            android:gravity="center"
+                            android:layout_marginEnd="12dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:contentDescription="@string/shield_icon"
+                                android:src="@drawable/ic_shield"
+                                app:tint="#64748B"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/privacy_amp_security"
+                                android:textSize="16sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/control_your_data_and_privacy"
+                                android:textSize="14sp"
+                                android:textColor="#64748B"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@string/chevron_right"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="#CBD5E1"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Sign Out Button - IMPROVED -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_sign_out"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="Sign Out"
-                android:textColor="#EF4444"
+                android:text="@string/sign_out"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_rounded_light_red"
-                android:drawableStart="@drawable/ic_logout"
-                android:drawableTint="#EF4444"
-                android:drawablePadding="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp"/>
+                android:backgroundTint="#EF4444"
+                app:icon="@drawable/ic_logout"
+                app:iconTint="#FFFFFF"
+                app:iconPadding="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                style="@style/Widget.Material3.Button"/>
 
             <!-- App Version -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HealthFlow v1.0.0"
+                android:text="@string/healthflow_v1_0_0"
                 android:textSize="14sp"
                 android:textColor="#94A3B8"
                 android:gravity="center"/>
