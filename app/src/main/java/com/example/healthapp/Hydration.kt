@@ -27,7 +27,7 @@ class Hydration : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
+                R.id.nav_hydration -> {
                     // Already on home, do nothing or refresh
                     true
                 }
@@ -44,9 +44,9 @@ class Hydration : AppCompatActivity() {
                     true
                 }
 
-                R.id.nav_hydration -> {
+                R.id.nav_home -> {
                     val intent =
-                        Intent(this, Hydration::class.java) // Replace with your Hydration activity
+                        Intent(this, Home::class.java) // Replace with your Hydration activity
                     startActivity(intent)
                     true
                 }

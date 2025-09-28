@@ -27,7 +27,7 @@ class Profile : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
+                R.id.nav_profile -> {
                     // Already on home, do nothing or refresh
                     true
                 }
@@ -51,9 +51,9 @@ class Profile : AppCompatActivity() {
                     true
                 }
 
-                R.id.nav_profile -> {
+                R.id.nav_home -> {
                     val intent =
-                        Intent(this, Profile::class.java) // Replace with your Profile activity
+                        Intent(this, Home::class.java) // Replace with your Profile activity
                     startActivity(intent)
                     true
                 }

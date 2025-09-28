@@ -28,7 +28,7 @@ class Mood : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
+                R.id.nav_mood -> {
                     // Already on home, do nothing or refresh
                     true
                 }
@@ -39,8 +39,8 @@ class Mood : AppCompatActivity() {
                     true
                 }
 
-                R.id.nav_mood -> {
-                    val intent = Intent(this, Mood::class.java) // Replace with your Mood activity
+                R.id.nav_home -> {
+                    val intent = Intent(this, Home::class.java) // Replace with your Mood activity
                     startActivity(intent)
                     true
                 }

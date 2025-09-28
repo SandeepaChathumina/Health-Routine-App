@@ -24,13 +24,13 @@ class Habits : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
+                R.id.nav_habits -> {
                     // Already on home, do nothing or refresh
                     true
                 }
 
-                R.id.nav_habits -> {
-                    val intent = Intent(this, Habits::class.java)
+                R.id.nav_home -> {
+                    val intent = Intent(this, Home::class.java)
                     startActivity(intent)
                     true
                 }

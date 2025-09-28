@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 
 class Home : AppCompatActivity() {
     @SuppressLint("ResourceType")
@@ -18,25 +19,8 @@ class Home : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-        //quick actions
-
-        val workoutButton: Button = findViewById(R.id.card_bmi_calculator)
-        workoutButton.setOnClickListener {
-            // ✅ Navigate to OnBoarding3 instead of OnBoarding2
-            val intent = Intent(this, BmiCalculatorActivity::class.java)
-            startActivity(intent)
-        }
-
-        //next button
-
-        val nextButton: Button = findViewById(R.id.card_daily_workout)
-        nextButton.setOnClickListener {
-            // ✅ Navigate to OnBoarding3 instead of OnBoarding2
-            val intent = Intent(this, DailyWorkoutActivity::class.java)
-            startActivity(intent)
-        }
-
         setupBottomNavigation()
+        setupQuickActions()
 
     }
 
@@ -71,6 +55,50 @@ class Home : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun setupQuickActions() {
+        // BMI Calculator
+        val bmiCard: MaterialCardView = findViewById(R.id.card_bmi_calculator)
+        bmiCard.setOnClickListener {
+            val intent = Intent(this, BmiCalculatorActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Daily Workout
+        val workoutCard: MaterialCardView = findViewById(R.id.card_daily_workout)
+        workoutCard.setOnClickListener {
+            val intent = Intent(this, DailyWorkoutActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Add Habit
+        val addHabitCard: MaterialCardView = findViewById(R.id.card_add_habit)
+        addHabitCard.setOnClickListener {
+            val intent = Intent(this, Habits::class.java) // Replace with your AddHabit activity
+            startActivity(intent)
+        }
+
+        // Log Mood
+        val logMoodCard: MaterialCardView = findViewById(R.id.card_log_mood)
+        logMoodCard.setOnClickListener {
+            val intent = Intent(this, Mood::class.java) // Replace with your LogMood activity
+            startActivity(intent)
+        }
+
+        // Drink Water
+        val drinkWaterCard: MaterialCardView = findViewById(R.id.card_drink_water)
+        drinkWaterCard.setOnClickListener {
+            val intent = Intent(this, Hydration::class.java) // Replace with your DrinkWater activity
+            startActivity(intent)
+        }
+
+        // View Stats
+        val viewStatsCard: MaterialCardView = findViewById(R.id.card_view_stats)
+        viewStatsCard.setOnClickListener {
+            val intent = Intent(this, Stats::class.java) // Replace with your ViewStats activity
+            startActivity(intent)
         }
     }
 }
