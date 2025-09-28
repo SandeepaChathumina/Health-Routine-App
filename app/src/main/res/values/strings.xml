@@ -85,4 +85,25 @@
     <string name="healthflow_v1_0_0">HealthFlow v1.0.0</string>
     <string name="shield_icon">shield_icon</string>
     <string name="bell_icon">bell_icon</string>
+    <string name="back">Back</string>
+    <string name="body_mass_index_calculator">Body Mass Index Calculator</string>
+    <string name="bmi_is_a_measure_of_body_fat_based_on_height_and_weight_enter_your_measurements_below_to_calculate_your_bmi">BMI is a measure of body fat based on height and weight. Enter your measurements below to calculate your BMI.</string>
+    <string name="height_cm">Height (cm)</string>
+    <string name="enter_your_height_in_cm">Enter your height in cm</string>
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="enter_your_weight_in_kg">Enter your weight in kg</string>
+    <string name="calculate_bmi">Calculate BMI</string>
+    <string name="your_bmi_result">Your BMI Result</string>
+    <string name="bmi">BMI</string>
+    <string name="blanks">--</string>
+    <string name="enter_your_details_above">Enter your details above</string>
+    <string name="bmi_categories">BMI Categories</string>
+    <string name="underweight">Underweight</string>
+    <string name="_18_5"><![CDATA[< 18.5]]></string>
+    <string name="normal_weight">Normal weight</string>
+    <string name="_18_5_24_9">18.5 - 24.9</string>
+    <string name="overweight">Overweight</string>
+    <string name="_25_0_29_9">25.0 - 29.9</string>
+    <string name="obese">Obese</string>
+    <string name="_30_0">≥ 30.0</string>
 </resources>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC">
+    android:background="#F8FAFC"
+    android:paddingTop="24dp">
 
     <!-- Header -->
     <LinearLayout
@@ -14,7 +15,7 @@
         android:gravity="center_vertical"
         android:padding="16dp"
         android:background="#FFFFFF"
-        android:elevation="4dp">
+        android:elevation="2dp">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -22,13 +23,14 @@
             android:layout_height="48dp"
             android:background="@drawable/bg_rounded_white"
             android:src="@drawable/ic_arrow_back"
-            app:tint="#64748B"/>
+            app:tint="#64748B"
+            android:contentDescription="@string/back"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="BMI Calculator"
+            android:text="@string/bmi_calculator"
             android:textSize="20sp"
             android:textColor="#1E293B"
             android:textStyle="bold"
@@ -41,7 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="24dp">
+        android:padding="16dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,29 +56,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp"
+                    android:padding="24dp"
                     android:background="#FFFFFF">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Body Mass Index Calculator"
+                        android:text="@string/body_mass_index_calculator"
                         android:textSize="18sp"
                         android:textColor="#1E293B"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="12dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BMI is a measure of body fat based on height and weight. Enter your measurements below to calculate your BMI."
+                        android:text="@string/bmi_is_a_measure_of_body_fat_based_on_height_and_weight_enter_your_measurements_below_to_calculate_your_bmi"
                         android:textSize="14sp"
                         android:textColor="#64748B"
                         android:lineSpacingExtra="4dp"/>
@@ -87,8 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,54 +106,80 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Height (cm)"
+                        android:text="@string/height_cm"
                         android:textSize="16sp"
                         android:textColor="#1E293B"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
-                    <EditText
-                        android:id="@+id/et_height"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_rounded_white"
-                        android:hint="Enter your height in cm"
-                        android:inputType="numberDecimal"
-                        android:padding="16dp"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="#E2E8F0"
+                        app:hintTextColor="#94A3B8">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_height"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:hint="@string/enter_your_height_in_cm"
+                            android:inputType="numberDecimal"
+                            android:textSize="16sp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Weight Input -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Weight (kg)"
+                        android:text="@string/weight_kg"
                         android:textSize="16sp"
                         android:textColor="#1E293B"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
-                    <EditText
-                        android:id="@+id/et_weight"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_rounded_white"
-                        android:hint="Enter your weight in kg"
-                        android:inputType="numberDecimal"
-                        android:padding="16dp"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="24dp"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="#E2E8F0"
+                        app:hintTextColor="#94A3B8">
 
-                    <!-- Calculate Button -->
-                    <Button
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:hint="@string/enter_your_weight_in_kg"
+                            android:inputType="numberDecimal"
+                            android:textSize="16sp"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Calculate Button - IMPROVED -->
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_calculate"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:background="@drawable/btn_orange_rounded"
-                        android:text="Calculate BMI"
+                        android:text="@string/calculate_bmi"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:backgroundTint="#2563EB"
+                        android:elevation="2dp"
+                        app:icon="@drawable/ic_calculate"
+                        app:iconTint="#FFFFFF"
+                        app:iconPadding="8dp"
+                        style="@style/Widget.Material3.Button"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -156,8 +187,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -169,11 +201,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Your BMI Result"
+                        android:text="@string/your_bmi_result"
                         android:textSize="18sp"
                         android:textColor="#1E293B"
                         android:textStyle="bold"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="20dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -181,22 +213,23 @@
                         android:orientation="vertical"
                         android:gravity="center"
                         android:background="@drawable/bg_rounded_light_blue"
-                        android:padding="24dp">
+                        android:padding="32dp"
+                        android:layout_marginBottom="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BMI"
+                            android:text="@string/bmi"
                             android:textSize="14sp"
                             android:textColor="#64748B"
-                            android:layout_marginBottom="4dp"/>
+                            android:layout_marginBottom="8dp"/>
 
                         <TextView
                             android:id="@+id/tv_bmi_result"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="--"
-                            android:textSize="32sp"
+                            android:text="@string/blanks"
+                            android:textSize="36sp"
                             android:textColor="#2563EB"
                             android:textStyle="bold"
                             android:layout_marginBottom="8dp"/>
@@ -205,121 +238,173 @@
                             android:id="@+id/tv_bmi_category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Enter your details above"
+                            android:text="@string/enter_your_details_above"
                             android:textSize="16sp"
                             android:textColor="#1E293B"
-                            android:textStyle="bold"/>
+                            android:gravity="center"/>
                     </LinearLayout>
 
                     <!-- BMI Categories -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BMI Categories"
+                            android:text="@string/bmi_categories"
                             android:textSize="16sp"
                             android:textColor="#1E293B"
                             android:textStyle="bold"
-                            android:layout_marginBottom="12dp"/>
+                            android:layout_marginBottom="16dp"/>
 
+                        <!-- Underweight -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginBottom="8dp">
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="20dp"
+                                android:background="#60A5FA"
+                                android:layout_marginEnd="12dp"/>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Underweight"
+                                android:text="@string/underweight"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="&lt; 18.5"
+                                android:text="@string/_18_5"
                                 android:textSize="14sp"
                                 android:textColor="#1E293B"
-                                android:textStyle="bold"/>
+                                />
                         </LinearLayout>
 
+                        <!-- Normal weight -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginBottom="8dp">
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="20dp"
+                                android:background="#10B981"
+                                android:layout_marginEnd="12dp"/>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Normal weight"
+                                android:text="@string/normal_weight"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="18.5 - 24.9"
+                                android:text="@string/_18_5_24_9"
                                 android:textSize="14sp"
                                 android:textColor="#1E293B"
-                                android:textStyle="bold"/>
+                                />
                         </LinearLayout>
 
+                        <!-- Overweight -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginBottom="8dp">
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="20dp"
+                                android:background="#F59E0B"
+                                android:layout_marginEnd="12dp"/>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Overweight"
+                                android:text="@string/overweight"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="25.0 - 29.9"
+                                android:text="@string/_25_0_29_9"
                                 android:textSize="14sp"
                                 android:textColor="#1E293B"
-                                android:textStyle="bold"/>
+                                />
                         </LinearLayout>
 
+                        <!-- Obese -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="12dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <View
+                                android:layout_width="4dp"
+                                android:layout_height="20dp"
+                                android:background="#EF4444"
+                                android:layout_marginEnd="12dp"/>
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Obese"
+                                android:text="@string/obese"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="age; 30.0"
+                                android:text="@string/_30_0"
                                 android:textSize="14sp"
                                 android:textColor="#1E293B"
-                                android:textStyle="bold"/>
+                                />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- Bottom Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
