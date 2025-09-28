@@ -108,21 +108,20 @@
         <!-- Get Started Button (Solid with Icon) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_get_started"
+            style="@style/Widget.Material3.Button"
             android:layout_width="0dp"
             android:layout_height="56dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="2dp"
             android:text="@string/get_started"
             android:textColor="#F59E0B"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="2dp"
-            app:icon="@drawable/ic_rocket"
             app:iconGravity="textEnd"
             app:iconPadding="8dp"
-            app:iconTint="#F59E0B"
-            android:layout_marginStart="8dp"
-            style="@style/Widget.Material3.Button" />
+            app:iconTint="#F59E0B" />
 
     </LinearLayout>
 
