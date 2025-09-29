@@ -48,8 +48,8 @@ class HabitAdapter(
         val progress = habit.getProgress()
         holder.progressBar.progress = progress
 
-        // Set progress text and color
-        if (habit.isCompleted) {
+        // Set progress text and color based on completion status
+        if (habit.isFullyCompleted()) {
             holder.tvProgressText.text = "Completed"
             holder.tvProgressText.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.cyan_500))
             holder.progressBar.progressTintList = ContextCompat.getColorStateList(holder.itemView.context, R.color.cyan_500)
@@ -62,22 +62,18 @@ class HabitAdapter(
         // Remove previous listener to avoid multiple callbacks
         holder.cbHabit.setOnCheckedChangeListener(null)
 
-        // Set checkbox state - make it uncheckable if already completed
-        holder.cbHabit.isChecked = habit.isCompleted
+        // Set checkbox state - checked only if fully completed
+        holder.cbHabit.isChecked = habit.isFullyCompleted()
 
-        // Disable checkbox if habit is already completed for today
-        if (habit.isCompleted) {
-            holder.cbHabit.isEnabled = false
-        } else {
-            holder.cbHabit.isEnabled = true
-        }
+        // Enable/disable checkbox based on completion status
+        holder.cbHabit.isEnabled = !habit.isFullyCompleted()
 
-        // Set checkbox listener - only trigger for checking, not unchecking
+        // Set checkbox listener
         holder.cbHabit.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked && !habit.isCompleted) {
+            if (isChecked && !habit.isFullyCompleted()) {
                 onHabitChecked(habit, isChecked)
-            } else {
-                // If user tries to uncheck, revert the checkbox state
+            } else if (!isChecked && habit.isFullyCompleted()) {
+                // If user tries to uncheck a completed habit, revert it
                 holder.cbHabit.isChecked = true
             }
         }

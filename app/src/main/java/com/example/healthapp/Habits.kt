@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,13 +50,9 @@ class Habits : AppCompatActivity() {
         habitAdapter = HabitAdapter(
             habits = habits,
             onHabitChecked = { habit, isChecked ->
-                // Prevent unchecking completed habits and only allow checking once per day
-                if (isChecked && !habit.isCompleted) {
-                    val updatedHabit = habit.copy(
-                        isCompleted = true,
-                        completedCount = habit.completedCount + 1,
-                        currentStreak = habit.currentStreak + 1 // Increase streak when completed
-                    )
+                // Only process if user is checking the habit and it's not fully completed
+                if (isChecked && !habit.isFullyCompleted()) {
+                    val updatedHabit = habit.markOneCompletion()
                     val index = habits.indexOfFirst { it.id == habit.id }
                     if (index != -1) {
                         habits[index] = updatedHabit
@@ -63,10 +60,9 @@ class Habits : AppCompatActivity() {
                         updateStats()
                     }
                 }
-                // If user tries to uncheck, we ignore it and keep it checked
+                // If user tries to uncheck or habit is already fully completed, ignore
             },
             onMoreClicked = { habit ->
-                // Handle more options (edit, delete, etc.)
                 showHabitOptions(habit)
             }
         )
@@ -87,7 +83,6 @@ class Habits : AppCompatActivity() {
         // Setup sort button
         val tvSort = findViewById<TextView>(R.id.tv_sort)
         tvSort.setOnClickListener {
-            // Toggle sort order
             toggleSortOrder()
         }
     }
@@ -105,15 +100,20 @@ class Habits : AppCompatActivity() {
             button.setOnClickListener {
                 // Reset all buttons to inactive state
                 filterButtons.forEach { btn ->
-                    btn.setBackgroundColor(getColor(android.R.color.transparent))
-                    btn.setTextColor(getColor(R.color.slate_500))
-                    btn.strokeColor = getColorStateList(R.color.slate_200)
+                    btn.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
+                    btn.setTextColor(ContextCompat.getColor(this, R.color.slate_500))
+                    // For outlined buttons, we need to set stroke color
+                    if (btn != btnAll) {
+                        btn.strokeColor = ContextCompat.getColorStateList(this, R.color.slate_200)
+                    }
                 }
 
                 // Set active state for clicked button
-                button.setBackgroundColor(getColor(R.color.blue_600))
-                button.setTextColor(getColor(android.R.color.white))
-                button.strokeColor = getColorStateList(R.color.blue_600)
+                button.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_600))
+                button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
+                if (button != btnAll) {
+                    button.strokeColor = ContextCompat.getColorStateList(this, R.color.blue_600)
+                }
 
                 // Filter habits
                 when (button) {
@@ -137,7 +137,7 @@ class Habits : AppCompatActivity() {
     }
 
     private fun toggleSortOrder() {
-        // Sort by recent (newest first) or by name
+        // Simple sort toggle - you can enhance this
         habits.sortByDescending { it.id }
         updateHabitsList()
 
@@ -176,7 +176,7 @@ class Habits : AppCompatActivity() {
     }
 
     private fun updateStats() {
-        val completedToday = habits.count { it.isCompleted }
+        val completedToday = habits.count { it.isFullyCompleted() }
         val bestStreak = habits.maxOfOrNull { it.currentStreak } ?: 0
         val successRate = if (habits.isNotEmpty()) {
             val totalCompletions = habits.sumOf { it.completedCount }
@@ -192,12 +192,24 @@ class Habits : AppCompatActivity() {
     }
 
     private fun showHabitOptions(habit: Habit) {
-        // Implement dialog for habit options (edit, delete, etc.)
-        // You can use AlertDialog or BottomSheetDialog
-        // For now, just show a simple delete option
+        val options = arrayOf("Delete", "Reset Today", "Cancel")
+
         android.app.AlertDialog.Builder(this)
             .setTitle("Habit Options")
-            .setMessage("What would you like to do with '${habit.title}'?")
+            .setItems(options) { dialog, which ->
+                when (which) {
+                    0 -> deleteHabit(habit) // Delete
+                    1 -> resetHabit(habit)  // Reset Today
+                    // 2 is Cancel - do nothing
+                }
+            }
+            .show()
+    }
+
+    private fun deleteHabit(habit: Habit) {
+        android.app.AlertDialog.Builder(this)
+            .setTitle("Delete Habit")
+            .setMessage("Are you sure you want to delete '${habit.title}'?")
             .setPositiveButton("Delete") { dialog, which ->
                 habits.remove(habit)
                 updateHabitsList()
@@ -207,37 +219,43 @@ class Habits : AppCompatActivity() {
             .show()
     }
 
+    private fun resetHabit(habit: Habit) {
+        val index = habits.indexOfFirst { it.id == habit.id }
+        if (index != -1) {
+            val resetHabit = habit.copy(
+                completedCount = 0,
+                isCompleted = false
+            )
+            habits[index] = resetHabit
+            updateHabitsList()
+            updateStats()
+        }
+    }
+
     private fun setupBottomNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_habits
 
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_habits -> {
-                    // Already on habits, do nothing
-                    true
-                }
+                R.id.nav_habits -> true
                 R.id.nav_home -> {
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, Home::class.java))
                     finish()
                     true
                 }
                 R.id.nav_mood -> {
-                    val intent = Intent(this, Mood::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, Mood::class.java))
                     finish()
                     true
                 }
                 R.id.nav_hydration -> {
-                    val intent = Intent(this, Hydration::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, Hydration::class.java))
                     finish()
                     true
                 }
                 R.id.nav_profile -> {
-                    val intent = Intent(this, Profile::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, Profile::class.java))
                     finish()
                     true
                 }

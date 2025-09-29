@@ -6,8 +6,8 @@ data class Habit(
     val title: String,
     val category: String,
     val currentStreak: Int,
-    val targetCount: Int,
-    val completedCount: Int,
+    val targetCount: Int, // How many times per day (e.g., eat 3 times)
+    val completedCount: Int, // How many times completed today
     val isCompleted: Boolean = false
 ) : Serializable {
     fun getProgress(): Int {
@@ -16,5 +16,23 @@ data class Habit(
         } else {
             0
         }
+    }
+
+    // Check if habit is fully completed for today
+    fun isFullyCompleted(): Boolean {
+        return completedCount >= targetCount
+    }
+
+    // Mark one completion
+    fun markOneCompletion(): Habit {
+        val newCompletedCount = (completedCount + 1).coerceAtMost(targetCount)
+        val fullyCompleted = newCompletedCount >= targetCount
+
+        return this.copy(
+            completedCount = newCompletedCount,
+            isCompleted = fullyCompleted,
+            // Increase streak only when fully completed for the first time today
+            currentStreak = if (fullyCompleted && !isCompleted) currentStreak + 1 else currentStreak
+        )
     }
 }
