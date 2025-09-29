@@ -93,6 +93,7 @@
                             android:padding="8dp"/>
 
                         <TextView
+                            android:id="@+id/tv_entries_month"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="47"
@@ -139,6 +140,7 @@
                             android:padding="8dp"/>
 
                         <TextView
+                            android:id="@+id/tv_most_common_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="😊"
@@ -182,6 +184,7 @@
                             android:padding="8dp"/>
 
                         <TextView
+                            android:id="@+id/tv_day_streak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12"
@@ -234,6 +237,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tv_view_insights"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="View Insights"
@@ -273,6 +277,7 @@
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tv_happy_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="15 times"
@@ -281,6 +286,7 @@
                         </LinearLayout>
 
                         <ProgressBar
+                            android:id="@+id/progress_happy"
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -320,6 +326,7 @@
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tv_calm_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="10 times"
@@ -328,6 +335,7 @@
                         </LinearLayout>
 
                         <ProgressBar
+                            android:id="@+id/progress_calm"
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -367,6 +375,7 @@
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tv_stressed_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5 times"
@@ -375,6 +384,7 @@
                         </LinearLayout>
 
                         <ProgressBar
+                            android:id="@+id/progress_stressed"
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -413,6 +423,7 @@
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tv_excited_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="6 times"
@@ -421,6 +432,7 @@
                         </LinearLayout>
 
                         <ProgressBar
+                            android:id="@+id/progress_excited"
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -448,6 +460,7 @@
 
                 <!-- Mood Patterns -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_mood_patterns"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -483,6 +496,7 @@
 
                 <!-- Set Reminders -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_reminders"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -516,6 +530,65 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+
+            <!-- Mood History Section -->
+            <TextView
+                android:id="@+id/tv_mood_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recent Mood Entries"
+                android:textSize="18sp"
+                android:textColor="#1E293B"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="24dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mood_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_mood"
+                    android:alpha="0.5"
+                    app:tint="#64748B"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No mood entries yet"
+                    android:textSize="16sp"
+                    android:textColor="#64748B"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap the + button to add your first mood entry"
+                    android:textSize="14sp"
+                    android:textColor="#94A3B8"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Bottom Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
         </LinearLayout>
     </ScrollView>
 
