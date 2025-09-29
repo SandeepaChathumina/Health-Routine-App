@@ -22,5 +22,7 @@
     <color name="orange_600">#EA580C</color>
     <color name="green_500">#22C55E</color>
     <color name="slate_200">#E2E8F0</color>
+    <color name="light_purple">#F3E8FF</color>
+    <color name="light_orange">#FFFBEB</color>
 
 </resources>

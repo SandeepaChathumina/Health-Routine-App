@@ -113,7 +113,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            tools:ignore="UseCompoundDrawables">
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -215,7 +216,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play_circle"
+                        android:src="@drawable/ic_play"
                         app:tint="#10B981"
                         android:contentDescription="@string/play"/>
                 </LinearLayout>
@@ -284,7 +285,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play_circle"
+                        android:src="@drawable/ic_play"
                         app:tint="#10B981"
                         android:contentDescription="@string/play"/>
                 </LinearLayout>
@@ -353,7 +354,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play_circle"
+                        android:src="@drawable/ic_play"
                         app:tint="#10B981"
                         android:contentDescription="@string/play"/>
                 </LinearLayout>
@@ -422,17 +423,287 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play_circle"
+                        android:src="@drawable/ic_play"
                         app:tint="#10B981"
                         android:contentDescription="@string/play"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Add 4 more exercises following the same pattern -->
-            <!-- Exercise 5: Lunges -->
-            <!-- Exercise 6: Crunches -->
-            <!-- Exercise 7: High Knees -->
-            <!-- Exercise 8: Arm Circles -->
+            <!-- Exercise 5: Mountain Climbers -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#FFFFFF"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/exercise5_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_gray"
+                        android:src="@drawable/mountainclimbers"
+                        android:contentDescription="@string/mountain_climbers"
+                        android:layout_marginEnd="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mountain_climbers"
+                            android:textSize="16sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_30_seconds"
+                            android:textSize="14sp"
+                            android:textColor="#64748B"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/core_abs"
+                            android:textSize="12sp"
+                            android:textColor="#EF4444"
+                            android:background="@drawable/bg_rounded_light_red"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_play"
+                        app:tint="#10B981"
+                        android:contentDescription="@string/play"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Exercise 6: Bicycle crunches -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#FFFFFF"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/exercise6_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_gray"
+                        android:src="@drawable/bicyclecrunches"
+                        android:contentDescription="@string/mountain_climbers"
+                        android:layout_marginEnd="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bicycle_crunches"
+                            android:textSize="16sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_30_seconds"
+                            android:textSize="14sp"
+                            android:textColor="#64748B"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/core_abs"
+                            android:textSize="12sp"
+                            android:textColor="#EF4444"
+                            android:background="@drawable/bg_rounded_light_red"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_play"
+                        app:tint="#10B981"
+                        android:contentDescription="@string/play"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Exercise 7: lunges -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#FFFFFF"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/exercise7_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_gray"
+                        android:src="@drawable/lunges"
+                        android:contentDescription="@string/mountain_climbers"
+                        android:layout_marginEnd="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/lunges"
+                            android:textSize="16sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_30_seconds"
+                            android:textSize="14sp"
+                            android:textColor="#64748B"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/core_abs"
+                            android:textSize="12sp"
+                            android:textColor="#EF4444"
+                            android:background="@drawable/bg_rounded_light_red"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_play"
+                        app:tint="#10B981"
+                        android:contentDescription="@string/play"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Exercise 8: glutebridges -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#FFFFFF"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/exercise8_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_gray"
+                        android:src="@drawable/glutebridges"
+                        android:contentDescription="@string/mountain_climbers"
+                        android:layout_marginEnd="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/glute_bridges"
+                            android:textSize="16sp"
+                            android:textColor="#1E293B"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/_30_seconds"
+                            android:textSize="14sp"
+                            android:textColor="#64748B"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/core_abs"
+                            android:textSize="12sp"
+                            android:textColor="#EF4444"
+                            android:background="@drawable/bg_rounded_light_red"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="4dp"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_play"
+                        app:tint="#10B981"
+                        android:contentDescription="@string/play"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- Start Workout Button -->
             <com.google.android.material.button.MaterialButton

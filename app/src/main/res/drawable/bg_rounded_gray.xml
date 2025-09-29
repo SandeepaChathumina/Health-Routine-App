@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Background Color -->
+    <!-- Using a standard Slate color. Replace with your preferred gray if needed. -->
+    <solid android:color="@color/slate_200" />
+
+    <!-- Corner Radius -->
+    <!-- A large value makes the ends fully rounded, creating a pill shape. -->
+    <corners android:radius="999dp" />
+
+</shape>

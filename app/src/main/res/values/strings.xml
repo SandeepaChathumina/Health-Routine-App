@@ -180,4 +180,8 @@
     <string name="_8_exercises">8 Exercises</string>
     <string name="_10_minutes">10 minutes</string>
     <string name="duration">Duration</string>
+    <string name="mountain_climbers">Mountain Climbers</string>
+    <string name="glute_bridges">Glute Bridges</string>
+    <string name="lunges">Lunges</string>
+    <string name="bicycle_crunches">Bicycle Crunches</string>
 </resources>
