@@ -3,8 +3,10 @@ package com.example.healthapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,6 +19,7 @@ class Habits : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var habitAdapter: HabitAdapter
+    private lateinit var fireworksView: FireworksView
     private val habits = mutableListOf<Habit>()
 
     private val addHabitLauncher = registerForActivityResult(
@@ -35,6 +38,8 @@ class Habits : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habits)
+
+        fireworksView = findViewById(R.id.fireworksView)
 
         setupBottomNavigation()
         setupRecyclerView()
@@ -55,9 +60,19 @@ class Habits : AppCompatActivity() {
                     val updatedHabit = habit.markOneCompletion()
                     val index = habits.indexOfFirst { it.id == habit.id }
                     if (index != -1) {
+                        val wasFullyCompletedBefore = habit.isFullyCompleted()
                         habits[index] = updatedHabit
+
+                        // Check if habit just became fully completed
+                        val isNowFullyCompleted = updatedHabit.isFullyCompleted()
+
                         updateHabitsList()
                         updateStats()
+
+                        // Show fireworks if habit just became fully completed
+                        if (isNowFullyCompleted && !wasFullyCompletedBefore) {
+                            showFireworksForHabit(index)
+                        }
                     }
                 }
                 // If user tries to uncheck or habit is already fully completed, ignore
@@ -68,6 +83,42 @@ class Habits : AppCompatActivity() {
         )
 
         recyclerView.adapter = habitAdapter
+    }
+
+    private fun showFireworksForHabit(habitIndex: Int) {
+        // Get the position of the habit item in the RecyclerView
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+        val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+
+        if (habitIndex in firstVisiblePosition..lastVisiblePosition) {
+            // Habit is visible on screen
+            val habitView = layoutManager.findViewByPosition(habitIndex)
+            habitView?.let { view ->
+                // Calculate center position of the habit item
+                val location = IntArray(2)
+                view.getLocationOnScreen(location)
+                val screenX = location[0] + view.width / 2f
+                val screenY = location[1] + view.height / 2f
+
+                // Show fireworks at the habit position
+                fireworksView.startFireworks(screenX, screenY)
+
+                // Also show a celebration message
+                showCelebrationMessage(habits[habitIndex].title)
+            }
+        } else {
+            // Habit is not visible, show fireworks from center of screen
+            val centerX = recyclerView.width / 2f
+            val centerY = recyclerView.height / 2f
+            fireworksView.startFireworks(centerX, centerY)
+            showCelebrationMessage(habits[habitIndex].title)
+        }
+    }
+
+    private fun showCelebrationMessage(habitTitle: String) {
+        val celebrationText = "🎉 Great job! '$habitTitle' completed! 🎉"
+        Toast.makeText(this, celebrationText, Toast.LENGTH_SHORT).show()
     }
 
     private fun setupClickListeners() {
@@ -102,18 +153,11 @@ class Habits : AppCompatActivity() {
                 filterButtons.forEach { btn ->
                     btn.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
                     btn.setTextColor(ContextCompat.getColor(this, R.color.slate_500))
-                    // For outlined buttons, we need to set stroke color
-                    if (btn != btnAll) {
-                        btn.strokeColor = ContextCompat.getColorStateList(this, R.color.slate_200)
-                    }
                 }
 
                 // Set active state for clicked button
                 button.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_600))
                 button.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-                if (button != btnAll) {
-                    button.strokeColor = ContextCompat.getColorStateList(this, R.color.blue_600)
-                }
 
                 // Filter habits
                 when (button) {
@@ -128,16 +172,19 @@ class Habits : AppCompatActivity() {
     }
 
     private fun filterHabitsByCategory(category: String) {
-        val filteredHabits = if (category == "All") {
-            habits
-        } else {
-            habits.filter { it.category == category }
+        val filteredHabits = when (category) {
+            "All" -> habits
+            "Health" -> habits.filter { it.category == "Health" }
+            "Fitness" -> habits.filter { it.category == "Fitness" }
+            "Mindfulness" -> habits.filter { it.category == "Mindfulness" }
+            "Work" -> habits.filter { it.category == "Work" }
+            else -> habits
         }
         habitAdapter.updateHabits(filteredHabits)
     }
 
     private fun toggleSortOrder() {
-        // Simple sort toggle - you can enhance this
+        // Simple sort toggle - sort by recent (newest first)
         habits.sortByDescending { it.id }
         updateHabitsList()
 
@@ -194,7 +241,7 @@ class Habits : AppCompatActivity() {
     private fun showHabitOptions(habit: Habit) {
         val options = arrayOf("Delete", "Reset Today", "Cancel")
 
-        android.app.AlertDialog.Builder(this)
+        androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Habit Options")
             .setItems(options) { dialog, which ->
                 when (which) {
@@ -207,7 +254,7 @@ class Habits : AppCompatActivity() {
     }
 
     private fun deleteHabit(habit: Habit) {
-        android.app.AlertDialog.Builder(this)
+        androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Delete Habit")
             .setMessage("Are you sure you want to delete '${habit.title}'?")
             .setPositiveButton("Delete") { dialog, which ->
@@ -262,5 +309,10 @@ class Habits : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fireworksView.cleanup()
     }
 }
