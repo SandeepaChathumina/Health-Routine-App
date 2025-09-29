@@ -2,18 +2,23 @@ package com.example.healthapp
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class Habits : AppCompatActivity() {
 
@@ -22,13 +27,19 @@ class Habits : AppCompatActivity() {
     private lateinit var fireworksView: FireworksView
     private val habits = mutableListOf<Habit>()
 
+    // SharedPreferences for data persistence
+    private lateinit var sharedPreferences: SharedPreferences
+    private val gson = Gson()
+    private val HABITS_KEY = "saved_habits"
+
     private val addHabitLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == RESULT_OK) {
             val habit = result.data?.getSerializableExtra("new_habit") as? Habit
             habit?.let {
                 habits.add(it)
+                saveHabitsToStorage()
                 updateHabitsList()
                 updateStats()
             }
@@ -39,12 +50,15 @@ class Habits : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habits)
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("HabitsPrefs", MODE_PRIVATE)
+
         fireworksView = findViewById(R.id.fireworksView)
 
         setupBottomNavigation()
         setupRecyclerView()
         setupClickListeners()
-        initializeSampleHabits()
+        loadHabitsFromStorage()
         updateStats()
     }
 
@@ -66,6 +80,8 @@ class Habits : AppCompatActivity() {
                         // Check if habit just became fully completed
                         val isNowFullyCompleted = updatedHabit.isFullyCompleted()
 
+                        // Save to storage whenever habits change
+                        saveHabitsToStorage()
                         updateHabitsList()
                         updateStats()
 
@@ -83,6 +99,37 @@ class Habits : AppCompatActivity() {
         )
 
         recyclerView.adapter = habitAdapter
+    }
+
+    private fun saveHabitsToStorage() {
+        try {
+            val habitsJson = gson.toJson(habits)
+            sharedPreferences.edit().putString(HABITS_KEY, habitsJson).apply()
+            Log.d("Habits", "Habits saved: ${habits.size} habits")
+        } catch (e: Exception) {
+            Log.e("Habits", "Error saving habits: ${e.message}")
+        }
+    }
+
+    private fun loadHabitsFromStorage() {
+        try {
+            val habitsJson = sharedPreferences.getString(HABITS_KEY, null)
+            if (habitsJson != null) {
+                val type = object : TypeToken<MutableList<Habit>>() {}.type
+                val savedHabits = gson.fromJson<MutableList<Habit>>(habitsJson, type)
+                habits.clear()
+                habits.addAll(savedHabits)
+                Log.d("Habits", "Habits loaded: ${habits.size} habits")
+            } else {
+                // If no saved habits, initialize with sample data
+                initializeSampleHabits()
+            }
+            updateHabitsList()
+        } catch (e: Exception) {
+            Log.e("Habits", "Error loading habits: ${e.message}")
+            // If error loading, initialize with sample data
+            initializeSampleHabits()
+        }
     }
 
     private fun showFireworksForHabit(habitIndex: Int) {
@@ -186,6 +233,7 @@ class Habits : AppCompatActivity() {
     private fun toggleSortOrder() {
         // Simple sort toggle - sort by recent (newest first)
         habits.sortByDescending { it.id }
+        saveHabitsToStorage() // Save the sorted order
         updateHabitsList()
 
         val tvSort = findViewById<TextView>(R.id.tv_sort)
@@ -193,28 +241,32 @@ class Habits : AppCompatActivity() {
     }
 
     private fun initializeSampleHabits() {
-        habits.addAll(
-            listOf(
-                Habit(
-                    id = 1,
-                    title = "Drink 8 glasses of water",
-                    category = "Health",
-                    currentStreak = 12,
-                    targetCount = 8,
-                    completedCount = 8,
-                    isCompleted = true
-                ),
-                Habit(
-                    id = 2,
-                    title = "10 minute meditation",
-                    category = "Mindfulness",
-                    currentStreak = 8,
-                    targetCount = 1,
-                    completedCount = 0,
-                    isCompleted = false
+        // Only add sample habits if no habits exist
+        if (habits.isEmpty()) {
+            habits.addAll(
+                listOf(
+                    Habit(
+                        id = System.currentTimeMillis().toInt(),
+                        title = "Drink 8 glasses of water",
+                        category = "Health",
+                        currentStreak = 12,
+                        targetCount = 8,
+                        completedCount = 8,
+                        isCompleted = true
+                    ),
+                    Habit(
+                        id = System.currentTimeMillis().toInt() + 1,
+                        title = "10 minute meditation",
+                        category = "Mindfulness",
+                        currentStreak = 8,
+                        targetCount = 1,
+                        completedCount = 0,
+                        isCompleted = false
+                    )
                 )
             )
-        )
+            saveHabitsToStorage() // Save the sample habits
+        }
         updateHabitsList()
     }
 
@@ -241,7 +293,7 @@ class Habits : AppCompatActivity() {
     private fun showHabitOptions(habit: Habit) {
         val options = arrayOf("Delete", "Reset Today", "Cancel")
 
-        androidx.appcompat.app.AlertDialog.Builder(this)
+        AlertDialog.Builder(this)
             .setTitle("Habit Options")
             .setItems(options) { dialog, which ->
                 when (which) {
@@ -254,11 +306,12 @@ class Habits : AppCompatActivity() {
     }
 
     private fun deleteHabit(habit: Habit) {
-        androidx.appcompat.app.AlertDialog.Builder(this)
+        AlertDialog.Builder(this)
             .setTitle("Delete Habit")
             .setMessage("Are you sure you want to delete '${habit.title}'?")
             .setPositiveButton("Delete") { dialog, which ->
                 habits.remove(habit)
+                saveHabitsToStorage() // Save after deletion
                 updateHabitsList()
                 updateStats()
             }
@@ -274,6 +327,7 @@ class Habits : AppCompatActivity() {
                 isCompleted = false
             )
             habits[index] = resetHabit
+            saveHabitsToStorage() // Save after reset
             updateHabitsList()
             updateStats()
         }
@@ -309,6 +363,12 @@ class Habits : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Save habits when the activity goes to background
+        saveHabitsToStorage()
     }
 
     override fun onDestroy() {
