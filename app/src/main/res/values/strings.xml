@@ -165,4 +165,19 @@
     <string name="plus12">+12%</string>
     <string name="this_week">This week</string>
     <string name="calender_icon">calender_icon</string>
+    <string name="workout_overview">Workout Overview</string>
+    <string name="start_workout">Start Workout</string>
+    <string name="play">play</string>
+    <string name="plank">Plank</string>
+    <string name="_30_seconds">30 seconds</string>
+    <string name="core_abs">core abs</string>
+    <string name="legs_lower_body">legs lower body</string>
+    <string name="_15_reps">15 reps</string>
+    <string name="strength_chest">strength chest</string>
+    <string name="_12_reps">12 reps</string>
+    <string name="cardio_full_body">cardio full body</string>
+    <string name="exercises">Exercises</string>
+    <string name="_8_exercises">8 Exercises</string>
+    <string name="_10_minutes">10 minutes</string>
+    <string name="duration">Duration</string>
 </resources>

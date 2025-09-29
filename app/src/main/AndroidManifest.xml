@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthApp">
         <activity
+            android:name=".AddHabitActivity"
+            android:exported="false" />
+        <activity
             android:name=".Stats"
             android:exported="false" />
         <activity
