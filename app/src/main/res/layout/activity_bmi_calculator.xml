@@ -261,6 +261,7 @@
 
                         <!-- Underweight -->
                         <LinearLayout
+                            android:id="@+id/underweight_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -296,6 +297,7 @@
 
                         <!-- Normal weight -->
                         <LinearLayout
+                            android:id="@+id/normal_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -331,6 +333,7 @@
 
                         <!-- Overweight -->
                         <LinearLayout
+                            android:id="@+id/overweight_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -366,6 +369,7 @@
 
                         <!-- Obese -->
                         <LinearLayout
+                            android:id="@+id/obese_category"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
