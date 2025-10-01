@@ -124,7 +124,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Reset Button Only -->
+            <!-- Reset Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reset_workout"
                 android:layout_width="match_parent"
@@ -138,7 +138,23 @@
                 app:iconTint="#64748B"
                 app:iconPadding="8dp"
                 style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Start Workout Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_start_workout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Start Workout"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:backgroundTint="#10B981"
+                app:icon="@drawable/ic_play"
+                app:iconTint="#FFFFFF"
+                app:iconPadding="8dp"
+                style="@style/Widget.Material3.Button"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone"/>
 
             <!-- Today's Exercises Header -->
             <LinearLayout

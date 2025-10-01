@@ -4,9 +4,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -34,6 +36,7 @@ class DailyWorkoutActivity : AppCompatActivity() {
 
         val backButton: ImageButton = findViewById(R.id.btn_back)
         val resetButton: MaterialButton = findViewById(R.id.btn_reset_workout)
+        val startWorkoutButton: MaterialButton = findViewById(R.id.btn_start_workout)
 
         // DEBUG: Check if we can find the CardView
         val workoutInfoCard: CardView? = findViewById(R.id.card_workout_info)
@@ -70,6 +73,15 @@ class DailyWorkoutActivity : AppCompatActivity() {
             resetSelectedExercises()
         }
 
+        // Start Workout Button
+        startWorkoutButton.setOnClickListener {
+            if (selectedExercises.isNotEmpty()) {
+                startWorkoutTimer()
+            } else {
+                Toast.makeText(this, "Please select exercises first", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Load and display selected exercises
         loadAndDisplaySelectedExercises()
     }
@@ -88,6 +100,18 @@ class DailyWorkoutActivity : AppCompatActivity() {
         // Don't call finish() so user can come back with back button
     }
 
+    private fun startWorkoutTimer() {
+        val intent = Intent(this, WorkoutTimerActivity::class.java)
+        val exercisesJson = gson.toJson(ArrayList(selectedExercises))
+        intent.putExtra(WorkoutTimerActivity.EXTRA_EXERCISES, exercisesJson)
+        startActivity(intent)
+    }
+
+    private fun updateStartButtonVisibility() {
+        val startWorkoutButton: MaterialButton = findViewById(R.id.btn_start_workout)
+        startWorkoutButton.visibility = if (selectedExercises.isNotEmpty()) View.VISIBLE else View.GONE
+    }
+
     private fun loadAndDisplaySelectedExercises() {
         val json = sharedPreferences.getString("selected_exercises", null)
         exercisesContainer.removeAllViews()
@@ -99,6 +123,7 @@ class DailyWorkoutActivity : AppCompatActivity() {
             selectedExercises.addAll(savedExercises)
 
             updateExerciseCount(selectedExercises.size)
+            updateStartButtonVisibility()
 
             if (selectedExercises.isEmpty()) {
                 showEmptyState()
@@ -109,6 +134,7 @@ class DailyWorkoutActivity : AppCompatActivity() {
             }
         } else {
             updateExerciseCount(0)
+            updateStartButtonVisibility()
             showEmptyState()
         }
     }
