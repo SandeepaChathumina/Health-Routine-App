@@ -28,7 +28,7 @@ class Onboarding3 : AppCompatActivity() {
         val nextButton: Button = findViewById(R.id.btn_get_started)
         nextButton.setOnClickListener {
             // ✅ Navigate to OnBoarding3 instead of OnBoarding2
-            val intent = Intent(this, Home::class.java)
+            val intent = Intent(this, CreateProfile::class.java)
             startActivity(intent)
         }
 
