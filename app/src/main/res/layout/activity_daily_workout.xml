@@ -53,19 +53,25 @@
 
             <!-- Workout Info Card - IMPROVED -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_workout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="3dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="24dp"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:id="@+id/tv_workout_title"
@@ -81,7 +87,7 @@
                         android:id="@+id/tv_workout_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/a_quick_10_minute_workout_routine_to_get_your_day_started_right"
+                        android:text="select_exercises_to_build_your_custom_workout"
                         android:textSize="14sp"
                         android:textColor="#64748B"
                         android:lineSpacingExtra="4dp"
@@ -111,56 +117,64 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_8_exercises_10_minutes"
+                            android:text="tap_to_select_exercises"
                             android:textSize="14sp"
                             android:textColor="#8B5CF6" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Action Buttons - IMPROVED -->
+            <!-- Reset Button Only -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reset_workout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="reset_all_exercises"
+                android:textColor="#64748B"
+                android:textSize="14sp"
+                android:backgroundTint="#FFFFFF"
+                android:strokeColor="#E2E8F0"
+                app:icon="@drawable/ic_refresh"
+                app:iconTint="#64748B"
+                app:iconPadding="8dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Today's Exercises Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="24dp">
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
 
-                <!-- Start Workout Button - FIXED -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_start_workout"
+                <TextView
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/start_daily_workout"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:backgroundTint="#10B981"
-                    android:elevation="2dp"
-                    app:icon="@drawable/ic_play"
-                    app:iconTint="#FFFFFF"
-                    app:iconPadding="8dp"
-                    style="@style/Widget.Material3.Button"/>
+                    android:text="@string/today_s_exercises"
+                    android:textSize="18sp"
+                    android:textColor="#1E293B"
+                    android:textStyle="bold"/>
 
-                <!-- Reset Button -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_reset_workout"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/reset"
-                    android:textColor="#64748B"
-                    android:textSize="12sp"
-                    android:backgroundTint="#FFFFFF"
-                    android:strokeColor="#E2E8F0"
-                    app:icon="@drawable/ic_refresh"
-                    app:iconTint="#64748B"
-                    app:iconPadding="8dp"
-                    style="@style/Widget.Material3.Button.OutlinedButton"/>
+                <TextView
+                    android:id="@+id/tv_exercise_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 exercises"
+                    android:textSize="14sp"
+                    android:textColor="#64748B"/>
             </LinearLayout>
 
-            <!-- Exercises Card - IMPROVED -->
+            <!-- Exercises Container - DYNAMIC -->
+            <LinearLayout
+                android:id="@+id/exercises_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Tips Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -175,219 +189,10 @@
                     android:padding="24dp"
                     android:background="#FFFFFF">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/today_s_exercises"
-                        android:textSize="18sp"
-                        android:textColor="#1E293B"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="16dp"/>
-
-                    <!-- Sample Exercise 1 -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="?attr/selectableItemBackground"
-                            android:padding="16dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <LinearLayout
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:background="@drawable/bg_circle_light_green"
-                                android:gravity="center"
-                                android:layout_marginEnd="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_1"
-                                    android:textSize="16sp"
-                                    android:textColor="#10B981"
-                                    android:textStyle="bold"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/jumping_jacks"
-                                    android:textSize="16sp"
-                                    android:textColor="#1E293B"
-                                    android:textStyle="bold"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_30_seconds_cardio"
-                                    android:textSize="14sp"
-                                    android:textColor="#64748B"
-                                    android:layout_marginTop="2dp"/>
-                            </LinearLayout>
-
-                            <CheckBox
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:button="@drawable/custom_checkbox"
-                                android:checked="false"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <!-- Sample Exercise 2 -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="?attr/selectableItemBackground"
-                            android:padding="16dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <LinearLayout
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:background="@drawable/bg_circle_light_blue"
-                                android:gravity="center"
-                                android:layout_marginEnd="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_2"
-                                    android:textSize="16sp"
-                                    android:textColor="#2563EB"
-                                    android:textStyle="bold"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/push_ups"
-                                    android:textSize="16sp"
-                                    android:textColor="#1E293B"
-                                    android:textStyle="bold"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_12_reps_strength"
-                                    android:textSize="14sp"
-                                    android:textColor="#64748B"
-                                    android:layout_marginTop="2dp"/>
-                            </LinearLayout>
-
-                            <CheckBox
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:button="@drawable/custom_checkbox"
-                                android:checked="false"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <!-- Sample Exercise 3 -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="1dp"
-                        app:cardUseCompatPadding="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="?attr/selectableItemBackground"
-                            android:padding="16dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <LinearLayout
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:background="@drawable/bg_circle_light_orange"
-                                android:gravity="center"
-                                android:layout_marginEnd="12dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_3"
-                                    android:textSize="16sp"
-                                    android:textColor="#F59E0B"
-                                    android:textStyle="bold"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/squats"
-                                    android:textSize="16sp"
-                                    android:textColor="#1E293B"
-                                    android:textStyle="bold"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_15_reps_legs"
-                                    android:textSize="14sp"
-                                    android:textColor="#64748B"
-                                    android:layout_marginTop="2dp"/>
-                            </LinearLayout>
-
-                            <CheckBox
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:button="@drawable/custom_checkbox"
-                                android:checked="false"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <!-- Tips Section - IMPROVED -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp"
                         android:background="@drawable/bg_rounded_light_blue"
                         android:padding="20dp"
                         android:backgroundTint="#F0F9FF">
@@ -402,7 +207,7 @@
                             <TextView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:text="@string/bulb"
+                                android:text="💡"
                                 android:textSize="16sp"
                                 android:layout_marginEnd="8dp"/>
 

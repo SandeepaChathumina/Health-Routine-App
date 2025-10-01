@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="40dp">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_workout"
+        android:contentDescription="@string/workout_icon"
+        app:tint="#CBD5E1"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_empty_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No exercises selected yet.\nTap 'Quick Morning Workout' to choose exercises."
+        android:textSize="16sp"
+        android:textColor="#64748B"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"/>
+</LinearLayout>

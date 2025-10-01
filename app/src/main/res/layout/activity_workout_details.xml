@@ -213,12 +213,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_1"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -282,12 +282,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_2"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -351,12 +351,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_3"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -420,12 +420,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_4"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -489,12 +489,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_5"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -558,12 +558,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_6"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -627,12 +627,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_7"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -696,12 +696,12 @@
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
 
-                    <ImageView
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkbox_exercise_8"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_play"
-                        app:tint="#10B981"
-                        android:contentDescription="@string/play"/>
+                        android:button="@drawable/custom_checkbox"
+                        android:checked="false"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
