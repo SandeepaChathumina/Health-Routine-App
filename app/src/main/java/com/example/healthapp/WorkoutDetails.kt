@@ -41,6 +41,7 @@ class WorkoutDetails : AppCompatActivity() {
 
 
 
+
         val backButton: ImageButton = findViewById(R.id.btn_back)
         val startWorkoutButton: MaterialButton = findViewById(R.id.btn_start_workout)
 
