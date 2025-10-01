@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC"
-    android:paddingTop="24dp">
+    android:background="#F8FAFC">
 
     <!-- Header -->
     <LinearLayout
@@ -30,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Workout Timer"
+            android:text="@string/workout_timer"
             android:textSize="20sp"
             android:textColor="#1E293B"
             android:textStyle="bold"
@@ -58,7 +57,6 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginBottom="32dp"
-                android:layout_gravity="center"
                 app:indicatorColor="#10B981"
                 app:trackColor="#E2E8F0"
                 app:trackThickness="8dp"
@@ -70,7 +68,7 @@
                 android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:30"
+                android:text="@string/_00_30"
                 android:textSize="48sp"
                 android:textColor="#1E293B"
                 android:textStyle="bold"
@@ -88,7 +86,7 @@
                     android:id="@+id/tv_exercise_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Exercise Name"
+                    android:text="@string/exercise_name"
                     android:textSize="24sp"
                     android:textColor="#1E293B"
                     android:textStyle="bold"
@@ -98,7 +96,7 @@
                     android:id="@+id/tv_exercise_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30 seconds • Cardio"
+                    android:text="@string/_30_seconds_cardio"
                     android:textSize="16sp"
                     android:textColor="#64748B" />
             </LinearLayout>
@@ -115,7 +113,7 @@
                     android:id="@+id/tv_current_exercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:text="@string/_1"
                     android:textSize="18sp"
                     android:textColor="#10B981"
                     android:textStyle="bold" />
@@ -132,7 +130,7 @@
                     android:id="@+id/tv_total_exercises"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8"
+                    android:text="@string/_8"
                     android:textSize="18sp"
                     android:textColor="#64748B" />
             </LinearLayout>
@@ -149,7 +147,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
-                    android:text="Pause"
+                    android:text="@string/pause"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:backgroundTint="#F59E0B"
@@ -163,7 +161,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:backgroundTint="#10B981"

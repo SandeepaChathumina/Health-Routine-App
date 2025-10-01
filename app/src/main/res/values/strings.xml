@@ -184,4 +184,8 @@
     <string name="glute_bridges">Glute Bridges</string>
     <string name="lunges">Lunges</string>
     <string name="bicycle_crunches">Bicycle Crunches</string>
+    <string name="workout_timer">Workout Timer</string>
+    <string name="_00_30">00:30</string>
+    <string name="exercise_name">Exercise Name</string>
+    <string name="pause">Pause</string>
 </resources>
