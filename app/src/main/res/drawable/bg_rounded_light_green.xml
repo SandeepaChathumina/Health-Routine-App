@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Background Color -->
+    <!-- This uses a light green color that you will define in colors.xml -->
+    <solid android:color="@color/light_green" />
+
+    <!-- Corner Radius -->
+    <!-- A large radius value makes the ends fully rounded, creating a pill shape. -->
+    <corners android:radius="999dp" />
+
+</shape>
