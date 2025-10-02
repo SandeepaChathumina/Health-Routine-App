@@ -480,10 +480,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/core_abs"
+                            android:text="@string/cardio_lower_body"
                             android:textSize="12sp"
-                            android:textColor="#EF4444"
-                            android:background="@drawable/bg_rounded_light_red"
+                            android:textColor="#8B5CF6"
+                            android:background="@drawable/bg_rounded_light_purple"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
                             android:layout_marginTop="8dp"/>
@@ -541,7 +541,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_30_seconds"
+                            android:text="@string/_15_reps"
                             android:textSize="14sp"
                             android:textColor="#64748B"
                             android:layout_marginTop="4dp"/>
@@ -551,8 +551,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/core_abs"
                             android:textSize="12sp"
-                            android:textColor="#EF4444"
-                            android:background="@drawable/bg_rounded_light_red"
+                            android:textColor="#2563EB"
+                            android:background="@drawable/bg_rounded_light_blue"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
                             android:layout_marginTop="8dp"/>
@@ -610,7 +610,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_30_seconds"
+                            android:text="@string/_15_reps"
                             android:textSize="14sp"
                             android:textColor="#64748B"
                             android:layout_marginTop="4dp"/>
@@ -618,10 +618,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/core_abs"
+                            android:text="@string/legs_lower_body"
                             android:textSize="12sp"
-                            android:textColor="#EF4444"
-                            android:background="@drawable/bg_rounded_light_red"
+                            android:textColor="#F59E0B"
+                            android:background="@drawable/bg_rounded_light_orange"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
                             android:layout_marginTop="8dp"/>
@@ -679,7 +679,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/_30_seconds"
+                            android:text="@string/_15_reps"
                             android:textSize="14sp"
                             android:textColor="#64748B"
                             android:layout_marginTop="4dp"/>
@@ -687,10 +687,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/core_abs"
+                            android:text="@string/lower_body"
                             android:textSize="12sp"
-                            android:textColor="#EF4444"
-                            android:background="@drawable/bg_rounded_light_red"
+                            android:textColor="#000000"
+                            android:background="@drawable/bg_rounded_light_green"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp"
                             android:layout_marginTop="8dp"/>

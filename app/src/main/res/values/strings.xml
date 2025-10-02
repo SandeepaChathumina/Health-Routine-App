@@ -188,4 +188,6 @@
     <string name="_00_30">00:30</string>
     <string name="exercise_name">Exercise Name</string>
     <string name="pause">Pause</string>
+    <string name="cardio_lower_body">cardio lower body</string>
+    <string name="lower_body">lower body</string>
 </resources>

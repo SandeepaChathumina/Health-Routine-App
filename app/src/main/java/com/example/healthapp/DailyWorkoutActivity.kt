@@ -155,10 +155,10 @@ class DailyWorkoutActivity : AppCompatActivity() {
             Exercise(2, "Push Ups", "12 reps", "Strength Chest", "pushups", "#2563EB"),
             Exercise(3, "Squats", "15 reps", "Legs Lower Body", "squats", "#F59E0B"),
             Exercise(4, "Plank", "30 seconds", "Core Abs", "plank", "#EF4444"),
-            Exercise(5, "Mountain Climbers", "45 seconds", "Cardio Core", "mountainclimbers", "#10B981"),
-            Exercise(6, "Bicycle Crunches", "20 reps", "Core Abs", "bicyclecrunches", "#EF4444"),
-            Exercise(7, "Lunges", "12 reps each leg", "Legs Strength", "lunges", "#2563EB"),
-            Exercise(8, "Glute Bridges", "15 reps", "Glutes Lower Body", "glutebridges", "#F59E0B")
+            Exercise(5, "Mountain Climbers", "30 seconds", "Cardio lower body", "mountainclimbers", "#10B981"),
+            Exercise(6, "Bicycle Crunches", "15 reps", "Core Abs", "bicyclecrunches", "#EF4444"),
+            Exercise(7, "Lunges", "15 reps each leg", "Legs lower body", "lunges", "#2563EB"),
+            Exercise(8, "Glute Bridges", "15 reps", "Lower Body", "glutebridges", "#F59E0B")
         )
         
         return availableExercises.find { it.id == exerciseId }
