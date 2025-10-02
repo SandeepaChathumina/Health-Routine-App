@@ -61,20 +61,27 @@
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
 
-        <!-- Replace checkbox with trash icon button -->
+        <!-- Remove exercise button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_remove_exercise"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
             android:backgroundTint="#FEF2F2"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
             app:icon="@drawable/trash"
             app:iconTint="#EF4444"
-            app:iconSize="20dp"
+            app:iconSize="18dp"
             app:iconPadding="0dp"
-            app:cornerRadius="24dp"
-            style="@style/Widget.Material3.Button"
-            android:contentDescription="remove exercise"/>
+            app:iconGravity="textStart"
+            app:cornerRadius="20dp"
+            app:strokeWidth="0dp"
+            style="@style/Widget.Material3.Button.UnelevatedButton"
+            android:contentDescription="Remove exercise"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

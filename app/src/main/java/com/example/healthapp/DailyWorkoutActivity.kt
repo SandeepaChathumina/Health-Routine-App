@@ -120,7 +120,16 @@ class DailyWorkoutActivity : AppCompatActivity() {
         if (json != null) {
             val type = object : TypeToken<ArrayList<Exercise>>() {}.type
             val savedExercises: ArrayList<Exercise> = gson.fromJson(json, type)
-            selectedExercises.addAll(savedExercises)
+            
+            // Update cached exercises with latest data from availableExercises
+            val updatedExercises = savedExercises.map { savedExercise ->
+                getUpdatedExerciseData(savedExercise.id) ?: savedExercise
+            }
+            
+            selectedExercises.addAll(updatedExercises)
+            
+            // Save the updated exercises back to cache
+            saveSelectedExercises()
 
             updateExerciseCount(selectedExercises.size)
             updateStartButtonVisibility()
@@ -137,6 +146,22 @@ class DailyWorkoutActivity : AppCompatActivity() {
             updateStartButtonVisibility()
             showEmptyState()
         }
+    }
+
+    private fun getUpdatedExerciseData(exerciseId: Int): Exercise? {
+        // Get the latest exercise data - this should match the data in WorkoutDetails.kt
+        val availableExercises = listOf(
+            Exercise(1, "Jumping Jacks", "30 seconds", "Cardio Full Body", "jumpingjack", "#10B981"),
+            Exercise(2, "Push Ups", "12 reps", "Strength Chest", "pushups", "#2563EB"),
+            Exercise(3, "Squats", "15 reps", "Legs Lower Body", "squats", "#F59E0B"),
+            Exercise(4, "Plank", "30 seconds", "Core Abs", "plank", "#EF4444"),
+            Exercise(5, "Mountain Climbers", "45 seconds", "Cardio Core", "mountainclimbers", "#10B981"),
+            Exercise(6, "Bicycle Crunches", "20 reps", "Core Abs", "bicyclecrunches", "#EF4444"),
+            Exercise(7, "Lunges", "12 reps each leg", "Legs Strength", "lunges", "#2563EB"),
+            Exercise(8, "Glute Bridges", "15 reps", "Glutes Lower Body", "glutebridges", "#F59E0B")
+        )
+        
+        return availableExercises.find { it.id == exerciseId }
     }
 
     private fun addExerciseToContainer(exercise: Exercise, position: Int) {
@@ -224,8 +249,10 @@ class DailyWorkoutActivity : AppCompatActivity() {
             .setTitle("Reset All Exercises")
             .setMessage("Are you sure you want to remove all exercises from your workout?")
             .setPositiveButton("Reset All") { dialog, which ->
-                sharedPreferences.edit().remove("selected_exercises").apply()
+                selectedExercises.clear()
+                saveSelectedExercises()
                 loadAndDisplaySelectedExercises()
+                Toast.makeText(this, "All exercises cleared", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)
             .show()
