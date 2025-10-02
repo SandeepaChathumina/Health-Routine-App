@@ -34,7 +34,7 @@ class HomeDataManager(private val context: Context) {
         // Calculate overall progress (weighted average)
         val habitProgress = if (habitsData.totalHabits > 0) {
             (habitsData.completed.toFloat() / habitsData.totalHabits * 100).roundToInt()
-        } else 0
+        } else 0 // No habits = 0% progress
         
         val hydrationProgress = ((hydrationData.intake.toFloat() / hydrationData.goal) * 100).roundToInt().coerceAtMost(100)
         

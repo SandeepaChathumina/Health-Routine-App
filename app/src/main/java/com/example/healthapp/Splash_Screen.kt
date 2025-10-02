@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.view.animation.AnimationUtils
@@ -12,6 +13,7 @@ import android.widget.ImageView // Add this import
 class Splash_Screen : AppCompatActivity() {
 
     private lateinit var heartImageView: ImageView // Declare here
+    private lateinit var navigationManager: NavigationManager
     private val SPLASH_DELAY: Long = 3000 // 3 seconds
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +21,12 @@ class Splash_Screen : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
 
-        // Initialize the ImageView
+        // Initialize components
         heartImageView = findViewById(R.id.heartImageView)
+        navigationManager = NavigationManager(this)
 
         startHeartAnimation()
-        navigateToMainActivity()
+        navigateToNextScreen()
     }
 
     private fun startHeartAnimation(){
@@ -34,9 +37,16 @@ class Splash_Screen : AppCompatActivity() {
         }, 500)
     }
 
-    private fun navigateToMainActivity(){
+    private fun navigateToNextScreen(){
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, Onboarding1::class.java)
+            // Determine next destination based on user profile status
+            val nextDestination = navigationManager.getNextDestination()
+            
+            // Log for debugging
+            Log.d("SplashScreen", "Profile Status: ${navigationManager.getProfileStatus()}")
+            Log.d("SplashScreen", "Navigating to: ${nextDestination.simpleName}")
+            
+            val intent = Intent(this, nextDestination)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()

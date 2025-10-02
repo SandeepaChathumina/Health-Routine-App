@@ -67,8 +67,12 @@ class CreateProfile : AppCompatActivity() {
 
             // Save profile data
             saveProfileData(name, age, gender)
+            
+            // Mark profile as complete using NavigationManager
+            val navigationManager = NavigationManager(this)
+            navigationManager.markProfileComplete()
 
-            // Navigate to main activity (or home)
+            // Navigate to home with clear task stack
             val intent = Intent(this, Home::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

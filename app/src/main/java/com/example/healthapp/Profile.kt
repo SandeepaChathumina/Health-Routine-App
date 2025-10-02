@@ -22,6 +22,13 @@ class Profile : AppCompatActivity() {
     private lateinit var tvUserAge: TextView
     private lateinit var tvUserGender: TextView
     private lateinit var tvJoinDate: TextView
+    
+    // Progress stats TextViews
+    private lateinit var tvTotalHabits: TextView
+    private lateinit var tvCurrentStreak: TextView
+    private lateinit var tvSuccessRate: TextView
+    
+    private lateinit var statsDataManager: StatsDataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +36,22 @@ class Profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         sharedPreferences = getSharedPreferences("user_profile", MODE_PRIVATE)
+        statsDataManager = StatsDataManager(this)
 
         // Initialize views
         tvUserName = findViewById(R.id.tv_user_name)
         tvUserAge = findViewById(R.id.tv_user_age)
         tvUserGender = findViewById(R.id.tv_user_gender)
         tvJoinDate = findViewById(R.id.tv_join_date)
+        
+        // Initialize progress stats views
+        tvTotalHabits = findViewById(R.id.tv_total_habits)
+        tvCurrentStreak = findViewById(R.id.tv_current_streak)
+        tvSuccessRate = findViewById(R.id.tv_success_rate)
 
         // Load and display profile data
         loadProfileData()
+        loadProgressStats()
 
         setupBottomNavigation()
 
@@ -47,6 +61,7 @@ class Profile : AppCompatActivity() {
             val intent = Intent(this, CreateProfile::class.java)
             startActivity(intent)
         }
+        
     }
 
     private fun loadProfileData() {
@@ -75,6 +90,26 @@ class Profile : AppCompatActivity() {
         super.onResume()
         // Refresh data when returning from CreateProfile activity
         loadProfileData()
+        loadProgressStats()
+    }
+    
+    private fun loadProgressStats() {
+        // Get real stats data for the last 30 days
+        val statsData = statsDataManager.getStatsForPeriod(30)
+        
+        // Update total habits
+        tvTotalHabits.text = statsData.totalHabits.toString()
+        
+        // Update current streak
+        val streakText = if (statsData.currentStreak == 1) {
+            "${statsData.currentStreak} day"
+        } else {
+            "${statsData.currentStreak} days"
+        }
+        tvCurrentStreak.text = streakText
+        
+        // Update success rate
+        tvSuccessRate.text = "${statsData.habitsScore}%"
     }
 
     private fun setupBottomNavigation() {
@@ -110,4 +145,5 @@ class Profile : AppCompatActivity() {
             }
         }
     }
+    
 }

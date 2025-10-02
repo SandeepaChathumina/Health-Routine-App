@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,6 +26,7 @@ class Habits : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var habitAdapter: HabitAdapter
     private lateinit var fireworksView: FireworksView
+    private lateinit var emptyStateLayout: LinearLayout
     private val habits = mutableListOf<Habit>()
 
     // SharedPreferences for data persistence
@@ -54,6 +56,7 @@ class Habits : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("HabitsPrefs", MODE_PRIVATE)
 
         fireworksView = findViewById(R.id.fireworksView)
+        emptyStateLayout = findViewById(R.id.layout_empty_state)
 
         setupBottomNavigation()
         setupRecyclerView()
@@ -121,14 +124,14 @@ class Habits : AppCompatActivity() {
                 habits.addAll(savedHabits)
                 Log.d("Habits", "Habits loaded: ${habits.size} habits")
             } else {
-                // If no saved habits, initialize with sample data
-                initializeSampleHabits()
+                // No saved habits - start with empty list
+                habits.clear()
             }
             updateHabitsList()
         } catch (e: Exception) {
             Log.e("Habits", "Error loading habits: ${e.message}")
-            // If error loading, initialize with sample data
-            initializeSampleHabits()
+            // If error loading, start with empty list
+            habits.clear()
         }
     }
 
@@ -171,6 +174,13 @@ class Habits : AppCompatActivity() {
     private fun setupClickListeners() {
         val btnAddHabit = findViewById<ImageButton>(R.id.btn_add_habit)
         btnAddHabit.setOnClickListener {
+            val intent = Intent(this, AddHabitActivity::class.java)
+            addHabitLauncher.launch(intent)
+        }
+        
+        // Empty state button
+        val btnAddFirstHabit = findViewById<MaterialButton>(R.id.btn_add_first_habit)
+        btnAddFirstHabit.setOnClickListener {
             val intent = Intent(this, AddHabitActivity::class.java)
             addHabitLauncher.launch(intent)
         }
@@ -240,38 +250,22 @@ class Habits : AppCompatActivity() {
         tvSort.text = "Sort by Name"
     }
 
-    private fun initializeSampleHabits() {
-        // Only add sample habits if no habits exist
-        if (habits.isEmpty()) {
-            habits.addAll(
-                listOf(
-                    Habit(
-                        id = System.currentTimeMillis().toInt(),
-                        title = "Drink 8 glasses of water",
-                        category = "Health",
-                        currentStreak = 12,
-                        targetCount = 8,
-                        completedCount = 8,
-                        isCompleted = true
-                    ),
-                    Habit(
-                        id = System.currentTimeMillis().toInt() + 1,
-                        title = "10 minute meditation",
-                        category = "Mindfulness",
-                        currentStreak = 8,
-                        targetCount = 1,
-                        completedCount = 0,
-                        isCompleted = false
-                    )
-                )
-            )
-            saveHabitsToStorage() // Save the sample habits
-        }
-        updateHabitsList()
-    }
 
     private fun updateHabitsList() {
         habitAdapter.updateHabits(habits)
+        updateEmptyState()
+    }
+    
+    private fun updateEmptyState() {
+        if (habits.isEmpty()) {
+            // Show empty state, hide RecyclerView
+            emptyStateLayout.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            // Show RecyclerView, hide empty state
+            emptyStateLayout.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
     }
 
     private fun updateStats() {

@@ -159,13 +159,10 @@
                     android:layout_marginEnd="6dp"
                     android:text="+250ml"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     app:backgroundTint="#00BCD4"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/ic_plus"
-                    app:iconTint="#FFFFFF"
-                    app:iconSize="16dp"/>
+                    app:cornerRadius="12dp"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_add_500"
@@ -175,13 +172,10 @@
                     android:layout_marginHorizontal="6dp"
                     android:text="+500ml"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     app:backgroundTint="#00BCD4"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/ic_plus"
-                    app:iconTint="#FFFFFF"
-                    app:iconSize="16dp"/>
+                    app:cornerRadius="12dp"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_add_750"
@@ -191,13 +185,10 @@
                     android:layout_marginStart="6dp"
                     android:text="+750ml"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     app:backgroundTint="#00BCD4"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/ic_plus"
-                    app:iconTint="#FFFFFF"
-                    app:iconSize="16dp"/>
+                    app:cornerRadius="12dp"/>
             </LinearLayout>
 
             <!-- Manual Controls -->
