@@ -19,7 +19,8 @@ class Profile : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var tvUserName: TextView
-    private lateinit var tvUserEmail: TextView
+    private lateinit var tvUserAge: TextView
+    private lateinit var tvUserGender: TextView
     private lateinit var tvJoinDate: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,8 @@ class Profile : AppCompatActivity() {
 
         // Initialize views
         tvUserName = findViewById(R.id.tv_user_name)
-        tvUserEmail = findViewById(R.id.tv_user_email)
+        tvUserAge = findViewById(R.id.tv_user_age)
+        tvUserGender = findViewById(R.id.tv_user_gender)
         tvJoinDate = findViewById(R.id.tv_join_date)
 
         // Load and display profile data
@@ -48,11 +50,13 @@ class Profile : AppCompatActivity() {
     }
 
     private fun loadProfileData() {
-        val userName = sharedPreferences.getString("user_name", "Sarah Johnson") ?: "Sarah Johnson"
-        val userEmail = sharedPreferences.getString("user_email", "sarah.johnson@email.com") ?: "sarah.johnson@email.com"
+        val userName = sharedPreferences.getString("user_name", "John Doe") ?: "John Doe"
+        val userAge = sharedPreferences.getInt("user_age", 25)
+        val userGender = sharedPreferences.getString("user_gender", "Not specified") ?: "Not specified"
 
         tvUserName.text = userName
-        tvUserEmail.text = userEmail
+        tvUserAge.text = "$userAge years old"
+        tvUserGender.text = userGender
 
         // Set join date to current date if not set
         if (!sharedPreferences.contains("join_date")) {

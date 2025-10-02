@@ -92,10 +92,19 @@
                         android:layout_marginBottom="4dp"/>
 
                     <TextView
-                        android:id="@+id/tv_user_email"
+                        android:id="@+id/tv_user_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sarah_johnson_email_com"
+                        android:text="25 years old"
+                        android:textSize="16sp"
+                        android:textColor="#64748B"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_user_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Not specified"
                         android:textSize="16sp"
                         android:textColor="#64748B"
                         android:layout_marginBottom="4dp"/>

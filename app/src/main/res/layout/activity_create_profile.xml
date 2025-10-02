@@ -10,12 +10,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
 
             <!-- Header -->
             <TextView
@@ -44,7 +47,7 @@
                     android:padding="24dp"
                     android:background="#FFFFFF">
 
-                    <!-- Full Name -->
+                    <!-- Name -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -57,15 +60,16 @@
                         app:hintTextColor="#64748B">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_full_name"
+                            android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Full Name"
+                            android:hint="Name"
+                            android:inputType="textPersonName"
                             android:textSize="16sp"
                             android:maxLines="1"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Email -->
+                    <!-- Age -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -78,13 +82,38 @@
                         app:hintTextColor="#64748B">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_email"
+                            android:id="@+id/et_age"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Email Address"
-                            android:inputType="textEmailAddress"
+                            android:hint="Age"
+                            android:inputType="number"
                             android:textSize="16sp"
                             android:maxLines="1"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Gender -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxStrokeColor="#64748B"
+                        app:hintTextColor="#64748B"
+                        app:endIconMode="dropdown_menu">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/et_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Gender"
+                            android:textSize="16sp"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:cursorVisible="false"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>

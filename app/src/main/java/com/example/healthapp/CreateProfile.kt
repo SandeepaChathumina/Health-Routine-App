@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -18,26 +20,53 @@ class CreateProfile : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("user_profile", MODE_PRIVATE)
 
-        val etFullName = findViewById<TextInputEditText>(R.id.et_full_name)
-        val etEmail = findViewById<TextInputEditText>(R.id.et_email)
+        val etName = findViewById<TextInputEditText>(R.id.et_name)
+        val etAge = findViewById<TextInputEditText>(R.id.et_age)
+        val etGender = findViewById<AutoCompleteTextView>(R.id.et_gender)
         val btnCreateProfile = findViewById<MaterialButton>(R.id.btn_create_profile)
 
-        btnCreateProfile.setOnClickListener {
-            val fullName = etFullName.text.toString().trim()
-            val email = etEmail.text.toString().trim()
+        // Setup gender dropdown
+        val genderOptions = arrayOf("Male", "Female", "Other", "Prefer not to say")
+        val genderAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, genderOptions)
+        etGender.setAdapter(genderAdapter)
+        
+        // Make the dropdown show when clicked
+        etGender.setOnClickListener {
+            etGender.showDropDown()
+        }
+        
+        // Prevent keyboard from showing
+        etGender.keyListener = null
 
-            if (fullName.isEmpty()) {
-                etFullName.error = "Please enter your full name"
+        btnCreateProfile.setOnClickListener {
+            val name = etName.text.toString().trim()
+            val ageText = etAge.text.toString().trim()
+            val gender = etGender.text.toString().trim()
+
+            // Validation
+            if (name.isEmpty()) {
+                etName.error = "Please enter your name"
                 return@setOnClickListener
             }
 
-            if (email.isEmpty()) {
-                etEmail.error = "Please enter your email"
+            if (ageText.isEmpty()) {
+                etAge.error = "Please enter your age"
+                return@setOnClickListener
+            }
+
+            val age = ageText.toIntOrNull()
+            if (age == null || age < 1 || age > 120) {
+                etAge.error = "Please enter a valid age (1-120)"
+                return@setOnClickListener
+            }
+
+            if (gender.isEmpty()) {
+                etGender.error = "Please select your gender"
                 return@setOnClickListener
             }
 
             // Save profile data
-            saveProfileData(fullName, email)
+            saveProfileData(name, age, gender)
 
             // Navigate to main activity (or home)
             val intent = Intent(this, Home::class.java)
@@ -47,10 +76,11 @@ class CreateProfile : AppCompatActivity() {
         }
     }
 
-    private fun saveProfileData(fullName: String, email: String) {
+    private fun saveProfileData(name: String, age: Int, gender: String) {
         val editor = sharedPreferences.edit()
-        editor.putString("user_name", fullName)
-        editor.putString("user_email", email)
+        editor.putString("user_name", name)
+        editor.putInt("user_age", age)
+        editor.putString("user_gender", gender)
         editor.putBoolean("profile_created", true)
         editor.apply()
     }

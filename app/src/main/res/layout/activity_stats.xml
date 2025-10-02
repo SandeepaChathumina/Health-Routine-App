@@ -209,6 +209,7 @@
                                     android:layout_marginHorizontal="8dp"/>
 
                                 <TextView
+                                    android:id="@+id/tv_habits_score"
                                     android:layout_width="30dp"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_85"
@@ -239,6 +240,7 @@
                                     android:layout_marginHorizontal="8dp"/>
 
                                 <TextView
+                                    android:id="@+id/tv_water_score"
                                     android:layout_width="30dp"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_92"
@@ -269,6 +271,7 @@
                                     android:layout_marginHorizontal="8dp"/>
 
                                 <TextView
+                                    android:id="@+id/tv_mood_score"
                                     android:layout_width="30dp"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_78"
@@ -298,6 +301,7 @@
                                     android:layout_marginHorizontal="8dp"/>
 
                                 <TextView
+                                    android:id="@+id/tv_exercise_score"
                                     android:layout_width="30dp"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_70"
@@ -531,6 +535,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_avg_habits_per_day"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/decimal6_8"
@@ -555,6 +560,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_total_habits_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_8"
@@ -579,6 +585,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_habit_streak"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_12"
@@ -660,6 +667,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_daily_water_avg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_2_3l"
@@ -685,6 +693,7 @@
                             tools:ignore="TooManyViews">
 
                             <TextView
+                                android:id="@+id/tv_glasses_per_day"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_9_2"
@@ -709,6 +718,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_hydration_days_on_track"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_6"
@@ -790,6 +800,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_mood_entries_week"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_6"
@@ -814,6 +825,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_most_common_mood_emoji"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/happy"
@@ -838,6 +850,7 @@
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/tv_mood_improvement"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/plus12"
