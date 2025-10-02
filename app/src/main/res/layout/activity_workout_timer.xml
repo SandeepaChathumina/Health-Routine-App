@@ -61,7 +61,7 @@
                 app:trackColor="#E2E8F0"
                 app:trackThickness="8dp"
                 app:indicatorSize="200dp"
-                app:progress="0" />
+                android:progress="0" />
 
             <!-- Timer Display -->
             <TextView
