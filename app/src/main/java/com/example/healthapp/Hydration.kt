@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -17,11 +18,14 @@ import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Hydration : AppCompatActivity() {
     private var currentIntake = 0
@@ -30,6 +34,7 @@ class Hydration : AppCompatActivity() {
     private var currentGlasses = 0
     private var goalGlasses = 12
     private var isGoalAchieved = false
+    private var streakDays = 0
 
     // UI Components
     private lateinit var tvCurrentAmount: TextView
@@ -43,6 +48,9 @@ class Hydration : AppCompatActivity() {
     private lateinit var btnAdd: MaterialButton
     private lateinit var btnSubtract: MaterialButton
 
+    // SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
+
     // Bottle dimensions
     private val maxWaterHeight = 180f
     private val waterWidth = 80f
@@ -51,9 +59,13 @@ class Hydration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hydration)
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("hydration_data", MODE_PRIVATE)
+
         initializeViews()
         setupClickListeners()
         setupBottomNavigation()
+        loadHydrationData()
         updateUI()
     }
 
@@ -84,6 +96,57 @@ class Hydration : AppCompatActivity() {
         findViewById<ImageButton>(R.id.btn_settings).setOnClickListener { showSettingsDialog() }
     }
 
+    private fun loadHydrationData() {
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val lastSavedDate = sharedPreferences.getString("last_saved_date", "")
+
+        // Reset data if it's a new day
+        if (lastSavedDate != today) {
+            resetDailyIntake()
+
+            // Check if goal was achieved yesterday to maintain streak
+            val yesterdayGoalAchieved = sharedPreferences.getBoolean("yesterday_goal_achieved", false)
+            if (yesterdayGoalAchieved) {
+                streakDays = sharedPreferences.getInt("streak_days", 0) + 1
+            } else {
+                streakDays = 0
+            }
+
+            // Save new date and reset yesterday's achievement flag
+            sharedPreferences.edit().apply {
+                putString("last_saved_date", today)
+                putBoolean("yesterday_goal_achieved", false)
+                putInt("streak_days", streakDays)
+                apply()
+            }
+        } else {
+            // Load today's data
+            currentIntake = sharedPreferences.getInt("current_intake", 0)
+            currentGlasses = sharedPreferences.getInt("current_glasses", 0)
+            isGoalAchieved = sharedPreferences.getBoolean("is_goal_achieved", false)
+            streakDays = sharedPreferences.getInt("streak_days", 0)
+        }
+    }
+
+    private fun saveHydrationData() {
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+        sharedPreferences.edit().apply {
+            putInt("current_intake", currentIntake)
+            putInt("current_glasses", currentGlasses)
+            putBoolean("is_goal_achieved", isGoalAchieved)
+            putString("last_saved_date", today)
+            putInt("streak_days", streakDays)
+
+            // If goal is achieved today, mark it for tomorrow's streak calculation
+            if (isGoalAchieved) {
+                putBoolean("yesterday_goal_achieved", true)
+            }
+
+            apply()
+        }
+    }
+
     private fun addWater(amount: Int) {
         if (isGoalAchieved) return // Prevent adding more water after goal is achieved
 
@@ -95,10 +158,12 @@ class Hydration : AppCompatActivity() {
 
         animateWaterChange(previousIntake, currentIntake)
         updateUI()
+        saveHydrationData()
 
         // Check if goal is reached
         if (currentIntake >= dailyGoal && !isGoalAchieved) {
             isGoalAchieved = true
+            saveHydrationData() // Save immediately when goal is achieved
             showTrophyCelebration()
         }
     }
@@ -116,6 +181,7 @@ class Hydration : AppCompatActivity() {
 
         animateWaterChange(previousIntake, currentIntake)
         updateUI()
+        saveHydrationData()
     }
 
     private fun animateWaterChange(from: Int, to: Int) {
@@ -153,7 +219,7 @@ class Hydration : AppCompatActivity() {
         tvProgressPercent.text = "$progressPercentage% Complete"
         tvProgress.text = "$progressPercentage%"
         tvCupsToday.text = "$currentGlasses/$goalGlasses"
-        tvStreak.text = "8 days"
+        tvStreak.text = "$streakDays days"
 
         val progress = currentIntake.toFloat() / dailyGoal
         updateWaterLevel(progress)
@@ -373,8 +439,19 @@ class Hydration : AppCompatActivity() {
             .setTitle("Hydration Settings")
             .setMessage("Daily Goal: 6000ml (6L)\nGlass Size: 500ml\n\n6 liters is recommended for active individuals.")
             .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+            .setNegativeButton("Reset Data") { dialog, which ->
+                resetAllData()
+            }
             .create()
         dialog.show()
+    }
+
+    private fun resetAllData() {
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+        resetDailyIntake()
+        Toast.makeText(this, "All hydration data reset", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupBottomNavigation() {
@@ -397,5 +474,18 @@ class Hydration : AppCompatActivity() {
         currentGlasses = 0
         isGoalAchieved = false
         updateUI()
+        saveHydrationData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Save data when leaving the activity
+        saveHydrationData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Save data when closing the app
+        saveHydrationData()
     }
 }
