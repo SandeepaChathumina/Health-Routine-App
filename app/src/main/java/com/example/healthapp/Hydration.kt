@@ -514,6 +514,7 @@ class Hydration : AppCompatActivity() {
         currentIntake = 0
         currentGlasses = 0
         isGoalAchieved = false
+        clearChartData() // Clear chart data for new day
         updateUI()
         saveHydrationData()
     }
@@ -523,13 +524,13 @@ class Hydration : AppCompatActivity() {
             // Animate the water level going down to empty
             animateWaterChange(currentIntake, 0)
             
+            // Add final data point showing reset to zero
+            addChartDataPoint(0)
+            
             // Reset all values
             currentIntake = 0
             currentGlasses = 0
             isGoalAchieved = false
-            
-            // Clear chart data
-            clearChartData()
             
             // Update UI and save data
             updateUI()
@@ -889,7 +890,7 @@ class Hydration : AppCompatActivity() {
             HydrationChartView.ChartDataPoint(
                 time = currentTime,
                 value = currentIntake.toFloat(),
-                label = "${currentIntake}ml"
+                label = if (currentIntake == 0) "Reset" else "${currentIntake}ml"
             )
         )
         
