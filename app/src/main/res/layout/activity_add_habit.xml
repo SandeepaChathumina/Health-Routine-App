@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#F8FAFC"
+    android:background="@color/background_light"
     >
 
     <LinearLayout
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="Add New Habit"
             android:textSize="24sp"
-            android:textColor="#1E293B"
+            android:textColor="#1E3A8A"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Category"
             android:textSize="16sp"
-            android:textColor="#1E293B"
+            android:textColor="#1E3A8A"
             android:layout_marginBottom="8dp"/>
 
         <RadioGroup
@@ -98,6 +98,6 @@
             android:text="Save Habit"
             android:textSize="16sp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#2563EB"/>
+            android:backgroundTint="#4C6AFD"/>
     </LinearLayout>
 </ScrollView>

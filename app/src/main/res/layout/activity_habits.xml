@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC"
+    android:background="@color/background_light"
     android:paddingTop="24dp">
 
     <!-- Content Area -->
@@ -40,8 +40,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/my_habits"
                         android:textSize="28sp"
-                        android:textColor="#1E293B"
-                        android:textStyle="bold"/>
+                        android:textColor="#1E3A8A"
+                        android:fontFamily="sans-serif-medium"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                         android:text="@string/all"
                         android:textColor="#FFFFFF"
                         android:textSize="13sp"
-                        android:backgroundTint="#2563EB"
+                        android:backgroundTint="#4C6AFD"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
                         android:layout_marginEnd="8dp"
@@ -186,7 +186,7 @@
                                 android:layout_height="24dp"
                                 android:contentDescription="@string/target_icon"
                                 android:src="@drawable/ic_target"
-                                app:tint="#2563EB"/>
+                                app:tint="#4C6AFD"/>
                         </LinearLayout>
 
                         <TextView
@@ -195,7 +195,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_3_5"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -245,7 +245,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_12"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -295,7 +295,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_85"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -325,8 +325,8 @@
                     android:layout_weight="1"
                     android:text="@string/your_habits"
                     android:textSize="18sp"
-                    android:textColor="#1E293B"
-                    android:textStyle="bold"/>
+                    android:textColor="#1E3A8A"
+                    android:fontFamily="sans-serif-medium"/>
 
                 <TextView
                     android:id="@+id/tv_sort"
@@ -334,7 +334,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sort_by_recent"
                     android:textSize="12sp"
-                    android:textColor="#2563EB"
+                        android:textColor="#4C6AFD"
                     android:padding="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
@@ -376,7 +376,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:src="@drawable/ic_target"
-                            app:tint="#2563EB"
+                            app:tint="#4C6AFD"
                             android:contentDescription="No habits illustration"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -387,7 +387,7 @@
                     android:layout_height="wrap_content"
                     android:text="No Habits Yet"
                     android:textSize="24sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
@@ -410,7 +410,7 @@
                     android:text="Create Your First Habit"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
-                    android:backgroundTint="#2563EB"
+                    android:backgroundTint="#4C6AFD"
                     app:icon="@drawable/ic_plus"
                     app:iconTint="#FFFFFF"
                     app:iconPadding="8dp"

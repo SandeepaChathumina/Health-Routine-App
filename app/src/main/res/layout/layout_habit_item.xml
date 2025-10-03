@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"/>
 
                 <LinearLayout
@@ -112,7 +112,7 @@
                 android:layout_height="6dp"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:progressTint="#06B6D4"
+                android:progressTint="#4C6AFD"
                 android:backgroundTint="#E2E8F0"
                 android:layout_marginEnd="12dp"/>
 
