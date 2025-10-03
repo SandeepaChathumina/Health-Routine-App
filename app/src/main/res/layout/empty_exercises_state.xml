@@ -12,7 +12,7 @@
         android:layout_height="80dp"
         android:src="@drawable/ic_workout"
         android:contentDescription="@string/workout_icon"
-        app:tint="#CBD5E1"
+        app:tint="#4C6AFD"
         android:layout_marginBottom="16dp"/>
 
     <TextView

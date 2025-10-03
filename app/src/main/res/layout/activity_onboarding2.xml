@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#10B981"
+    android:background="#4C6AFD"
     android:padding="32dp"
     android:gravity="center_horizontal">
 
@@ -111,7 +111,7 @@
             android:layout_height="56dp"
             android:layout_weight="1"
             android:text="@string/next"
-            android:textColor="#10B981"
+            android:textColor="#4C6AFD"
             android:textSize="16sp"
             android:textStyle="bold"
             android:backgroundTint="#FFFFFF"

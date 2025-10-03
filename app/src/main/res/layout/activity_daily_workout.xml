@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC"
+    android:background="@color/background_light"
     android:paddingTop="24dp">
 
     <!-- Header -->
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:text="@string/daily_workout"
             android:textSize="20sp"
-            android:textColor="#1E293B"
+            android:textColor="#1E3A8A"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginEnd="48dp"/>
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/quick_morning_workout"
                         android:textSize="18sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
@@ -148,7 +148,7 @@
                 android:text="Start Workout"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:backgroundTint="#10B981"
+                android:backgroundTint="#4C6AFD"
                 app:icon="@drawable/ic_play"
                 app:iconTint="#FFFFFF"
                 app:iconPadding="8dp"
@@ -170,7 +170,7 @@
                     android:layout_weight="1"
                     android:text="@string/today_s_exercises"
                     android:textSize="18sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -232,7 +232,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/workout_tips"
                                 android:textSize="16sp"
-                                android:textColor="#2563EB"
+                                android:textColor="#4C6AFD"
                                 android:textStyle="bold"/>
                         </LinearLayout>
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC"
+    android:background="@color/background_light"
     android:paddingTop="24dp">
 
     <!-- Header -->
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:text="@string/bmi_calculator"
             android:textSize="20sp"
-            android:textColor="#1E293B"
+            android:textColor="#1E3A8A"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginEnd="48dp"/>
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/body_mass_index_calculator"
                         android:textSize="18sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="12dp"/>
 
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/height_cm"
                         android:textSize="16sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/weight_kg"
                         android:textSize="16sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
@@ -174,7 +174,7 @@
                         android:text="@string/calculate_bmi"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:backgroundTint="#2563EB"
+                        android:backgroundTint="#4C6AFD"
                         android:elevation="2dp"
                         app:icon="@drawable/ic_calculate"
                         app:iconTint="#FFFFFF"
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/your_bmi_result"
                         android:textSize="18sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="20dp"/>
 
@@ -230,7 +230,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/blanks"
                             android:textSize="36sp"
-                            android:textColor="#2563EB"
+                            android:textColor="#4C6AFD"
                             android:textStyle="bold"
                             android:layout_marginBottom="8dp"/>
 
@@ -240,7 +240,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/enter_your_details_above"
                             android:textSize="16sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -255,7 +255,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/bmi_categories"
                             android:textSize="16sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginBottom="16dp"/>
 
@@ -275,7 +275,7 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="20dp"
-                                android:background="#60A5FA"
+                                android:background="#4C6AFD"
                                 android:layout_marginEnd="12dp"/>
 
                             <TextView
@@ -291,7 +291,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_18_5"
                                 android:textSize="14sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 />
                         </LinearLayout>
 
@@ -311,7 +311,7 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="20dp"
-                                android:background="#10B981"
+                                android:background="#4C6AFD"
                                 android:layout_marginEnd="12dp"/>
 
                             <TextView
@@ -327,7 +327,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_18_5_24_9"
                                 android:textSize="14sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 />
                         </LinearLayout>
 
@@ -347,7 +347,7 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="20dp"
-                                android:background="#F59E0B"
+                                android:background="#4C6AFD"
                                 android:layout_marginEnd="12dp"/>
 
                             <TextView
@@ -363,7 +363,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_25_0_29_9"
                                 android:textSize="14sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 />
                         </LinearLayout>
 
@@ -382,7 +382,7 @@
                             <View
                                 android:layout_width="4dp"
                                 android:layout_height="20dp"
-                                android:background="#EF4444"
+                                android:background="#4C6AFD"
                                 android:layout_marginEnd="12dp"/>
 
                             <TextView
@@ -398,7 +398,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_30_0"
                                 android:textSize="14sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 />
                         </LinearLayout>
                     </LinearLayout>

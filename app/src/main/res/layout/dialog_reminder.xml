@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Reminder Title"
         android:textSize="16sp"
-        android:textColor="#1E293B"
+        android:textColor="#1E3A8A"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:hint="Mood Check-in"
         android:textSize="16sp"
-        android:textColor="#1E293B"
+        android:textColor="#1E3A8A"
         android:background="@drawable/bg_rounded_outline"
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Reminder Message"
         android:textSize="16sp"
-        android:textColor="#1E293B"
+        android:textColor="#1E3A8A"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:hint="How are you feeling today?"
         android:textSize="16sp"
-        android:textColor="#1E293B"
+        android:textColor="#1E3A8A"
         android:background="@drawable/bg_rounded_outline"
         android:padding="12dp"
         android:layout_marginBottom="16dp"/>
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:text="Reminder Time"
         android:textSize="16sp"
-        android:textColor="#1E293B"
+        android:textColor="#1E3A8A"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 

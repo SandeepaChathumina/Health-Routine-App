@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8FAFC"
+    android:background="@color/background_light"
     android:paddingTop="24dp">
 
     <!-- Content Area -->
@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:text="@string/profile"
                     android:textSize="28sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"/>
 
                 <ImageButton
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sarah_johnson"
                         android:textSize="24sp"
-                        android:textColor="#1E293B"
+                        android:textColor="#1E3A8A"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
 
@@ -123,10 +123,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:text="@string/edit_profile"
-                        android:textColor="#2563EB"
+                        android:textColor="#4C6AFD"
                         android:textSize="14sp"
                         android:backgroundTint="#FFFFFF"
-                        android:strokeColor="#2563EB"
+                        android:strokeColor="#4C6AFD"
                         android:paddingStart="24dp"
                         android:paddingEnd="24dp"
                         android:layout_marginTop="16dp"
@@ -148,7 +148,7 @@
                     android:layout_weight="1"
                     android:text="@string/your_progress"
                     android:textSize="20sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/view_details"
                     android:textSize="14sp"
-                    android:textColor="#2563EB"
+                    android:textColor="#4C6AFD"
                     android:padding="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
@@ -200,7 +200,7 @@
                                 android:layout_height="24dp"
                                 android:contentDescription="@string/target_icon"
                                 android:src="@drawable/ic_target"
-                                app:tint="#2563EB"/>
+                                app:tint="#4C6AFD"/>
                         </LinearLayout>
 
                         <TextView
@@ -209,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_12"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -263,7 +263,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_15_days"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -316,7 +316,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_83"
                             android:textSize="18sp"
-                            android:textColor="#1E293B"
+                            android:textColor="#1E3A8A"
                             android:textStyle="bold"
                             android:layout_marginTop="12dp"/>
 
@@ -346,7 +346,7 @@
                     android:layout_weight="1"
                     android:text="@string/settings"
                     android:textSize="20sp"
-                    android:textColor="#1E293B"
+                    android:textColor="#1E3A8A"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -355,7 +355,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/manage_all"
                     android:textSize="14sp"
-                    android:textColor="#2563EB"
+                    android:textColor="#4C6AFD"
                     android:padding="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
@@ -414,7 +414,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/account_settings"
                                 android:textSize="16sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -480,7 +480,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/notifications"
                                 android:textSize="16sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -546,7 +546,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/privacy_amp_security"
                                 android:textSize="16sp"
-                                android:textColor="#1E293B"
+                                android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
 
                             <TextView

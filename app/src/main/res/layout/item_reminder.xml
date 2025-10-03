@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Mood Check-in"
             android:textSize="16sp"
-            android:textColor="#1E293B"
+            android:textColor="#1E3A8A"
             android:textStyle="bold"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:text="09:00"
             android:textSize="12sp"
-            android:textColor="#2563EB"
+            android:textColor="#4C6AFD"
             android:textStyle="bold"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
