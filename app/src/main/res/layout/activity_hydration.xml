@@ -141,6 +141,23 @@
                         android:textColor="#00BCD4"
                         android:fontFamily="sans-serif-medium"
                         android:layout_marginTop="8dp"/>
+
+                    <!-- Reset Bottle Button (only visible when bottle is full) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_reset_bottle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Reset Bottle"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        app:backgroundTint="#FF5722"
+                        app:cornerRadius="20dp"
+                        app:icon="@drawable/ic_refresh"
+                        app:iconTint="#FFFFFF"
+                        app:iconSize="16dp"
+                        android:visibility="gone"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -243,6 +260,44 @@
                     app:cornerRadius="12dp"
                     android:layout_marginStart="16dp"/>
             </LinearLayout>
+
+            <!-- Water Reminders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Water Reminders"
+                    android:textSize="18sp"
+                    android:textColor="#1A1A1A"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_reminder"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:icon="@drawable/ic_plus"
+                    app:iconTint="#00BCD4"
+                    app:backgroundTint="#FFFFFF"
+                    app:strokeColor="#E0E0E0"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="12dp"/>
+            </LinearLayout>
+
+            <!-- Reminders List -->
+            <LinearLayout
+                android:id="@+id/reminders_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"/>
 
             <!-- Today's Progress -->
             <TextView

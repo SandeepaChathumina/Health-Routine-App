@@ -3,10 +3,15 @@ package com.example.healthapp
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -17,13 +22,18 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,9 +57,13 @@ class Hydration : AppCompatActivity() {
     private lateinit var btnAddGlass: MaterialButton
     private lateinit var btnAdd: MaterialButton
     private lateinit var btnSubtract: MaterialButton
+    private lateinit var btnResetBottle: MaterialButton
+    private lateinit var btnAddReminder: MaterialButton
+    private lateinit var remindersContainer: LinearLayout
 
     // SharedPreferences
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var alarmManager: AlarmManager
 
     // Bottle dimensions
     private val maxWaterHeight = 180f
@@ -61,11 +75,15 @@ class Hydration : AppCompatActivity() {
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("hydration_data", MODE_PRIVATE)
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         initializeViews()
         setupClickListeners()
         setupBottomNavigation()
         loadHydrationData()
+        loadReminders()
+        rescheduleAllReminders()
+        checkNotificationPermission()
         updateUI()
     }
 
@@ -80,12 +98,18 @@ class Hydration : AppCompatActivity() {
         btnAddGlass = findViewById(R.id.btn_add_glass)
         btnAdd = findViewById(R.id.btn_add)
         btnSubtract = findViewById(R.id.btn_subtract)
+        btnResetBottle = findViewById(R.id.btn_reset_bottle)
+        btnAddReminder = findViewById(R.id.btn_add_reminder)
+        remindersContainer = findViewById(R.id.reminders_container)
 
         // Quick add buttons
         findViewById<MaterialButton>(R.id.btn_add_250).setOnClickListener { addWater(250) }
         findViewById<MaterialButton>(R.id.btn_add_500).setOnClickListener { addWater(500) }
         findViewById<MaterialButton>(R.id.btn_add_750).setOnClickListener { addWater(750) }
 
+        // Initialize reset button as hidden
+        btnResetBottle.visibility = View.GONE
+        
         updateWaterLevel(0f)
     }
 
@@ -93,6 +117,8 @@ class Hydration : AppCompatActivity() {
         btnAddGlass.setOnClickListener { addWater(glassSize) }
         btnAdd.setOnClickListener { addWater(glassSize) }
         btnSubtract.setOnClickListener { removeWater(glassSize) }
+        btnResetBottle.setOnClickListener { resetBottle() }
+        btnAddReminder.setOnClickListener { showAddReminderDialog() }
         findViewById<ImageButton>(R.id.btn_settings).setOnClickListener { showSettingsDialog() }
     }
 
@@ -157,14 +183,16 @@ class Hydration : AppCompatActivity() {
         currentGlasses = (currentIntake / glassSize).coerceAtMost(goalGlasses)
 
         animateWaterChange(previousIntake, currentIntake)
-        updateUI()
-        saveHydrationData()
-
-        // Check if goal is reached
+        
+        // Check if goal is reached BEFORE updating UI
         if (currentIntake >= dailyGoal && !isGoalAchieved) {
             isGoalAchieved = true
             saveHydrationData() // Save immediately when goal is achieved
+            updateUI() // Update UI after setting isGoalAchieved to true
             showTrophyCelebration()
+        } else {
+            updateUI()
+            saveHydrationData()
         }
     }
 
@@ -223,6 +251,9 @@ class Hydration : AppCompatActivity() {
 
         val progress = currentIntake.toFloat() / dailyGoal
         updateWaterLevel(progress)
+        
+        // Show/hide reset button based on goal achievement
+        btnResetBottle.visibility = if (isGoalAchieved) View.VISIBLE else View.GONE
     }
 
     private fun showTrophyCelebration() {
@@ -477,6 +508,25 @@ class Hydration : AppCompatActivity() {
         saveHydrationData()
     }
 
+    private fun resetBottle() {
+        if (isGoalAchieved) {
+            // Animate the water level going down to empty
+            animateWaterChange(currentIntake, 0)
+            
+            // Reset all values
+            currentIntake = 0
+            currentGlasses = 0
+            isGoalAchieved = false
+            
+            // Update UI and save data
+            updateUI()
+            saveHydrationData()
+            
+            // Show confirmation message
+            Toast.makeText(this, "Bottle reset! Start fresh!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         // Save data when leaving the activity
@@ -488,4 +538,298 @@ class Hydration : AppCompatActivity() {
         // Save data when closing the app
         saveHydrationData()
     }
+
+    // Reminder Management Functions
+    private fun loadReminders() {
+        remindersContainer.removeAllViews()
+        val reminders = getReminders()
+        
+        if (reminders.isEmpty()) {
+            val emptyText = TextView(this).apply {
+                text = "No reminders set. Tap + to add one!"
+                textSize = 14f
+                setTextColor(Color.parseColor("#666666"))
+                gravity = Gravity.CENTER
+                setPadding(0, 32, 0, 32)
+            }
+            remindersContainer.addView(emptyText)
+        } else {
+            reminders.forEach { reminder ->
+                addReminderCard(reminder)
+            }
+        }
+    }
+
+    private fun getReminders(): List<ReminderData> {
+        return try {
+            val reminders = mutableListOf<ReminderData>()
+            val reminderCount = sharedPreferences.getInt("reminder_count", 0)
+            for (i in 0 until reminderCount) {
+                val time = sharedPreferences.getString("reminder_$i", "")
+                if (time != null && time.isNotEmpty()) {
+                    reminders.add(ReminderData(i, time))
+                }
+            }
+            reminders
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    private fun saveReminders(reminders: List<ReminderData>) {
+        sharedPreferences.edit().apply {
+            putInt("reminder_count", reminders.size)
+            reminders.forEachIndexed { index, reminder ->
+                putString("reminder_$index", reminder.time)
+            }
+            apply()
+        }
+    }
+
+    private fun addReminderCard(reminder: ReminderData) {
+        val card = MaterialCardView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = dpToPx(8)
+            }
+            radius = dpToPx(12).toFloat()
+            elevation = dpToPx(2).toFloat()
+            setCardBackgroundColor(Color.WHITE)
+        }
+
+        val contentLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dpToPx(16), dpToPx(12), dpToPx(16), dpToPx(12))
+        }
+
+        val timeText = TextView(this).apply {
+            text = "⏰ ${reminder.time}"
+            textSize = 16f
+            setTextColor(Color.parseColor("#1A1A1A"))
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        }
+
+        val deleteButton = MaterialButton(this).apply {
+            text = "Delete"
+            textSize = 12f
+            setTextColor(Color.parseColor("#FF5722"))
+            setBackgroundColor(Color.TRANSPARENT)
+            strokeColor = ContextCompat.getColorStateList(this@Hydration, android.R.color.transparent)
+            setOnClickListener {
+                removeReminder(reminder.id)
+            }
+        }
+
+        contentLayout.addView(timeText)
+        contentLayout.addView(deleteButton)
+        card.addView(contentLayout)
+        remindersContainer.addView(card)
+    }
+
+    private fun showAddReminderDialog() {
+        val timePicker = TimePicker(this).apply {
+            setIs24HourView(true)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Add Water Reminder")
+            .setMessage("Set a time to be reminded to drink water")
+            .setView(timePicker)
+            .setPositiveButton("Add") { _, _ ->
+                val hour = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    timePicker.hour
+                } else {
+                    @Suppress("DEPRECATION")
+                    timePicker.currentHour
+                }
+                val minute = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    timePicker.minute
+                } else {
+                    @Suppress("DEPRECATION")
+                    timePicker.currentMinute
+                }
+                
+                val timeString = String.format("%02d:%02d", hour, minute)
+                addReminder(timeString)
+            }
+            .setNeutralButton("Test (30s)") { _, _ ->
+                testReminder()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun testReminder() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.SECOND, 30) // 30 seconds from now
+        
+        val testTime = String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
+        val testReminder = ReminderData(999, testTime)
+        
+        android.util.Log.d("Hydration", "Creating test reminder for 30 seconds from now")
+        
+        // Schedule test alarm for 30 seconds from now
+        val intent = Intent(this, WaterReminderReceiver::class.java).apply {
+            putExtra("reminder_id", 999)
+            putExtra("time", testTime)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            999,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        try {
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
+            Toast.makeText(this, "Test reminder set for 30 seconds from now", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Test reminder failed: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun addReminder(time: String) {
+        val reminders = getReminders().toMutableList()
+        val newId = reminders.size
+        val newReminder = ReminderData(newId, time)
+        reminders.add(newReminder)
+        
+        saveReminders(reminders)
+        scheduleReminder(newReminder)
+        loadReminders()
+        
+        Toast.makeText(this, "Reminder added for $time", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun removeReminder(reminderId: Int) {
+        val reminders = getReminders().toMutableList()
+        reminders.removeAll { it.id == reminderId }
+        
+        saveReminders(reminders)
+        cancelReminder(reminderId)
+        loadReminders()
+        
+        Toast.makeText(this, "Reminder removed", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun scheduleReminder(reminder: ReminderData) {
+        android.util.Log.d("Hydration", "Scheduling reminder: ${reminder.time}")
+        
+        val intent = Intent(this, WaterReminderReceiver::class.java).apply {
+            putExtra("reminder_id", reminder.id)
+            putExtra("time", reminder.time)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            reminder.id,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Parse time string (HH:MM format)
+        val timeParts = reminder.time.split(":")
+        val hour = timeParts[0].toInt()
+        val minute = timeParts[1].toInt()
+
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+            
+            // If the time has passed today, schedule for tomorrow
+            if (timeInMillis <= System.currentTimeMillis()) {
+                add(Calendar.DAY_OF_MONTH, 1)
+            }
+        }
+
+        val timeUntilAlarm = calendar.timeInMillis - System.currentTimeMillis()
+        android.util.Log.d("Hydration", "Alarm scheduled for: ${calendar.time}")
+        android.util.Log.d("Hydration", "Time until alarm: ${timeUntilAlarm / 1000} seconds")
+
+        // Schedule the alarm
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+                android.util.Log.d("Hydration", "Alarm set with setExactAndAllowWhileIdle")
+            } else {
+                alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    calendar.timeInMillis,
+                    pendingIntent
+                )
+                android.util.Log.d("Hydration", "Alarm set with setExact")
+            }
+            
+            Toast.makeText(this, "Reminder set for ${reminder.time}", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            android.util.Log.e("Hydration", "Error setting alarm: ${e.message}")
+            Toast.makeText(this, "Could not set reminder: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun cancelReminder(reminderId: Int) {
+        val intent = Intent(this, WaterReminderReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            reminderId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.cancel(pendingIntent)
+    }
+
+    private fun rescheduleAllReminders() {
+        val reminders = getReminders()
+        reminders.forEach { reminder ->
+            scheduleReminder(reminder)
+        }
+    }
+
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) 
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                    1001
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1001) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Notification permission granted!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Notification permission denied. Reminders won't work.", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    // Data class for reminders
+    data class ReminderData(
+        val id: Int,
+        val time: String
+    )
 }
