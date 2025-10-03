@@ -60,6 +60,7 @@ class Hydration : AppCompatActivity() {
     private lateinit var btnResetBottle: MaterialButton
     private lateinit var btnAddReminder: MaterialButton
     private lateinit var remindersContainer: LinearLayout
+    private lateinit var hydrationChart: HydrationChartView
 
     // SharedPreferences
     private lateinit var sharedPreferences: SharedPreferences
@@ -84,6 +85,7 @@ class Hydration : AppCompatActivity() {
         loadReminders()
         rescheduleAllReminders()
         checkNotificationPermission()
+        loadChartData()
         updateUI()
     }
 
@@ -101,6 +103,7 @@ class Hydration : AppCompatActivity() {
         btnResetBottle = findViewById(R.id.btn_reset_bottle)
         btnAddReminder = findViewById(R.id.btn_add_reminder)
         remindersContainer = findViewById(R.id.reminders_container)
+        hydrationChart = findViewById(R.id.hydration_chart)
 
         // Quick add buttons
         findViewById<MaterialButton>(R.id.btn_add_250).setOnClickListener { addWater(250) }
@@ -184,6 +187,9 @@ class Hydration : AppCompatActivity() {
 
         animateWaterChange(previousIntake, currentIntake)
         
+        // Add data point to chart
+        addChartDataPoint(currentIntake)
+        
         // Check if goal is reached BEFORE updating UI
         if (currentIntake >= dailyGoal && !isGoalAchieved) {
             isGoalAchieved = true
@@ -208,6 +214,10 @@ class Hydration : AppCompatActivity() {
         currentGlasses = (currentIntake / glassSize).coerceAtLeast(0)
 
         animateWaterChange(previousIntake, currentIntake)
+        
+        // Update chart data
+        addChartDataPoint(currentIntake)
+        
         updateUI()
         saveHydrationData()
     }
@@ -518,6 +528,9 @@ class Hydration : AppCompatActivity() {
             currentGlasses = 0
             isGoalAchieved = false
             
+            // Clear chart data
+            clearChartData()
+            
             // Update UI and save data
             updateUI()
             saveHydrationData()
@@ -825,6 +838,74 @@ class Hydration : AppCompatActivity() {
                 Toast.makeText(this, "Notification permission denied. Reminders won't work.", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    // Chart Data Management
+    private fun loadChartData() {
+        val chartData = getChartData()
+        hydrationChart.setData(chartData)
+    }
+    
+    private fun getChartData(): List<HydrationChartView.ChartDataPoint> {
+        val chartData = mutableListOf<HydrationChartView.ChartDataPoint>()
+        val chartDataJson = sharedPreferences.getString("chart_data", "") ?: ""
+        
+        if (chartDataJson.isNotEmpty()) {
+            try {
+                val dataPoints = chartDataJson.split("|")
+                for (dataPoint in dataPoints) {
+                    if (dataPoint.isNotEmpty()) {
+                        val parts = dataPoint.split(",")
+                        if (parts.size >= 3) {
+                            chartData.add(
+                                HydrationChartView.ChartDataPoint(
+                                    time = parts[0],
+                                    value = parts[1].toFloat(),
+                                    label = parts[2]
+                                )
+                            )
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // If parsing fails, return empty list
+            }
+        }
+        
+        return chartData
+    }
+    
+    private fun saveChartData(chartData: List<HydrationChartView.ChartDataPoint>) {
+        val chartDataJson = chartData.joinToString("|") { "${it.time},${it.value},${it.label}" }
+        sharedPreferences.edit().putString("chart_data", chartDataJson).apply()
+    }
+    
+    private fun addChartDataPoint(currentIntake: Int) {
+        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+        val chartData = getChartData().toMutableList()
+        
+        // Add new data point
+        chartData.add(
+            HydrationChartView.ChartDataPoint(
+                time = currentTime,
+                value = currentIntake.toFloat(),
+                label = "${currentIntake}ml"
+            )
+        )
+        
+        // Keep only last 10 data points to avoid clutter
+        if (chartData.size > 10) {
+            chartData.removeAt(0)
+        }
+        
+        // Save and update chart
+        saveChartData(chartData)
+        hydrationChart.setData(chartData)
+    }
+    
+    private fun clearChartData() {
+        sharedPreferences.edit().remove("chart_data").apply()
+        hydrationChart.clearData()
     }
 
     // Data class for reminders
