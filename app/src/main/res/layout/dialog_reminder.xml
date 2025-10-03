@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Title Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder Title"
+        android:textSize="16sp"
+        android:textColor="#1E293B"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_reminder_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mood Check-in"
+        android:textSize="16sp"
+        android:textColor="#1E293B"
+        android:background="@drawable/bg_rounded_outline"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Message Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder Message"
+        android:textSize="16sp"
+        android:textColor="#1E293B"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_reminder_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="How are you feeling today?"
+        android:textSize="16sp"
+        android:textColor="#1E293B"
+        android:background="@drawable/bg_rounded_outline"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Time Picker -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reminder Time"
+        android:textSize="16sp"
+        android:textColor="#1E293B"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:timePickerMode="spinner"/>
+
+</LinearLayout>

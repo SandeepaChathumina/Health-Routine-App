@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -472,15 +473,41 @@ class Mood : AppCompatActivity() {
     }
 
     private fun showReminderDialog() {
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Set Mood Reminder")
-            .setMessage("Would you like to be reminded to log your mood daily?")
-            .setPositiveButton("Set Daily Reminder") { dialog, _ ->
-                Toast.makeText(this, "Daily reminder set! 📅", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+            .setView(R.layout.dialog_reminder)
+            .setPositiveButton("Save Reminder") { dialogInterface, _ ->
+                val titleEditText = (dialogInterface as AlertDialog).findViewById<TextView>(R.id.et_reminder_title)
+                val messageEditText = (dialogInterface as AlertDialog).findViewById<TextView>(R.id.et_reminder_message)
+                val timePicker = (dialogInterface as AlertDialog).findViewById<TimePicker>(R.id.time_picker)
+                
+                val title = titleEditText?.text?.toString()?.trim() ?: "Mood Check-in"
+                val message = messageEditText?.text?.toString()?.trim() ?: "How are you feeling today?"
+                val hour = timePicker?.hour ?: 9
+                val minute = timePicker?.minute ?: 0
+                
+                val timeString = String.format("%02d:%02d", hour, minute)
+                
+                val reminder = Reminder(
+                    id = System.currentTimeMillis().toInt(),
+                    title = title,
+                    message = message,
+                    time = timeString
+                )
+                
+                val reminderManager = ReminderManager(this)
+                reminderManager.saveReminder(reminder)
+                
+                // Also try the simple method as backup
+                reminderManager.saveReminderSimple(reminder)
+                
+                Toast.makeText(this, "Reminder set for $timeString! 📅", Toast.LENGTH_SHORT).show()
+                dialogInterface.dismiss()
             }
-            .setNegativeButton("Not Now", null)
-            .show()
+            .setNegativeButton("Cancel", null)
+            .create()
+        
+        dialog.show()
     }
 
     private fun showMoodInsights() {

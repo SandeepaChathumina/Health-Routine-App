@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Status Icon -->
+    <ImageView
+        android:id="@+id/iv_reminder_status"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_notifications_active"
+        app:tint="#10B981"
+        android:layout_marginEnd="12dp"/>
+
+    <!-- Reminder Content -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_reminder_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mood Check-in"
+            android:textSize="16sp"
+            android:textColor="#1E293B"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_reminder_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How are you feeling today?"
+            android:textSize="14sp"
+            android:textColor="#64748B"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_reminder_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09:00"
+            android:textSize="12sp"
+            android:textColor="#2563EB"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <!-- Delete Button -->
+    <ImageView
+        android:id="@+id/iv_delete_reminder"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/trash"
+        app:tint="#EF4444"
+        android:background="@drawable/bg_circle_light_red"
+        android:padding="6dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+</LinearLayout>
