@@ -11,8 +11,11 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +68,12 @@ class Hydration : AppCompatActivity() {
     // SharedPreferences
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var alarmManager: AlarmManager
+    
+    // Sensor components for shake detection
+    private lateinit var sensorManager: SensorManager
+    private lateinit var accelerometer: Sensor
+    private lateinit var shakeDetector: ShakeDetector
+    private lateinit var vibrator: Vibrator
 
     // Bottle dimensions
     private val maxWaterHeight = 180f
@@ -77,6 +86,16 @@ class Hydration : AppCompatActivity() {
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("hydration_data", MODE_PRIVATE)
         alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        
+        // Initialize sensor components
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) ?: return
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        
+        // Initialize shake detector
+        shakeDetector = ShakeDetector { waterAmount ->
+            onShakeDetected(waterAmount)
+        }
 
         initializeViews()
         setupClickListeners()
@@ -87,6 +106,22 @@ class Hydration : AppCompatActivity() {
         checkNotificationPermission()
         loadChartData()
         updateUI()
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        // Register sensor listener when activity is active
+        if (accelerometer != null) {
+            sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI)
+        }
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        // Unregister sensor listener when activity is paused
+        sensorManager.unregisterListener(shakeDetector)
+        // Save data when leaving the activity
+        saveHydrationData()
     }
 
     private fun initializeViews() {
@@ -541,11 +576,6 @@ class Hydration : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        // Save data when leaving the activity
-        saveHydrationData()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -907,6 +937,45 @@ class Hydration : AppCompatActivity() {
     private fun clearChartData() {
         sharedPreferences.edit().remove("chart_data").apply()
         hydrationChart.clearData()
+    }
+    
+    // Shake detection handler
+    private fun onShakeDetected(waterAmount: Int) {
+        // Add water with shake detection
+        addWater(waterAmount)
+        
+        // Provide haptic feedback
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(android.os.VibrationEffect.createOneShot(200, android.os.VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(200)
+        }
+        
+        // Show simple toast feedback
+        Toast.makeText(this, "Shake detected - Added 250ml water!", Toast.LENGTH_SHORT).show()
+        
+        // Animate water bottle for visual feedback
+        animateShakeFeedback()
+    }
+    
+    private fun animateShakeFeedback() {
+        val waterBottle = findViewById<View>(R.id.bottle_background)
+        
+        // Create shake animation
+        val shakeAnimator = ObjectAnimator.ofFloat(waterBottle, "translationX", 0f, 10f, -10f, 8f, -8f, 6f, -6f, 4f, -4f, 2f, -2f, 0f)
+        shakeAnimator.duration = 500
+        shakeAnimator.start()
+        
+        // Add scale animation for emphasis
+        val scaleAnimator = ObjectAnimator.ofFloat(waterBottle, "scaleX", 1f, 1.1f, 1f)
+        val scaleYAnimator = ObjectAnimator.ofFloat(waterBottle, "scaleY", 1f, 1.1f, 1f)
+        scaleAnimator.duration = 300
+        scaleYAnimator.duration = 300
+        
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(shakeAnimator, scaleAnimator, scaleYAnimator)
+        animatorSet.start()
     }
 
     // Data class for reminders
