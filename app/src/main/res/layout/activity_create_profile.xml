@@ -4,21 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_light"
-    android:padding="24dp">
+    android:background="@color/background_light">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:padding="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_gravity="center">
+            android:gravity="center">
 
             <!-- Header -->
             <TextView
@@ -91,30 +90,89 @@
                             android:maxLines="1"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Gender -->
-                    <com.google.android.material.textfield.TextInputLayout
+                    <!-- Gender Selection -->
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxStrokeColor="#64748B"
-                        app:hintTextColor="#64748B"
-                        app:endIconMode="dropdown_menu">
+                        android:text="Gender"
+                        android:textSize="16sp"
+                        android:textColor="#1E3A8A"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
 
-                        <AutoCompleteTextView
-                            android:id="@+id/et_gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Gender"
-                            android:textSize="16sp"
-                            android:inputType="none"
-                            android:focusable="false"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Male Option -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_male"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="2dp"
                             android:clickable="true"
-                            android:cursorVisible="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:focusable="true"
+                            android:backgroundTint="#E6F7FF">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:background="?attr/selectableItemBackground"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Male"
+                                    android:textSize="18sp"
+                                    android:textColor="#4C6AFD"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Female Option -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_female"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="2dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:backgroundTint="#E6F7FF">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:background="?attr/selectableItemBackground"
+                                android:padding="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Female"
+                                    android:textSize="18sp"
+                                    android:textColor="#4C6AFD"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -140,9 +198,12 @@
         android:layout_height="56dp"
         android:text="Create Profile"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:backgroundTint="#4C6AFD"
-        android:layout_marginTop="16dp"
+        android:elevation="4dp"
+        android:layout_margin="24dp"
+        app:cornerRadius="28dp"
         style="@style/Widget.Material3.Button"/>
 
 </LinearLayout>

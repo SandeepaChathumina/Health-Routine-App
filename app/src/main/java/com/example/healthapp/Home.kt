@@ -22,8 +22,6 @@ class Home : AppCompatActivity() {
     
     private lateinit var homeDataManager: HomeDataManager
     private lateinit var profilePrefs: SharedPreferences
-    private lateinit var reminderManager: ReminderManager
-    
     // UI Components
     private lateinit var tvGreeting: TextView
     private lateinit var tvSubtitle: TextView
@@ -31,11 +29,6 @@ class Home : AppCompatActivity() {
     private lateinit var tvHabitsCount: TextView
     private lateinit var tvStreakDays: TextView
     private lateinit var tvWaterIntake: TextView
-    
-    // Reminder Components
-    private lateinit var rvReminders: androidx.recyclerview.widget.RecyclerView
-    private lateinit var emptyRemindersState: LinearLayout
-    private lateinit var reminderAdapter: ReminderAdapter
     
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +38,10 @@ class Home : AppCompatActivity() {
 
         homeDataManager = HomeDataManager(this)
         profilePrefs = getSharedPreferences("user_profile", MODE_PRIVATE)
-        reminderManager = ReminderManager(this)
         
         initializeViews()
         setupBottomNavigation()
         setupQuickActions()
-        setupReminders()
         loadTodayProgress()
     }
     
@@ -58,7 +49,6 @@ class Home : AppCompatActivity() {
         super.onResume()
         // Refresh data when returning to home page
         loadTodayProgress()
-        loadReminders()
     }
     
     private fun initializeViews() {
@@ -69,19 +59,9 @@ class Home : AppCompatActivity() {
         tvStreakDays = findViewById(R.id.tv_streak_days)
         tvWaterIntake = findViewById(R.id.tv_water_intake)
         
-        // Reminder components
-        rvReminders = findViewById(R.id.rv_reminders)
-        emptyRemindersState = findViewById(R.id.empty_reminders_state)
-        
         // Setup "View All" click handler
         findViewById<TextView>(R.id.tv_view_all).setOnClickListener {
             val intent = Intent(this, Stats::class.java)
-            startActivity(intent)
-        }
-        
-        // Setup "View All Reminders" click handler
-        findViewById<TextView>(R.id.tv_view_all_reminders).setOnClickListener {
-            val intent = Intent(this, Mood::class.java)
             startActivity(intent)
         }
     }
@@ -225,44 +205,4 @@ class Home : AppCompatActivity() {
         }
     }
     
-    private fun setupReminders() {
-        rvReminders.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        
-        reminderAdapter = ReminderAdapter(
-            reminders = emptyList(),
-            onReminderClick = { reminder ->
-                // Handle reminder click - could show details or mark as completed
-                Toast.makeText(this, "Reminder: ${reminder.title}", Toast.LENGTH_SHORT).show()
-            },
-            onDeleteReminder = { reminder ->
-                // Delete reminder
-                reminderManager.deleteReminder(reminder.id)
-                loadReminders()
-                Toast.makeText(this, "Reminder deleted", Toast.LENGTH_SHORT).show()
-            }
-        )
-        
-        rvReminders.adapter = reminderAdapter
-    }
-    
-    private fun loadReminders() {
-        val allReminders = reminderManager.getAllReminders()
-        val simpleReminders = reminderManager.getAllRemindersSimple()
-        val todaysReminders = reminderManager.getTodaysReminders()
-        
-        // Try to use simple reminders if Gson method fails
-        val allRemindersToShow = if (allReminders.isNotEmpty()) allReminders else simpleReminders
-        
-        // Show all reminders (removed the .take(2) limit)
-        val remindersToShow = allRemindersToShow
-        
-        if (remindersToShow.isEmpty()) {
-            rvReminders.visibility = View.GONE
-            emptyRemindersState.visibility = View.VISIBLE
-        } else {
-            rvReminders.visibility = View.VISIBLE
-            emptyRemindersState.visibility = View.GONE
-            reminderAdapter.updateReminders(remindersToShow)
-        }
-    }
 }

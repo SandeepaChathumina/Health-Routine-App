@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA"
+    android:background="@color/background_light"
     android:paddingTop="24dp">
 
     <!-- Content Area -->
@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/your_progress"
                         android:textSize="28sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="#1E3A8A"
                         android:fontFamily="sans-serif-medium"/>
 
                     <TextView
@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/track_your_health_journey"
                         android:textSize="14sp"
-                        android:textColor="#666666"
+                        android:textColor="#64748B"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
 
@@ -89,7 +89,7 @@
                     android:text="@string/_7_days"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp"
-                    android:backgroundTint="#2563EB"
+                    android:backgroundTint="#4C6AFD"
                     style="@style/Widget.Material3.Button"/>
 
                 <!-- Month Button - Inactive State -->
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/overall_health_score"
                         android:textSize="18sp"
-                        android:textColor="#1A1A1A"
+                        android:textColor="#1E3A8A"
                         android:fontFamily="sans-serif-medium"
                         android:layout_marginBottom="16dp"/>
 
@@ -174,7 +174,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/health_score"
                                 android:textSize="12sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="4dp"/>
                         </LinearLayout>
 
@@ -199,7 +199,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/habits"
                                     android:textSize="12sp"
-                                    android:textColor="#666666"/>
+                                    android:textColor="#64748B"/>
 
                                 <View
                                     android:layout_width="0dp"
@@ -230,7 +230,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/water"
                                     android:textSize="12sp"
-                                    android:textColor="#666666"/>
+                                    android:textColor="#64748B"/>
 
                                 <View
                                     android:layout_width="0dp"
@@ -261,7 +261,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/mood"
                                     android:textSize="12sp"
-                                    android:textColor="#666666"/>
+                                    android:textColor="#64748B"/>
 
                                 <View
                                     android:layout_width="0dp"
@@ -291,7 +291,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/exercise"
                                     android:textSize="12sp"
-                                    android:textColor="#666666"/>
+                                    android:textColor="#64748B"/>
 
                                 <View
                                     android:layout_width="0dp"
@@ -353,7 +353,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_12"
                             android:textSize="20sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="8dp"/>
 
@@ -362,7 +362,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/day_streak"
                             android:textSize="11sp"
-                            android:textColor="#666666"
+                            android:textColor="#64748B"
                             android:gravity="center"
                             android:layout_marginTop="2dp"/>
                     </LinearLayout>
@@ -400,7 +400,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_28"
                             android:textSize="20sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="8dp"/>
 
@@ -409,7 +409,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/best_streak"
                             android:textSize="11sp"
-                            android:textColor="#666666"
+                            android:textColor="#64748B"
                             android:gravity="center"
                             android:layout_marginTop="2dp"/>
                     </LinearLayout>
@@ -447,7 +447,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/_156"
                             android:textSize="20sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="8dp"/>
 
@@ -456,7 +456,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/total_days"
                             android:textSize="11sp"
-                            android:textColor="#666666"
+                            android:textColor="#64748B"
                             android:gravity="center"
                             android:layout_marginTop="2dp"/>
                     </LinearLayout>
@@ -508,7 +508,7 @@
                             android:layout_weight="1"
                             android:text="@string/habits"
                             android:textSize="16sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginStart="12dp"/>
 
@@ -540,7 +540,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/decimal6_8"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -548,7 +548,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/avg_per_day"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -565,7 +565,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_8"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -573,7 +573,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/total_habits"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -590,7 +590,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_12"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -598,7 +598,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/day_streak"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -640,7 +640,7 @@
                             android:layout_weight="1"
                             android:text="@string/hydration"
                             android:textSize="16sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginStart="12dp"/>
 
@@ -672,7 +672,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_2_3l"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -680,7 +680,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/daily_avg"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -698,7 +698,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_9_2"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -706,7 +706,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/glasses_day"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -723,7 +723,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_6"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -731,7 +731,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/days_on_track"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -773,7 +773,7 @@
                             android:layout_weight="1"
                             android:text="@string/mood_journal"
                             android:textSize="16sp"
-                            android:textColor="#1A1A1A"
+                            android:textColor="#1E3A8A"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginStart="12dp"/>
 
@@ -805,7 +805,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/_6"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -813,7 +813,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/entries_week"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -830,7 +830,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/happy"
                                 android:textSize="18sp"
-                                android:textColor="#1A1A1A"
+                                android:textColor="#1E3A8A"
                                 android:fontFamily="sans-serif-medium"/>
 
                             <TextView
@@ -838,7 +838,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/most_common"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
 
@@ -863,7 +863,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/this_week"
                                 android:textSize="11sp"
-                                android:textColor="#666666"
+                                android:textColor="#64748B"
                                 android:layout_marginTop="2dp"/>
                         </LinearLayout>
                     </LinearLayout>

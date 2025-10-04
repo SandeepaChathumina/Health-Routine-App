@@ -4,15 +4,15 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 
 class CreateProfile : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private var selectedGender: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,26 +22,22 @@ class CreateProfile : AppCompatActivity() {
 
         val etName = findViewById<TextInputEditText>(R.id.et_name)
         val etAge = findViewById<TextInputEditText>(R.id.et_age)
-        val etGender = findViewById<AutoCompleteTextView>(R.id.et_gender)
+        val cardMale = findViewById<MaterialCardView>(R.id.card_male)
+        val cardFemale = findViewById<MaterialCardView>(R.id.card_female)
         val btnCreateProfile = findViewById<MaterialButton>(R.id.btn_create_profile)
 
-        // Setup gender dropdown
-        val genderOptions = arrayOf("Male", "Female", "Other", "Prefer not to say")
-        val genderAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, genderOptions)
-        etGender.setAdapter(genderAdapter)
-        
-        // Make the dropdown show when clicked
-        etGender.setOnClickListener {
-            etGender.showDropDown()
+        // Setup gender selection cards
+        cardMale.setOnClickListener {
+            selectGender("Male", cardMale, cardFemale)
         }
-        
-        // Prevent keyboard from showing
-        etGender.keyListener = null
+
+        cardFemale.setOnClickListener {
+            selectGender("Female", cardFemale, cardMale)
+        }
 
         btnCreateProfile.setOnClickListener {
             val name = etName.text.toString().trim()
             val ageText = etAge.text.toString().trim()
-            val gender = etGender.text.toString().trim()
 
             // Validation
             if (name.isEmpty()) {
@@ -60,13 +56,13 @@ class CreateProfile : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (gender.isEmpty()) {
-                etGender.error = "Please select your gender"
+            if (selectedGender.isEmpty()) {
+                Toast.makeText(this, "Please select your gender", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             // Save profile data
-            saveProfileData(name, age, gender)
+            saveProfileData(name, age, selectedGender)
             
             // Mark profile as complete using NavigationManager
             val navigationManager = NavigationManager(this)
@@ -78,6 +74,18 @@ class CreateProfile : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun selectGender(gender: String, selectedCard: MaterialCardView, unselectedCard: MaterialCardView) {
+        selectedGender = gender
+        
+        // Update visual state
+        selectedCard.setCardBackgroundColor(getColor(R.color.card_background_light))
+        selectedCard.strokeWidth = 3
+        selectedCard.strokeColor = getColor(R.color.primary_blue)
+        
+        unselectedCard.setCardBackgroundColor(getColor(R.color.card_background_light))
+        unselectedCard.strokeWidth = 0
     }
 
     private fun saveProfileData(name: String, age: Int, gender: String) {
