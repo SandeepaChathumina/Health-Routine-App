@@ -102,39 +102,27 @@ class Mood : AppCompatActivity() {
 
     private fun showMoodSelectionDialog() {
         val dialog = AlertDialog.Builder(this)
-            .setTitle("How are you feeling?")
-            .setCancelable(true)
+            .setTitle("Log Your Mood")
+            .setView(R.layout.dialog_mood_entry)
+            .setPositiveButton("Save Mood") { dialogInterface, _ ->
+                val noteEditText = (dialogInterface as AlertDialog).findViewById<TextView>(R.id.et_mood_note)
+                val note = noteEditText?.text?.toString()?.trim() ?: ""
+
+                // Get selected mood from the enhanced dialog
+                val selectedMood = getSelectedMoodFromDialog(dialogInterface as AlertDialog)
+                
+                if (selectedMood != null) {
+                    saveMoodEntry(selectedMood, note)
+                    Toast.makeText(this, "Mood logged successfully! ${selectedMood.emoji}", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Please select a mood first", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
             .create()
 
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setPadding(32, 32, 32, 32)
-
-        // Create mood buttons
-        moodTypes.forEach { moodType ->
-            val button = Button(this)
-            button.text = "${moodType.emoji} ${moodType.name}"
-            button.textSize = 16f
-            button.setPadding(32, 32, 32, 32)
-            button.gravity = Gravity.START or Gravity.CENTER_VERTICAL
-            button.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_outline)
-
-            val layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.bottomMargin = 16
-            button.layoutParams = layoutParams
-
-            button.setOnClickListener {
-                showNoteDialog(moodType)
-                dialog.dismiss()
-            }
-
-            layout.addView(button)
-        }
-
-        dialog.setView(layout)
+        // Set up emoji button listeners
+        setupEmojiButtons(dialog)
         dialog.show()
     }
 
@@ -272,7 +260,11 @@ class Mood : AppCompatActivity() {
     }
 
     private fun updateMoodEntryType(oldEntry: MoodEntry, newMoodType: MoodType) {
+        android.util.Log.d("Calendar", "updateMoodEntryType called: ${oldEntry.moodType} -> ${newMoodType.name}")
+        
         val index = moodEntries.indexOfFirst { it.id == oldEntry.id }
+        android.util.Log.d("Calendar", "Found entry at index: $index")
+        
         if (index != -1) {
             val updatedEntry = oldEntry.copy(
                 moodType = newMoodType.name,
@@ -284,6 +276,9 @@ class Mood : AppCompatActivity() {
             updateStats()
             updateMoodDistribution()
             Toast.makeText(this, "Mood changed to ${newMoodType.emoji}", Toast.LENGTH_SHORT).show()
+            android.util.Log.d("Calendar", "Mood updated successfully")
+        } else {
+            android.util.Log.e("Calendar", "Entry not found for update")
         }
     }
 
@@ -439,10 +434,10 @@ class Mood : AppCompatActivity() {
             showMoodPatterns()
         }
 
-        // Set Reminders button
-        val remindersCard = findViewById<CardView>(R.id.card_reminders)
-        remindersCard?.setOnClickListener {
-            showReminderDialog()
+        // Calendar View button
+        val calendarCard = findViewById<CardView>(R.id.card_calendar)
+        calendarCard?.setOnClickListener {
+            showCalendarView()
         }
 
         // View Insights button in Mood Distribution
@@ -472,42 +467,456 @@ class Mood : AppCompatActivity() {
             .show()
     }
 
-    private fun showReminderDialog() {
+    private fun showCalendarView() {
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Set Mood Reminder")
-            .setView(R.layout.dialog_reminder)
-            .setPositiveButton("Save Reminder") { dialogInterface, _ ->
-                val titleEditText = (dialogInterface as AlertDialog).findViewById<TextView>(R.id.et_reminder_title)
-                val messageEditText = (dialogInterface as AlertDialog).findViewById<TextView>(R.id.et_reminder_message)
-                val timePicker = (dialogInterface as AlertDialog).findViewById<TimePicker>(R.id.time_picker)
+            .setTitle("Mood Calendar")
+            .setView(R.layout.dialog_mood_calendar)
+            .setPositiveButton("Close", null)
+            .create()
+
+        // Setup calendar functionality BEFORE showing
+        setupCalendarView(dialog)
+        
+        dialog.show()
+    }
+
+    private fun setupEmojiButtons(dialog: AlertDialog) {
+        dialog.setOnShowListener {
+            val emojiButtons = listOf(
+                R.id.btn_emoji_excited to moodTypes[0],
+                R.id.btn_emoji_happy to moodTypes[1],
+                R.id.btn_emoji_calm to moodTypes[2],
+                R.id.btn_emoji_neutral to moodTypes[3],
+                R.id.btn_emoji_tired to moodTypes[4],
+                R.id.btn_emoji_stressed to moodTypes[5],
+                R.id.btn_emoji_sad to moodTypes[6],
+                R.id.btn_emoji_angry to moodTypes[7]
+            )
+
+            emojiButtons.forEach { (buttonId, moodType) ->
+                val button = dialog.findViewById<Button>(buttonId)
+                button?.setOnClickListener {
+                    selectEmoji(dialog, buttonId, moodType)
+                }
+            }
+        }
+    }
+
+    private fun selectEmoji(dialog: AlertDialog, selectedButtonId: Int, selectedMood: MoodType) {
+        // Reset all buttons
+        val allButtonIds = listOf(
+            R.id.btn_emoji_excited, R.id.btn_emoji_happy, R.id.btn_emoji_calm, R.id.btn_emoji_neutral,
+            R.id.btn_emoji_tired, R.id.btn_emoji_stressed, R.id.btn_emoji_sad, R.id.btn_emoji_angry
+        )
+
+        allButtonIds.forEach { buttonId ->
+            val button = dialog.findViewById<Button>(buttonId)
+            button?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button)
+        }
+
+        // Highlight selected button
+        val selectedButton = dialog.findViewById<Button>(selectedButtonId)
+        selectedButton?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button_selected)
+
+        // Show selected mood
+        val selectedMoodContainer = dialog.findViewById<LinearLayout>(R.id.selected_mood_container)
+        val selectedMoodText = dialog.findViewById<TextView>(R.id.tv_selected_mood)
+        
+        selectedMoodContainer?.visibility = View.VISIBLE
+        selectedMoodText?.text = "${selectedMood.emoji} ${selectedMood.name}"
+
+        // Store selected mood for later retrieval
+        dialog.findViewById<View>(R.id.selected_mood_container)?.tag = selectedMood
+    }
+
+    private fun getSelectedMoodFromDialog(dialog: AlertDialog): MoodType? {
+        val selectedMoodContainer = dialog.findViewById<LinearLayout>(R.id.selected_mood_container)
+        return selectedMoodContainer?.tag as? MoodType
+    }
+
+    private var currentCalendar: Calendar = Calendar.getInstance()
+    
+    private fun setupCalendarView(dialog: AlertDialog) {
+        dialog.setOnShowListener {
+            android.util.Log.d("Calendar", "Dialog shown, setting up calendar...")
+            
+            // First, let's try to add content directly to the dialog
+            val dialogView = dialog.findViewById<View>(android.R.id.content)
+            android.util.Log.d("Calendar", "Dialog view found: ${dialogView != null}")
+            
+            currentCalendar = Calendar.getInstance()
+            updateCalendarDisplay(dialog, currentCalendar)
+            
+            // Setup navigation buttons
+            val prevButton = dialog.findViewById<ImageButton>(R.id.btn_prev_month)
+            val nextButton = dialog.findViewById<ImageButton>(R.id.btn_next_month)
+            
+            android.util.Log.d("Calendar", "Prev button found: ${prevButton != null}")
+            android.util.Log.d("Calendar", "Next button found: ${nextButton != null}")
+            
+            prevButton?.setOnClickListener {
+                currentCalendar.add(Calendar.MONTH, -1)
+                updateCalendarDisplay(dialog, currentCalendar)
+            }
+            
+            nextButton?.setOnClickListener {
+                currentCalendar.add(Calendar.MONTH, 1)
+                updateCalendarDisplay(dialog, currentCalendar)
+            }
+        }
+    }
+
+    private fun updateCalendarDisplay(dialog: AlertDialog, calendar: Calendar) {
+        android.util.Log.d("Calendar", "updateCalendarDisplay called")
+        
+        val monthYearText = dialog.findViewById<TextView>(R.id.tv_month_year)
+        val calendarGrid = dialog.findViewById<LinearLayout>(R.id.calendar_grid)
+        
+        android.util.Log.d("Calendar", "monthYearText found: ${monthYearText != null}")
+        android.util.Log.d("Calendar", "calendarGrid found: ${calendarGrid != null}")
+        
+        // Update month/year display
+        val monthYear = SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(calendar.time)
+        monthYearText?.text = monthYear
+        android.util.Log.d("Calendar", "Month year set to: $monthYear")
+        
+        // Clear existing calendar
+        calendarGrid?.removeAllViews()
+        android.util.Log.d("Calendar", "Cleared existing views")
+        
+        // Create a very simple calendar with just text views
+        createVerySimpleCalendar(calendarGrid, dialog)
+    }
+    
+    private fun createVerySimpleCalendar(calendarGrid: LinearLayout?, calendarDialog: AlertDialog? = null) {
+        if (calendarGrid == null) {
+            android.util.Log.e("Calendar", "Calendar grid is null!")
+            return
+        }
+        
+        android.util.Log.d("Calendar", "Creating real calendar for ${currentCalendar.get(Calendar.MONTH) + 1}/${currentCalendar.get(Calendar.YEAR)}")
+        
+        // Get the first day of the month and number of days
+        val calendar = currentCalendar.clone() as Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) // 1 = Sunday, 2 = Monday, etc.
+        val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+        
+        android.util.Log.d("Calendar", "First day of week: $firstDayOfWeek, Days in month: $daysInMonth")
+        
+        // Create 6 weeks (42 days total)
+        for (week in 0..5) {
+            val weekLayout = LinearLayout(this)
+            weekLayout.orientation = LinearLayout.HORIZONTAL
+            weekLayout.gravity = Gravity.CENTER
+            
+            val weekParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            weekParams.setMargins(0, 2, 0, 2)
+            weekLayout.layoutParams = weekParams
+            
+            // Create 7 days for this week
+            for (dayOfWeek in 0..6) {
+                val dayPosition = week * 7 + dayOfWeek
+                val dayView = createDayView(dayPosition, firstDayOfWeek, daysInMonth, calendar, calendarDialog)
                 
-                val title = titleEditText?.text?.toString()?.trim() ?: "Mood Check-in"
-                val message = messageEditText?.text?.toString()?.trim() ?: "How are you feeling today?"
-                val hour = timePicker?.hour ?: 9
-                val minute = timePicker?.minute ?: 0
-                
-                val timeString = String.format("%02d:%02d", hour, minute)
-                
-                val reminder = Reminder(
-                    id = System.currentTimeMillis().toInt(),
-                    title = title,
-                    message = message,
-                    time = timeString
+                val dayParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
                 )
+                dayParams.setMargins(2, 2, 2, 2)
+                dayView.layoutParams = dayParams
                 
-                val reminderManager = ReminderManager(this)
-                reminderManager.saveReminder(reminder)
-                
-                // Also try the simple method as backup
-                reminderManager.saveReminderSimple(reminder)
-                
-                Toast.makeText(this, "Reminder set for $timeString! 📅", Toast.LENGTH_SHORT).show()
-                dialogInterface.dismiss()
+                weekLayout.addView(dayView)
+            }
+            
+            calendarGrid.addView(weekLayout)
+            android.util.Log.d("Calendar", "Added week $week with 7 days")
+        }
+        
+        android.util.Log.d("Calendar", "Real calendar created with ${calendarGrid.childCount} weeks")
+    }
+    
+    private fun createDayView(dayPosition: Int, firstDayOfWeek: Int, daysInMonth: Int, calendar: Calendar, calendarDialog: AlertDialog? = null): TextView {
+        val dayView = TextView(this)
+        
+        // Calculate if this position should show a day of the current month
+        val dayNumber = dayPosition - firstDayOfWeek + 2 // Adjust for Sunday = 1
+        
+        if (dayPosition < firstDayOfWeek - 1 || dayNumber > daysInMonth) {
+            // Empty cell (previous month or next month)
+            dayView.text = ""
+            dayView.setBackgroundColor(ContextCompat.getColor(this, R.color.background_light))
+        } else {
+            // Current month day
+            dayView.text = dayNumber.toString()
+            dayView.textSize = 14f
+            dayView.setTextColor(ContextCompat.getColor(this, R.color.text_primary))
+            dayView.gravity = Gravity.CENTER
+            dayView.setPadding(8, 8, 8, 8)
+            dayView.setBackgroundColor(ContextCompat.getColor(this, R.color.card_background_light))
+            
+            // Check if there's a mood entry for this day
+            val moodForDay = getMoodForDay(dayNumber, calendar)
+            if (moodForDay != null) {
+                // Show mood emoji
+                val emoji = getEmojiForMood(moodForDay.name)
+                dayView.text = "$dayNumber\n$emoji"
+                dayView.textSize = 12f
+                dayView.setBackgroundColor(ContextCompat.getColor(this, R.color.accent_light_blue))
+            }
+            
+            // Add click listener
+            dayView.setOnClickListener {
+                showDayDetails(dayNumber, moodForDay, calendar, calendarDialog)
+            }
+        }
+        
+        return dayView
+    }
+    
+    private fun showDayDetails(dayNumber: Int, moodForDay: MoodType?, calendar: Calendar, calendarDialog: AlertDialog? = null) {
+        // Create the correct date for this specific day
+        val dayCalendar = calendar.clone() as Calendar
+        dayCalendar.set(Calendar.DAY_OF_MONTH, dayNumber)
+        val date = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(dayCalendar.time)
+        
+        if (moodForDay != null) {
+            val emoji = getEmojiForMood(moodForDay.name)
+            AlertDialog.Builder(this)
+                .setTitle("$date")
+                .setMessage("Mood: ${moodForDay.name} $emoji\n\nTap to add a note or edit mood.")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("Edit Mood") { _, _ ->
+                    editMoodForDay(dayNumber, dayCalendar, moodForDay, calendarDialog)
+                }
+                .show()
+        } else {
+            AlertDialog.Builder(this)
+                .setTitle("$date")
+                .setMessage("No mood recorded for this day.\n\nTap the + button to add a mood entry.")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("Add Mood") { _, _ ->
+                    addMoodForDay(dayNumber, dayCalendar, calendarDialog)
+                }
+                .show()
+        }
+    }
+    
+    private fun getMoodForDay(dayNumber: Int, calendar: Calendar): MoodType? {
+        // Create a date for this specific day
+        val dayCalendar = calendar.clone() as Calendar
+        dayCalendar.set(Calendar.DAY_OF_MONTH, dayNumber)
+        val targetDate = dayCalendar.time
+        
+        // Find mood entry for this date from the class variable
+        val moodEntry = moodEntries.find { entry ->
+            val entryCalendar = Calendar.getInstance()
+            entryCalendar.time = entry.date
+            entryCalendar.get(Calendar.YEAR) == dayCalendar.get(Calendar.YEAR) &&
+            entryCalendar.get(Calendar.MONTH) == dayCalendar.get(Calendar.MONTH) &&
+            entryCalendar.get(Calendar.DAY_OF_MONTH) == dayCalendar.get(Calendar.DAY_OF_MONTH)
+        }
+        
+        // Convert string moodType to MoodType enum
+        return moodTypes.find { it.name == moodEntry?.moodType }
+    }
+    
+    private fun editMoodForDay(dayNumber: Int, dayCalendar: Calendar, currentMood: MoodType, calendarDialog: AlertDialog? = null) {
+        android.util.Log.d("Calendar", "editMoodForDay called for day $dayNumber")
+        
+        // Find the existing mood entry for this day
+        val existingEntry = moodEntries.find { entry ->
+            val entryCalendar = Calendar.getInstance()
+            entryCalendar.time = entry.date
+            entryCalendar.get(Calendar.YEAR) == dayCalendar.get(Calendar.YEAR) &&
+            entryCalendar.get(Calendar.MONTH) == dayCalendar.get(Calendar.MONTH) &&
+            entryCalendar.get(Calendar.DAY_OF_MONTH) == dayCalendar.get(Calendar.DAY_OF_MONTH)
+        }
+        
+        android.util.Log.d("Calendar", "Found existing entry: ${existingEntry != null}")
+        
+        if (existingEntry != null) {
+            android.util.Log.d("Calendar", "Current mood: ${existingEntry.moodType}")
+            // Show mood selection dialog for editing
+            showMoodSelectionForEdit(existingEntry)
+            
+            // Refresh calendar after editing
+            if (calendarDialog != null) {
+                refreshCalendarDisplay(calendarDialog)
+            }
+        } else {
+            Toast.makeText(this, "No mood entry found for this day", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun addMoodForDay(dayNumber: Int, dayCalendar: Calendar, calendarDialog: AlertDialog? = null) {
+        // Show mood selection dialog for this specific date
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Select Mood for ${SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(dayCalendar.time)}")
+            .setPositiveButton("Save") { _, _ ->
+                // This will be handled in the dialog setup
             }
             .setNegativeButton("Cancel", null)
             .create()
         
+        val dialogView = layoutInflater.inflate(R.layout.dialog_mood_entry, null)
+        dialog.setView(dialogView)
+        
+        // Setup emoji buttons
+        setupEmojiButtons(dialog)
+        
         dialog.show()
+        
+        // Override the save button to use the specific date
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setOnClickListener {
+            val selectedMood = getSelectedMoodFromDialog(dialog)
+            val note = dialog.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_mood_note)?.text?.toString()?.trim() ?: ""
+            
+            if (selectedMood != null) {
+                // Create mood entry for the specific date
+                val newEntry = MoodEntry(
+                    id = System.currentTimeMillis().toInt(),
+                    moodType = selectedMood.name,
+                    moodEmoji = selectedMood.emoji,
+                    note = note,
+                    date = dayCalendar.time
+                )
+                
+                moodEntries.add(0, newEntry)
+                saveMoodEntriesToStorage()
+                updateStats()
+                updateEmptyState()
+                updateMoodDistribution()
+                updateMoodList()
+                
+                Toast.makeText(this, "Mood logged for ${SimpleDateFormat("MMM dd", Locale.getDefault()).format(dayCalendar.time)}! ${selectedMood.emoji}", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+                
+                // Refresh calendar after adding
+                if (calendarDialog != null) {
+                    refreshCalendarDisplay(calendarDialog)
+                }
+            } else {
+                Toast.makeText(this, "Please select a mood", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    
+    private fun refreshCalendarDisplay(calendarDialog: AlertDialog) {
+        android.util.Log.d("Calendar", "Refreshing calendar display...")
+        updateCalendarDisplay(calendarDialog, currentCalendar)
+    }
+
+    private fun createDayLayout(dialog: AlertDialog, day: Int, daysInMonth: Int, calendar: Calendar): LinearLayout {
+        val dayLayout = LinearLayout(this)
+        dayLayout.orientation = LinearLayout.VERTICAL
+        dayLayout.gravity = Gravity.CENTER
+        
+        val layoutParams = LinearLayout.LayoutParams(
+            0,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            1f
+        )
+        layoutParams.setMargins(2, 2, 2, 2)
+        dayLayout.layoutParams = layoutParams
+        
+        // Set background
+        dayLayout.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_white)
+        dayLayout.setPadding(8, 8, 8, 8)
+        dayLayout.minimumHeight = 60
+        
+        // Always create a text view
+        val dayText = TextView(this)
+        dayText.textSize = 14f
+        dayText.gravity = Gravity.CENTER
+        dayText.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        
+        if (day > 0 && day <= daysInMonth) {
+            // Valid day of current month
+            dayText.text = day.toString()
+            dayText.setTextColor(ContextCompat.getColor(this, R.color.text_primary))
+            dayLayout.addView(dayText)
+            
+            // Check if there's a mood entry for this day
+            val moodForDay = getMoodForDay(calendar, day)
+            if (moodForDay != null) {
+                val moodText = TextView(this)
+                moodText.text = moodForDay.emoji
+                moodText.textSize = 18f
+                moodText.gravity = Gravity.CENTER
+                moodText.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                dayLayout.addView(moodText)
+                
+                // Make clickable
+                dayLayout.setOnClickListener {
+                    showDayDetails(dialog, calendar, day, moodForDay)
+                }
+            }
+        } else {
+            // Empty day (from previous/next month)
+            dayText.text = ""
+            dayText.setTextColor(ContextCompat.getColor(this, R.color.text_tertiary))
+            dayLayout.addView(dayText)
+        }
+        
+        return dayLayout
+    }
+
+    private fun getMoodForDay(calendar: Calendar, day: Int): MoodType? {
+        val targetDate = Calendar.getInstance()
+        targetDate.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), day)
+        val targetTimestamp = targetDate.timeInMillis
+        
+        // Find mood entry for this day
+        for (entry in moodEntries) {
+            val entryDate = Calendar.getInstance()
+            entryDate.timeInMillis = entry.timestamp
+            
+            if (entryDate.get(Calendar.YEAR) == targetDate.get(Calendar.YEAR) &&
+                entryDate.get(Calendar.MONTH) == targetDate.get(Calendar.MONTH) &&
+                entryDate.get(Calendar.DAY_OF_MONTH) == targetDate.get(Calendar.DAY_OF_MONTH)) {
+                
+                return moodTypes.find { it.name == entry.moodType }
+            }
+        }
+        return null
+    }
+
+    private fun showDayDetails(dialog: AlertDialog, calendar: Calendar, day: Int, mood: MoodType) {
+        val selectedDayInfo = dialog.findViewById<LinearLayout>(R.id.selected_day_info)
+        val selectedDate = dialog.findViewById<TextView>(R.id.tv_selected_date)
+        val selectedMood = dialog.findViewById<TextView>(R.id.tv_selected_mood)
+        val selectedNote = dialog.findViewById<TextView>(R.id.tv_selected_note)
+        
+        // Format date
+        val date = Calendar.getInstance()
+        date.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), day)
+        val dateFormat = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
+        
+        selectedDate?.text = dateFormat.format(date.time)
+        selectedMood?.text = "${mood.emoji} ${mood.name}"
+        
+        // Find the mood entry for this day
+        val moodEntry = moodEntries.find { entry ->
+            val entryDate = Calendar.getInstance()
+            entryDate.timeInMillis = entry.timestamp
+            entryDate.get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
+            entryDate.get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+            entryDate.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)
+        }
+        
+        selectedNote?.text = moodEntry?.note ?: "No note added"
+        selectedDayInfo?.visibility = View.VISIBLE
     }
 
     private fun showMoodInsights() {

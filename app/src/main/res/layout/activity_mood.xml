@@ -494,9 +494,9 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Set Reminders -->
+                <!-- Calendar View -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card_reminders"
+                    android:id="@+id/card_calendar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -521,7 +521,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Set Reminders"
+                            android:text="Calendar View"
                             android:textSize="14sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"
