@@ -222,6 +222,49 @@ class Mood : AppCompatActivity() {
         dialog.setView(layout)
         dialog.show()
     }
+    
+    private fun showMoodSelectionForEditWithRefresh(oldMoodEntry: MoodEntry, calendarDialog: AlertDialog?) {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Select New Mood")
+            .setCancelable(true)
+            .create()
+
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.setPadding(32, 32, 32, 32)
+
+        moodTypes.forEach { moodType ->
+            val button = Button(this)
+            button.text = "${moodType.emoji} ${moodType.name}"
+            button.textSize = 16f
+            button.setPadding(32, 32, 32, 32)
+            button.gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            button.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_outline)
+
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.bottomMargin = 16
+            button.layoutParams = layoutParams
+
+            button.setOnClickListener {
+                updateMoodEntryType(oldMoodEntry, moodType)
+                dialog.dismiss()
+                
+                // Refresh calendar after mood is actually changed
+                if (calendarDialog != null) {
+                    android.util.Log.d("Calendar", "Refreshing calendar after mood edit...")
+                    refreshCalendarDisplay(calendarDialog)
+                }
+            }
+
+            layout.addView(button)
+        }
+
+        dialog.setView(layout)
+        dialog.show()
+    }
 
     private fun saveMoodEntry(moodType: MoodType, note: String) {
         val newEntry = MoodEntry(
@@ -741,13 +784,8 @@ class Mood : AppCompatActivity() {
         
         if (existingEntry != null) {
             android.util.Log.d("Calendar", "Current mood: ${existingEntry.moodType}")
-            // Show mood selection dialog for editing
-            showMoodSelectionForEdit(existingEntry)
-            
-            // Refresh calendar after editing
-            if (calendarDialog != null) {
-                refreshCalendarDisplay(calendarDialog)
-            }
+            // Show mood selection dialog for editing with calendar refresh callback
+            showMoodSelectionForEditWithRefresh(existingEntry, calendarDialog)
         } else {
             Toast.makeText(this, "No mood entry found for this day", Toast.LENGTH_SHORT).show()
         }
