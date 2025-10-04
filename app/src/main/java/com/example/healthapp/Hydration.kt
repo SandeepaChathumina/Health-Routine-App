@@ -699,46 +699,10 @@ class Hydration : AppCompatActivity() {
                 val timeString = String.format("%02d:%02d", hour, minute)
                 addReminder(timeString)
             }
-            .setNeutralButton("Test (30s)") { _, _ ->
-                testReminder()
-            }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    private fun testReminder() {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.SECOND, 30) // 30 seconds from now
-        
-        val testTime = String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
-        val testReminder = ReminderData(999, testTime)
-        
-        android.util.Log.d("Hydration", "Creating test reminder for 30 seconds from now")
-        
-        // Schedule test alarm for 30 seconds from now
-        val intent = Intent(this, WaterReminderReceiver::class.java).apply {
-            putExtra("reminder_id", 999)
-            putExtra("time", testTime)
-        }
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            999,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        try {
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-            Toast.makeText(this, "Test reminder set for 30 seconds from now", Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Test reminder failed: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
 
     private fun addReminder(time: String) {
         val reminders = getReminders().toMutableList()
