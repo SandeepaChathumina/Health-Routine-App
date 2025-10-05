@@ -32,7 +32,14 @@ class MoodAdapter(
     override fun onBindViewHolder(holder: MoodViewHolder, position: Int) {
         val moodEntry = moodEntries[position]
 
+        // Enhanced emoji display with better support and clarity
         holder.tvMoodEmoji.text = moodEntry.moodEmoji
+        holder.tvMoodEmoji.typeface = android.graphics.Typeface.DEFAULT
+        holder.tvMoodEmoji.paint.isAntiAlias = true
+        holder.tvMoodEmoji.paint.isSubpixelText = true
+        holder.tvMoodEmoji.paint.isFakeBoldText = false
+        holder.tvMoodEmoji.paint.textSize = 36f
+        holder.tvMoodEmoji.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
         holder.tvMoodType.text = moodEntry.moodType
 
         // Handle note display

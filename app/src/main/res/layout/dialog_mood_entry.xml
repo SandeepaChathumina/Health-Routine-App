@@ -46,39 +46,59 @@
 
             <Button
                 android:id="@+id/btn_emoji_excited"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="🥳"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_happy"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😊"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_calm"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😌"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_neutral"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😐"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
         </LinearLayout>
 
@@ -91,39 +111,59 @@
 
             <Button
                 android:id="@+id/btn_emoji_tired"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😴"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_stressed"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😤"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_sad"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😔"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
             <Button
                 android:id="@+id/btn_emoji_angry"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:text="😠"
-                android:textSize="24sp"
-                android:background="@drawable/bg_emoji_button"
-                android:layout_margin="4dp"/>
+                android:textSize="48sp"
+                android:background="@drawable/bg_emoji_button_pure_white"
+                android:layout_margin="4dp"
+                android:typeface="normal"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.Material3.Button.UnelevatedButton"/>
 
         </LinearLayout>
 

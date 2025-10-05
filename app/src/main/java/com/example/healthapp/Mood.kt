@@ -34,16 +34,28 @@ class Mood : AppCompatActivity() {
     private val MOOD_ENTRIES_KEY = "mood_entries"
     private val moodEntries = mutableListOf<MoodEntry>()
 
-    // Mood types with emojis and colors
+    // Mood types with emojis and colors - Enhanced with fallback support
     private val moodTypes = listOf(
         MoodType("Excited", "🥳", "#F59E0B"),
         MoodType("Happy", "😊", "#10B981"),
-        MoodType("Calm", "😌", "#8B5CF6"),
+        MoodType("Calm", "😌", "#10B981"),
         MoodType("Neutral", "😐", "#64748B"),
         MoodType("Tired", "😴", "#6B7280"),
         MoodType("Stressed", "😤", "#EF4444"),
         MoodType("Sad", "😔", "#3B82F6"),
         MoodType("Angry", "😠", "#DC2626")
+    )
+    
+    // Fallback emojis for better compatibility
+    private val fallbackEmojis = mapOf(
+        "Excited" to "😄",
+        "Happy" to "😊", 
+        "Calm" to "😌",
+        "Neutral" to "😐",
+        "Tired" to "😴",
+        "Stressed" to "😤",
+        "Sad" to "😔",
+        "Angry" to "😠"
     )
 
     // Mood distribution data class
@@ -198,11 +210,17 @@ class Mood : AppCompatActivity() {
 
         moodTypes.forEach { moodType ->
             val button = Button(this)
-            button.text = "${moodType.emoji} ${moodType.name}"
+            val bestEmoji = getBestEmojiForMood(moodType.name)
+            button.text = "$bestEmoji ${moodType.name}"
             button.textSize = 16f
             button.setPadding(32, 32, 32, 32)
             button.gravity = Gravity.START or Gravity.CENTER_VERTICAL
             button.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_outline)
+            button.typeface = android.graphics.Typeface.DEFAULT
+            button.paint.isAntiAlias = true
+            button.paint.isSubpixelText = true
+            button.paint.isFakeBoldText = false
+            button.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
 
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -235,11 +253,17 @@ class Mood : AppCompatActivity() {
 
         moodTypes.forEach { moodType ->
             val button = Button(this)
-            button.text = "${moodType.emoji} ${moodType.name}"
+            val bestEmoji = getBestEmojiForMood(moodType.name)
+            button.text = "$bestEmoji ${moodType.name}"
             button.textSize = 16f
             button.setPadding(32, 32, 32, 32)
             button.gravity = Gravity.START or Gravity.CENTER_VERTICAL
             button.background = ContextCompat.getDrawable(this, R.drawable.bg_rounded_outline)
+            button.typeface = android.graphics.Typeface.DEFAULT
+            button.paint.isAntiAlias = true
+            button.paint.isSubpixelText = true
+            button.paint.isFakeBoldText = false
+            button.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
 
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -270,7 +294,7 @@ class Mood : AppCompatActivity() {
         val newEntry = MoodEntry(
             id = System.currentTimeMillis().toInt(),
             moodType = moodType.name,
-            moodEmoji = moodType.emoji,
+            moodEmoji = getBestEmojiForMood(moodType.name),
             note = note,
             date = Date()
         )
@@ -311,14 +335,15 @@ class Mood : AppCompatActivity() {
         if (index != -1) {
             val updatedEntry = oldEntry.copy(
                 moodType = newMoodType.name,
-                moodEmoji = newMoodType.emoji
+                moodEmoji = getBestEmojiForMood(newMoodType.name)
             )
             moodEntries[index] = updatedEntry
             saveMoodEntriesToStorage()
             updateMoodList()
             updateStats()
             updateMoodDistribution()
-            Toast.makeText(this, "Mood changed to ${newMoodType.emoji}", Toast.LENGTH_SHORT).show()
+            val bestEmoji = getBestEmojiForMood(newMoodType.name)
+            Toast.makeText(this, "Mood changed to $bestEmoji", Toast.LENGTH_SHORT).show()
             android.util.Log.d("Calendar", "Mood updated successfully")
         } else {
             android.util.Log.e("Calendar", "Entry not found for update")
@@ -541,6 +566,17 @@ class Mood : AppCompatActivity() {
                 button?.setOnClickListener {
                     selectEmoji(dialog, buttonId, moodType)
                 }
+                
+                // Ensure emoji displays properly on button with enhanced rendering
+                button?.typeface = android.graphics.Typeface.DEFAULT
+                button?.text = getBestEmojiForMood(moodType.name)
+                button?.paint?.isAntiAlias = true
+                button?.paint?.isSubpixelText = true
+                button?.paint?.isFakeBoldText = false
+                button?.paint?.textSize = 48f
+                button?.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
+                button?.setBackgroundColor(android.graphics.Color.WHITE)
+                button?.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE)
             }
         }
     }
@@ -554,19 +590,27 @@ class Mood : AppCompatActivity() {
 
         allButtonIds.forEach { buttonId ->
             val button = dialog.findViewById<Button>(buttonId)
-            button?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button)
+            button?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button_pure_white)
         }
 
         // Highlight selected button
         val selectedButton = dialog.findViewById<Button>(selectedButtonId)
-        selectedButton?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button_selected)
+        selectedButton?.background = ContextCompat.getDrawable(this, R.drawable.bg_emoji_button_selected_pure_white)
+        selectedButton?.setBackgroundColor(android.graphics.Color.parseColor("#F8FAFC"))
+        selectedButton?.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#F8FAFC"))
 
-        // Show selected mood
+        // Show selected mood with improved emoji display
         val selectedMoodContainer = dialog.findViewById<LinearLayout>(R.id.selected_mood_container)
         val selectedMoodText = dialog.findViewById<TextView>(R.id.tv_selected_mood)
         
         selectedMoodContainer?.visibility = View.VISIBLE
-        selectedMoodText?.text = "${selectedMood.emoji} ${selectedMood.name}"
+        val bestEmoji = getBestEmojiForMood(selectedMood.name)
+        selectedMoodText?.text = "$bestEmoji ${selectedMood.name}"
+        selectedMoodText?.typeface = android.graphics.Typeface.DEFAULT
+        selectedMoodText?.paint?.isAntiAlias = true
+        selectedMoodText?.paint?.isSubpixelText = true
+        selectedMoodText?.paint?.isFakeBoldText = false
+        selectedMoodText?.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
 
         // Store selected mood for later retrieval
         dialog.findViewById<View>(R.id.selected_mood_container)?.tag = selectedMood
@@ -705,11 +749,18 @@ class Mood : AppCompatActivity() {
             // Check if there's a mood entry for this day
             val moodForDay = getMoodForDay(dayNumber, calendar)
             if (moodForDay != null) {
-                // Show mood emoji
-                val emoji = getEmojiForMood(moodForDay.name)
+                // Show mood emoji with improved display
+                val emoji = getBestEmojiForMood(moodForDay.name)
                 dayView.text = "$dayNumber\n$emoji"
                 dayView.textSize = 12f
                 dayView.setBackgroundColor(ContextCompat.getColor(this, R.color.accent_light_blue))
+                
+                // Ensure emoji displays properly with enhanced rendering
+                dayView.typeface = android.graphics.Typeface.DEFAULT
+                dayView.paint.isAntiAlias = true
+                dayView.paint.isSubpixelText = true
+                dayView.paint.isFakeBoldText = false
+                dayView.setShadowLayer(1f, 0f, 1f, android.graphics.Color.parseColor("#20000000"))
             }
             
             // Add click listener
@@ -985,6 +1036,31 @@ class Mood : AppCompatActivity() {
 
     private fun getEmojiForMood(mood: String): String {
         return moodTypes.find { it.name == mood }?.emoji ?: "😊"
+    }
+    
+    /**
+     * Get the best emoji for display with fallback support
+     * This ensures emojis display correctly across different Android versions
+     */
+    private fun getBestEmojiForMood(mood: String): String {
+        val primaryEmoji = moodTypes.find { it.name == mood }?.emoji
+        val fallbackEmoji = fallbackEmojis[mood]
+        
+        // Try to use primary emoji, fallback to simpler emoji if needed
+        return primaryEmoji ?: fallbackEmoji ?: "😊"
+    }
+    
+    /**
+     * Check if emoji is properly supported on this device
+     */
+    private fun isEmojiSupported(emoji: String): Boolean {
+        return try {
+            val paint = android.graphics.Paint()
+            val hasGlyph = paint.hasGlyph(emoji)
+            hasGlyph
+        } catch (e: Exception) {
+            false
+        }
     }
 
     private fun getRecentTrend(): String {

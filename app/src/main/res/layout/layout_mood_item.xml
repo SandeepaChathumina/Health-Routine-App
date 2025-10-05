@@ -20,12 +20,14 @@
         <!-- Mood Emoji -->
         <TextView
             android:id="@+id/tv_mood_emoji"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:gravity="center"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:background="@drawable/bg_circle_light_gray"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:typeface="normal"
+            android:includeFontPadding="false"/>
 
         <!-- Mood Details -->
         <LinearLayout

@@ -36,43 +36,66 @@ class StatsDataManager(private val context: Context) {
     )
     
     fun getStatsForPeriod(days: Int): StatsData {
-        val endDate = Date()
-        val startDate = Calendar.getInstance().apply {
-            time = endDate
-            add(Calendar.DAY_OF_YEAR, -days)
-        }.time
+        try {
+            val endDate = Date()
+            val startDate = Calendar.getInstance().apply {
+                time = endDate
+                add(Calendar.DAY_OF_YEAR, -days)
+            }.time
+            
+            // Get habits data
+            val habitsData = getHabitsStats(startDate, endDate)
+            
+            // Get hydration data
+            val hydrationData = getHydrationStats(startDate, endDate)
+            
+            // Get mood data
+            val moodData = getMoodStats(startDate, endDate)
+            
+            // Calculate overall health score
+            val healthScore = calculateHealthScore(habitsData, hydrationData, moodData)
         
-        // Get habits data
-        val habitsData = getHabitsStats(startDate, endDate)
-        
-        // Get hydration data
-        val hydrationData = getHydrationStats(startDate, endDate)
-        
-        // Get mood data
-        val moodData = getMoodStats(startDate, endDate)
-        
-        // Calculate overall health score
-        val healthScore = calculateHealthScore(habitsData, hydrationData, moodData)
-        
-        return StatsData(
-            healthScore = healthScore,
-            habitsScore = habitsData.score,
-            waterScore = hydrationData.score,
-            moodScore = moodData.score,
-            exerciseScore = 70, // Placeholder for now
-            currentStreak = habitsData.currentStreak,
-            bestStreak = habitsData.bestStreak,
-            totalDaysActive = calculateTotalDaysActive(startDate, endDate),
-            totalHabits = habitsData.totalHabits,
-            avgHabitsPerDay = habitsData.avgPerDay,
-            habitStreak = habitsData.currentStreak,
-            dailyWaterAvg = hydrationData.dailyAvg,
-            glassesPerDay = hydrationData.glassesPerDay,
-            daysOnTrack = hydrationData.daysOnTrack,
-            moodEntriesWeek = moodData.entriesThisWeek,
-            mostCommonMood = moodData.mostCommonMood,
-            moodImprovement = moodData.improvement
-        )
+            return StatsData(
+                healthScore = healthScore,
+                habitsScore = habitsData.score,
+                waterScore = hydrationData.score,
+                moodScore = moodData.score,
+                exerciseScore = 70, // Placeholder for now
+                currentStreak = habitsData.currentStreak,
+                bestStreak = habitsData.bestStreak,
+                totalDaysActive = calculateTotalDaysActive(startDate, endDate),
+                totalHabits = habitsData.totalHabits,
+                avgHabitsPerDay = habitsData.avgPerDay,
+                habitStreak = habitsData.currentStreak,
+                dailyWaterAvg = hydrationData.dailyAvg,
+                glassesPerDay = hydrationData.glassesPerDay,
+                daysOnTrack = hydrationData.daysOnTrack,
+                moodEntriesWeek = moodData.entriesThisWeek,
+                mostCommonMood = moodData.mostCommonMood,
+                moodImprovement = moodData.improvement
+            )
+        } catch (e: Exception) {
+            // Return default stats if there's an error
+            return StatsData(
+                healthScore = 0,
+                habitsScore = 0,
+                waterScore = 0,
+                moodScore = 0,
+                exerciseScore = 0,
+                currentStreak = 0,
+                bestStreak = 0,
+                totalDaysActive = 0,
+                totalHabits = 0,
+                avgHabitsPerDay = 0f,
+                habitStreak = 0,
+                dailyWaterAvg = 0f,
+                glassesPerDay = 0f,
+                daysOnTrack = 0,
+                moodEntriesWeek = 0,
+                mostCommonMood = "😊",
+                moodImprovement = "+0%"
+            )
+        }
     }
     
     private fun getHabitsStats(startDate: Date, endDate: Date): HabitsStats {
@@ -110,10 +133,14 @@ class StatsDataManager(private val context: Context) {
         val dailyGoal = 6000 // 6L default goal
         val streakDays = hydrationPrefs.getInt("streak_days", 0)
         
-        val score = ((currentIntake.toFloat() / dailyGoal) * 100).roundToInt().coerceAtMost(100)
-        val dailyAvg = currentIntake / 1000f // Convert to liters
-        val glassesPerDay = currentIntake / 250f // Assuming 250ml per glass
-        val daysOnTrack = streakDays
+        // Calculate period-based stats
+        val daysInPeriod = ((endDate.time - startDate.time) / (1000 * 60 * 60 * 24)).toInt() + 1
+        val avgIntakePerDay = if (daysInPeriod > 0) currentIntake.toFloat() / daysInPeriod else currentIntake.toFloat()
+        
+        val score = ((avgIntakePerDay / dailyGoal) * 100).roundToInt().coerceAtMost(100)
+        val dailyAvg = avgIntakePerDay / 1000f // Convert to liters
+        val glassesPerDay = avgIntakePerDay / 250f // Assuming 250ml per glass
+        val daysOnTrack = minOf(streakDays, daysInPeriod)
         
         return HydrationStats(score, dailyAvg, glassesPerDay, daysOnTrack)
     }
@@ -181,10 +208,19 @@ class StatsDataManager(private val context: Context) {
     private fun calculateTotalDaysActive(startDate: Date, endDate: Date): Int {
         // Calculate days between start and end date
         val diffInMillis = endDate.time - startDate.time
-        val diffInDays = (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
+        val diffInDays = (diffInMillis / (1000 * 60 * 60 * 24)).toInt() + 1
         
-        // For now, assume user has been active for most days in the period
-        return (diffInDays * 0.8).roundToInt().coerceAtLeast(1)
+        // Check if user has any activity data
+        val hasHabits = habitsPrefs.getString("saved_habits", null) != null
+        val hasMood = moodPrefs.getString("mood_entries", null) != null
+        val hasHydration = hydrationPrefs.getInt("current_intake", 0) > 0
+        
+        // If user has any activity, assume they've been active for most days
+        return if (hasHabits || hasMood || hasHydration) {
+            (diffInDays * 0.7).roundToInt().coerceAtLeast(1)
+        } else {
+            0
+        }
     }
     
     // Data classes for organized stats
