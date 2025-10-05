@@ -37,7 +37,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mood Journal"
+                        android:text="@string/mood_journal"
                         android:textSize="28sp"
                         android:textColor="#1E3A8A"
                         android:fontFamily="sans-serif-medium"/>
@@ -45,7 +45,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Track your emotional wellness"
+                        android:text="@string/track_your_emotional_wellness"
                         android:textSize="14sp"
                         android:textColor="#64748B"
                         android:layout_marginTop="4dp"/>
@@ -56,6 +56,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/bg_rounded_blue"
+                    android:contentDescription="@string/plusicon"
                     android:src="@drawable/ic_plus"
                     app:tint="#FFFFFF"/>
             </LinearLayout>
@@ -87,6 +88,7 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:contentDescription="@string/calendericon"
                             android:src="@drawable/ic_calendar"
                             app:tint="#4C6AFD"
                             android:background="@drawable/bg_circle_light_blue"
@@ -96,7 +98,7 @@
                             android:id="@+id/tv_entries_month"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="47"
+                            android:text="@string/_47"
                             android:textSize="20sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"
@@ -105,7 +107,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Entries This Month"
+                            android:text="@string/entries_this_month"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -134,6 +136,7 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:contentDescription="@string/staticon"
                             android:src="@drawable/ic_trending_up"
                             app:tint="#10B981"
                             android:background="@drawable/bg_circle_light_green"
@@ -143,14 +146,14 @@
                             android:id="@+id/tv_most_common_mood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="😊"
+                            android:text="@string/happyface"
                             android:textSize="20sp"
                             android:layout_marginTop="12dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Most Common Mood"
+                            android:text="@string/most_common_mood"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -178,6 +181,7 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:contentDescription="@string/staricon"
                             android:src="@drawable/ic_star"
                             app:tint="#F59E0B"
                             android:background="@drawable/bg_circle_light_orange"
@@ -187,7 +191,7 @@
                             android:id="@+id/tv_day_streak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
+                            android:text="@string/_12"
                             android:textSize="20sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"
@@ -196,7 +200,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Day Streak"
+                            android:text="@string/day_streak"
                             android:textSize="12sp"
                             android:textColor="#64748B"
                             android:gravity="center"
@@ -231,7 +235,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Mood Distribution"
+                            android:text="@string/mood_distribution"
                             android:textSize="18sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"/>
@@ -240,7 +244,7 @@
                             android:id="@+id/tv_view_insights"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View Insights"
+                            android:text="@string/view_insights"
                             android:textSize="14sp"
                             android:textColor="#4C6AFD"
                             android:textStyle="bold"/>
@@ -263,7 +267,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="😊"
+                                android:text="@string/happy_face"
                                 android:textSize="20sp"
                                 android:layout_marginEnd="12dp"/>
 
@@ -271,7 +275,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Happy"
+                                android:text="@string/happy"
                                 android:textSize="16sp"
                                 android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
@@ -280,7 +284,7 @@
                                 android:id="@+id/tv_happy_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="15 times"
+                                android:text="@string/_15_times"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
                         </LinearLayout>
@@ -312,7 +316,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="😌"
+                                android:text="@string/calmface"
                                 android:textSize="20sp"
                                 android:layout_marginEnd="12dp"/>
 
@@ -320,7 +324,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Calm"
+                                android:text="@string/calm"
                                 android:textSize="16sp"
                                 android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
@@ -329,7 +333,7 @@
                                 android:id="@+id/tv_calm_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10 times"
+                                android:text="@string/_10_times"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
                         </LinearLayout>
@@ -361,7 +365,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="😤"
+                                android:text="@string/stressface"
                                 android:textSize="20sp"
                                 android:layout_marginEnd="12dp"/>
 
@@ -369,7 +373,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Stressed"
+                                android:text="@string/stressed"
                                 android:textSize="16sp"
                                 android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
@@ -378,7 +382,7 @@
                                 android:id="@+id/tv_stressed_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5 times"
+                                android:text="@string/_5_times"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
                         </LinearLayout>
@@ -409,7 +413,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="🥳"
+                                android:text="@string/exiteface"
                                 android:textSize="20sp"
                                 android:layout_marginEnd="12dp"/>
 
@@ -417,7 +421,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Excited"
+                                android:text="@string/excited"
                                 android:textSize="16sp"
                                 android:textColor="#1E3A8A"
                                 android:textStyle="bold"/>
@@ -426,7 +430,7 @@
                                 android:id="@+id/tv_excited_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="6 times"
+                                android:text="@string/_6_times"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"/>
                         </LinearLayout>
@@ -447,7 +451,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Quick Actions"
+                android:text="@string/quick_actions"
                 android:textSize="18sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"
@@ -479,13 +483,14 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:contentDescription="@string/herticon"
                             android:src="@drawable/ic_heart"
                             app:tint="#EC4899"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mood Patterns"
+                            android:text="@string/mood_patterns"
                             android:textSize="14sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"
@@ -515,13 +520,14 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:contentDescription="@string/calendericon"
                             android:src="@drawable/ic_calendar"
                             app:tint="#4C6AFD"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Calendar View"
+                            android:text="@string/calendar_view"
                             android:textSize="14sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"
@@ -536,7 +542,7 @@
                 android:id="@+id/tv_mood_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recent Mood Entries"
+                android:text="@string/recent_mood_entries"
                 android:textSize="18sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"
@@ -562,6 +568,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:contentDescription="@string/moodicon"
                     android:src="@drawable/ic_mood"
                     android:alpha="0.5"
                     app:tint="#64748B"/>
@@ -569,7 +576,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No mood entries yet"
+                    android:text="@string/no_mood_entries_yet"
                     android:textSize="16sp"
                     android:textColor="#64748B"
                     android:textStyle="bold"
@@ -578,7 +585,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tap the + button to add your first mood entry"
+                    android:text="@string/tap_the_button_to_add_your_first_mood_entry"
                     android:textSize="14sp"
                     android:textColor="#94A3B8"
                     android:gravity="center"

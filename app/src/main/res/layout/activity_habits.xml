@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -377,7 +376,7 @@
                             android:layout_height="48dp"
                             android:src="@drawable/ic_target"
                             app:tint="#4C6AFD"
-                            android:contentDescription="No habits illustration"/>
+                            android:contentDescription="@string/no_habits_illustration"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -385,7 +384,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No Habits Yet"
+                    android:text="@string/no_habits_yet"
                     android:textSize="24sp"
                     android:textColor="#1E3A8A"
                     android:textStyle="bold"
@@ -395,7 +394,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start building healthy routines by creating your first habit. Small steps lead to big changes!"
+                    android:text="@string/start_building_healthy_routines_by_creating_your_first_habit_small_steps_lead_to_big_changes"
                     android:textSize="16sp"
                     android:textColor="#64748B"
                     android:gravity="center"
@@ -407,7 +406,7 @@
                     android:id="@+id/btn_add_first_habit"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
-                    android:text="Create Your First Habit"
+                    android:text="@string/create_your_first_habit"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:backgroundTint="#4C6AFD"
@@ -422,7 +421,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="💡 Popular habits: Drink water, Exercise, Meditate, Read"
+                    android:text="@string/popular_habits_drink_water_exercise_meditate_read"
                     android:textSize="14sp"
                     android:textColor="#94A3B8"
                     android:gravity="center"
