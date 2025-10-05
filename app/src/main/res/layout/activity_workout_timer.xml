@@ -23,13 +23,13 @@
             android:background="@drawable/bg_rounded_white"
             android:src="@drawable/ic_arrow_back"
             app:tint="#64748B"
-            android:contentDescription="Back"/>
+            android:contentDescription="@string/back"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Workout Timer"
+            android:text="@string/workout_timer"
             android:textSize="20sp"
             android:textColor="#1E3A8A"
             android:textStyle="bold"
@@ -68,7 +68,7 @@
                 android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:30"
+                android:text="@string/_00_30"
                 android:textSize="48sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"
@@ -86,7 +86,7 @@
                     android:id="@+id/tv_exercise_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Exercise Name"
+                    android:text="@string/exercise_name"
                     android:textSize="24sp"
                     android:textColor="#1E3A8A"
                     android:textStyle="bold"
@@ -96,7 +96,7 @@
                     android:id="@+id/tv_exercise_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30 seconds • Cardio"
+                    android:text="@string/_30_seconds_cardio"
                     android:textSize="16sp"
                     android:textColor="#64748B" />
             </LinearLayout>
@@ -113,7 +113,7 @@
                     android:id="@+id/tv_current_exercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:text="@string/_1"
                     android:textSize="18sp"
                     android:textColor="#4C6AFD"
                     android:textStyle="bold" />
@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" / "
+                    android:text="@string/devide"
                     android:textSize="18sp"
                     android:textColor="#64748B"
                     android:layout_marginHorizontal="4dp" />
@@ -130,7 +130,7 @@
                     android:id="@+id/tv_total_exercises"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8"
+                    android:text="@string/_8"
                     android:textSize="18sp"
                     android:textColor="#64748B" />
             </LinearLayout>
@@ -148,7 +148,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
-                    android:text="Pause"
+                    android:text="@string/pause"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:backgroundTint="#F59E0B"
@@ -162,7 +162,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:backgroundTint="#4C6AFD"
@@ -199,6 +199,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
+                            android:contentDescription="@string/musicicon"
                             android:src="@drawable/ic_music_note"
                             app:tint="#64748B"
                             android:layout_marginEnd="12dp"/>
@@ -207,7 +208,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Background Music"
+                            android:text="@string/background_music"
                             android:textSize="16sp"
                             android:textColor="#1E3A8A"
                             android:textStyle="bold"/>
@@ -216,7 +217,7 @@
                             android:id="@+id/btn_music_toggle"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:text="ON"
+                            android:text="@string/on"
                             android:textColor="#FFFFFF"
                             android:textSize="14sp"
                             android:backgroundTint="#4C6AFD"
@@ -233,6 +234,7 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
+                            android:contentDescription="@string/volumedown"
                             android:src="@drawable/ic_volume_down"
                             app:tint="#64748B"
                             android:layout_marginEnd="12dp"/>
@@ -250,6 +252,7 @@
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
+                            android:contentDescription="@string/volumeup"
                             android:src="@drawable/ic_volume_up"
                             app:tint="#64748B"
                             android:layout_marginStart="12dp"/>
@@ -260,7 +263,7 @@
                         android:id="@+id/tv_volume_percentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="80%"
+                        android:text="@string/_80"
                         android:textSize="12sp"
                         android:textColor="#64748B"
                         android:layout_gravity="center"

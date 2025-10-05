@@ -87,7 +87,7 @@
                         android:id="@+id/tv_workout_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="select_exercises_to_build_your_custom_workout"
+                        android:text="@string/select_exercises_to_build_your_custom_workout"
                         android:textSize="14sp"
                         android:textColor="#64748B"
                         android:lineSpacingExtra="4dp"
@@ -117,7 +117,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="tap_to_select_exercises"
+                            android:text="@string/tap_to_select_exercises"
                             android:textSize="14sp"
                             android:textColor="#8B5CF6" />
                     </LinearLayout>
@@ -129,7 +129,7 @@
                 android:id="@+id/btn_reset_workout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="reset_all_exercises"
+                android:text="@string/reset_all_exercises"
                 android:textColor="#64748B"
                 android:textSize="14sp"
                 android:backgroundTint="#FFFFFF"
@@ -145,7 +145,7 @@
                 android:id="@+id/btn_start_workout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Start Workout"
+                android:text="@string/start_workout"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:backgroundTint="#4C6AFD"
@@ -177,7 +177,7 @@
                     android:id="@+id/tv_exercise_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 exercises"
+                    android:text="@string/_0_exercises"
                     android:textSize="14sp"
                     android:textColor="#64748B"/>
             </LinearLayout>
@@ -223,7 +223,7 @@
                             <TextView
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
-                                android:text="💡"
+                                android:text="@string/bulb"
                                 android:textSize="16sp"
                                 android:layout_marginEnd="8dp"/>
 

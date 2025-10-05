@@ -8,7 +8,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Add your thoughts...">
+        android:hint="@string/add_your_thoughts">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_mood_note"
@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This helps you understand your emotions better"
+        android:text="@string/this_helps_you_understand_your_emotions_better"
         android:textSize="12sp"
         android:textColor="#64748B"
         android:paddingTop="8dp" />

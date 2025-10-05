@@ -30,7 +30,7 @@
                 android:id="@+id/tv_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/_1"
                 android:textSize="16sp"
                 android:textColor="#4C6AFD"
                 android:textStyle="bold"/>
@@ -46,7 +46,7 @@
                 android:id="@+id/tv_exercise_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jumping Jacks"
+                android:text="@string/jumping_jacks"
                 android:textSize="16sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"/>
@@ -55,7 +55,7 @@
                 android:id="@+id/tv_exercise_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="30 seconds • Cardio"
+                android:text="@string/_30_seconds_cardio"
                 android:textSize="14sp"
                 android:textColor="#64748B"
                 android:layout_marginTop="2dp"/>
@@ -80,7 +80,7 @@
             app:cornerRadius="20dp"
             app:strokeWidth="0dp"
             style="@style/Widget.Material3.Button.UnelevatedButton"
-            android:contentDescription="Remove exercise"
+            android:contentDescription="@string/remove_exercise"
             android:clickable="true"
             android:focusable="true"/>
     </LinearLayout>

@@ -24,13 +24,13 @@
             android:background="@drawable/bg_rounded_white"
             android:src="@drawable/ic_arrow_back"
             app:tint="#64748B"
-            android:contentDescription="Back"/>
+            android:contentDescription="@string/back"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Workout Complete"
+            android:text="@string/workout_complete"
             android:textSize="20sp"
             android:textColor="#1E3A8A"
             android:textStyle="bold"
@@ -85,7 +85,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/trophy"
                         app:tint="#4C6AFD"
-                        android:contentDescription="Workout complete"/>
+                        android:contentDescription="@string/workout_complete"/>
                 </LinearLayout>
 
             </FrameLayout>
@@ -95,7 +95,7 @@
                 android:id="@+id/tv_congratulations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Workout Complete!"
+                android:text="@string/workout_complete"
                 android:textSize="28sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"
@@ -108,7 +108,7 @@
                 android:id="@+id/tv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Great job! You've completed your workout routine successfully."
+                android:text="@string/great_job_you_ve_completed_your_workout_routine_successfully"
                 android:textSize="16sp"
                 android:textColor="#64748B"
                 android:gravity="center"
@@ -140,7 +140,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Workout Summary"
+                        android:text="@string/workout_summary"
                         android:textSize="18sp"
                         android:textColor="#1E3A8A"
                         android:textStyle="bold"
@@ -163,7 +163,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Exercises"
+                                android:text="@string/exercises"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"
                                 android:layout_marginBottom="4dp"/>
@@ -172,7 +172,7 @@
                                 android:id="@+id/tv_total_exercises"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="8"
+                                android:text="@string/_8"
                                 android:textSize="24sp"
                                 android:textColor="#4C6AFD"
                                 android:textStyle="bold"/>
@@ -193,7 +193,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Duration"
+                                android:text="@string/duration"
                                 android:textSize="14sp"
                                 android:textColor="#64748B"
                                 android:layout_marginBottom="4dp"/>
@@ -202,7 +202,7 @@
                                 android:id="@+id/tv_total_duration"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10 min"
+                                android:text="@string/_10_min"
                                 android:textSize="24sp"
                                 android:textColor="#4C6AFD"
                                 android:textStyle="bold"/>
@@ -225,6 +225,7 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
+                            android:contentDescription="@string/staricon"
                             android:src="@drawable/ic_star"
                             app:tint="#4C6AFD"
                             android:layout_marginEnd="8dp"/>
@@ -232,7 +233,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Workout Champion! 🏆"
+                            android:text="@string/workout_champion"
                             android:textSize="14sp"
                             android:textColor="#4C6AFD"
                             android:textStyle="bold"/>
@@ -245,7 +246,7 @@
                 android:id="@+id/btn_done"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Back to Workouts"
+                android:text="@string/back_to_workouts"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:backgroundTint="#4C6AFD"

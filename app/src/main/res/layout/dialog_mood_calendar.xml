@@ -18,6 +18,7 @@
             android:id="@+id/btn_prev_month"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:contentDescription="@string/chevron_left"
             android:src="@drawable/ic_chevron_left"
             android:background="@drawable/bg_rounded_white"
             app:tint="#4C6AFD"/>
@@ -37,6 +38,7 @@
             android:id="@+id/btn_next_month"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:contentDescription="@string/chevron_right"
             android:src="@drawable/ic_chevron_right"
             android:background="@drawable/bg_rounded_white"
             app:tint="#4C6AFD"/>
@@ -54,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sun"
+            android:text="@string/sun"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -64,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mon"
+            android:text="@string/mon"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -74,7 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tue"
+            android:text="@string/tue"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -84,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Wed"
+            android:text="@string/wed"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -94,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Thu"
+            android:text="@string/thu"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -104,7 +106,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Fri"
+            android:text="@string/fri"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -114,7 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sat"
+            android:text="@string/sat"
             android:textSize="12sp"
             android:textColor="#64748B"
             android:gravity="center"
@@ -192,7 +194,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mood Legend"
+            android:text="@string/mood_legend"
             android:textSize="14sp"
             android:textColor="#1E3A8A"
             android:textStyle="bold"
@@ -208,7 +210,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🥳 Excited"
+                android:text="@string/excitedimoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -216,7 +218,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😊 Happy"
+                android:text="@string/happyemoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -224,7 +226,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😌 Calm"
+                android:text="@string/calmemoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -232,7 +234,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😐 Neutral"
+                android:text="@string/neutralemojo"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -247,7 +249,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😴 Tired"
+                android:text="@string/tiredemoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -255,7 +257,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😤 Stressed"
+                android:text="@string/stressedemoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -263,7 +265,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😔 Sad"
+                android:text="@string/sademoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 
@@ -271,7 +273,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="😠 Angry"
+                android:text="@string/angryemoji"
                 android:textSize="12sp"
                 android:textColor="#64748B"/>
 

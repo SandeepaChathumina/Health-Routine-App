@@ -15,6 +15,7 @@
         android:id="@+id/iv_reminder_status"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:contentDescription="@string/notifyactive"
         android:src="@drawable/ic_notifications_active"
         app:tint="#10B981"
         android:layout_marginEnd="12dp"/>
@@ -30,7 +31,7 @@
             android:id="@+id/tv_reminder_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mood Check-in"
+            android:text="@string/mood_check_in"
             android:textSize="16sp"
             android:textColor="#1E3A8A"
             android:textStyle="bold"/>
@@ -39,7 +40,7 @@
             android:id="@+id/tv_reminder_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="How are you feeling today?"
+            android:text="@string/how_are_you_feeling_today"
             android:textSize="14sp"
             android:textColor="#64748B"
             android:layout_marginTop="2dp"/>
@@ -48,7 +49,7 @@
             android:id="@+id/tv_reminder_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="09:00"
+            android:text="@string/_09_00"
             android:textSize="12sp"
             android:textColor="#4C6AFD"
             android:textStyle="bold"
@@ -60,6 +61,7 @@
         android:id="@+id/iv_delete_reminder"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:contentDescription="@string/trashicon"
         android:src="@drawable/trash"
         app:tint="#EF4444"
         android:background="@drawable/bg_circle_light_red"

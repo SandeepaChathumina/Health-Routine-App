@@ -466,8 +466,8 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:contentDescription="@string/awardicon"
-                            android:src="@drawable/ic_award"
+                            android:contentDescription="@string/staricon"
+                            android:src="@drawable/ic_star"
                             app:tint="#4C6AFD"
                             android:background="@drawable/bg_circle_light_blue"
                             android:padding="8dp"/>

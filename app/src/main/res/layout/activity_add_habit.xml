@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Habit"
+            android:text="@string/add_new_habit"
             android:textSize="24sp"
             android:textColor="#1E3A8A"
             android:textStyle="bold"
@@ -29,14 +29,14 @@
                 android:id="@+id/et_habit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Habit Title"
+                android:hint="@string/habit_title"
                 android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/category"
             android:textSize="16sp"
             android:textColor="#1E3A8A"
             android:layout_marginBottom="8dp"/>
@@ -52,28 +52,28 @@
                 android:id="@+id/rb_health"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Health"
+                android:text="@string/health"
                 android:textSize="14sp"/>
 
             <RadioButton
                 android:id="@+id/rb_fitness"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fitness"
+                android:text="@string/fitness"
                 android:textSize="14sp"/>
 
             <RadioButton
                 android:id="@+id/rb_mindfulness"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mindfulness"
+                android:text="@string/mindfulness"
                 android:textSize="14sp"/>
 
             <RadioButton
                 android:id="@+id/rb_work"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Work"
+                android:text="@string/work"
                 android:textSize="14sp"/>
         </RadioGroup>
 
@@ -86,7 +86,7 @@
                 android:id="@+id/et_target_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Target Count (e.g., 8 glasses)"
+                android:hint="@string/target_count"
                 android:inputType="number"
                 android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -95,7 +95,7 @@
             android:id="@+id/btn_save_habit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Habit"
+            android:text="@string/save_habit"
             android:textSize="16sp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#4C6AFD"/>

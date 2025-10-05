@@ -71,6 +71,6 @@
             android:src="@drawable/ic_more_vertical"
             app:tint="#64748B"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Options"/>
+            android:contentDescription="@string/options"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

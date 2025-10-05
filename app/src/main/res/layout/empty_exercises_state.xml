@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="40dp">
+    android:padding="40dp"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:layout_width="80dp"
@@ -19,7 +21,7 @@
         android:id="@+id/tv_empty_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No exercises selected yet.\nTap 'Quick Morning Workout' to choose exercises."
+        android:text="@string/no_exercises_selected_yet_ntap_quick_morning_workout_to_choose_exercises"
         android:textSize="16sp"
         android:textColor="#64748B"
         android:gravity="center"

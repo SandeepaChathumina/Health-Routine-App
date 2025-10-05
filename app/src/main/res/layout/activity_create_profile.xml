@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create Your Profile"
+                android:text="@string/create_your_profile"
                 android:textSize="28sp"
                 android:textColor="#1E3A8A"
                 android:textStyle="bold"
@@ -62,7 +62,7 @@
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Name"
+                            android:hint="@string/name"
                             android:inputType="textPersonName"
                             android:textSize="16sp"
                             android:maxLines="1"/>
@@ -84,7 +84,7 @@
                             android:id="@+id/et_age"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Age"
+                            android:hint="@string/age"
                             android:inputType="number"
                             android:textSize="16sp"
                             android:maxLines="1"/>
@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gender"
+                        android:text="@string/gender"
                         android:textSize="16sp"
                         android:textColor="#1E3A8A"
                         android:textStyle="bold"
@@ -130,7 +130,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Male"
+                                    android:text="@string/male"
                                     android:textSize="18sp"
                                     android:textColor="#4C6AFD"
                                     android:textStyle="bold" />
@@ -163,7 +163,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Female"
+                                    android:text="@string/female"
                                     android:textSize="18sp"
                                     android:textColor="#4C6AFD"
                                     android:textStyle="bold" />
@@ -181,7 +181,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You can always update this information later in your profile settings."
+                android:text="@string/you_can_always_update_this_information_later_in_your_profile_settings"
                 android:textSize="14sp"
                 android:textColor="#64748B"
                 android:gravity="center"
@@ -196,7 +196,7 @@
         android:id="@+id/btn_create_profile"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Create Profile"
+        android:text="@string/create_profile"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
