@@ -8,7 +8,7 @@ class NavigationManager(private val context: Context) {
     private val profilePrefs: SharedPreferences = context.getSharedPreferences("user_profile", Context.MODE_PRIVATE)
     
     /**
-     * Determines where the user should be navigated after splash screen
+     * identify where the user should be navigated after splash screen
      * @return Class of the activity to navigate to
      */
     fun getNextDestination(): Class<*> {
@@ -38,18 +38,18 @@ class NavigationManager(private val context: Context) {
                !userGender.isNullOrEmpty()
     }
     
-    /**
-     * Marks the profile as complete
-     */
+
+    // Marks the profile as complete
+
     fun markProfileComplete() {
         profilePrefs.edit().putBoolean("profile_created", true).apply()
     }
     
-    /**
-     * Clears all user data (useful for testing or logout)
-     */
+
+    //  Clears all user data (useful for testing or logout)
+
+    // Clear profile data
     fun clearAllUserData() {
-        // Clear profile data
         profilePrefs.edit().clear().apply()
         
         // Clear habits data

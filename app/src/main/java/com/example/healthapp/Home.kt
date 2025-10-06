@@ -22,7 +22,6 @@ class Home : AppCompatActivity() {
     
     private lateinit var homeDataManager: HomeDataManager
     private lateinit var profilePrefs: SharedPreferences
-    // UI Components
     private lateinit var tvGreeting: TextView
     private lateinit var tvSubtitle: TextView
     private lateinit var tvProgressPercent: TextView
@@ -47,8 +46,7 @@ class Home : AppCompatActivity() {
     
     override fun onResume() {
         super.onResume()
-        // Refresh data when returning to home page
-        loadTodayProgress()
+        loadTodayProgress()   // Refresh data when returning to home page
     }
     
     private fun initializeViews() {

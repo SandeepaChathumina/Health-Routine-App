@@ -10,6 +10,7 @@ data class Habit(
     val completedCount: Int, // How many times completed today
     val isCompleted: Boolean = false
 ) : Serializable {
+    //Calculate progress percentage
     fun getProgress(): Int {
         return if (targetCount > 0) {
             (completedCount.toFloat() / targetCount.toFloat() * 100).toInt()

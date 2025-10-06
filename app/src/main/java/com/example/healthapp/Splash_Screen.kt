@@ -8,11 +8,11 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.view.animation.AnimationUtils
-import android.widget.ImageView // Add this import
+import android.widget.ImageView
 
 class Splash_Screen : AppCompatActivity() {
 
-    private lateinit var heartImageView: ImageView // Declare here
+    private lateinit var heartImageView: ImageView //heart image
     private lateinit var navigationManager: NavigationManager
     private val SPLASH_DELAY: Long = 3000 // 3 seconds
 
@@ -21,7 +21,7 @@ class Splash_Screen : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
 
-        // Initialize components
+        // Initialize variables
         heartImageView = findViewById(R.id.heartImageView)
         navigationManager = NavigationManager(this)
 
@@ -29,6 +29,7 @@ class Splash_Screen : AppCompatActivity() {
         navigateToNextScreen()
     }
 
+    //Heart Animation
     private fun startHeartAnimation(){
         val heartBeatAnim = AnimationUtils.loadAnimation(this, R.anim.heart_beat)
 
@@ -37,6 +38,7 @@ class Splash_Screen : AppCompatActivity() {
         }, 500)
     }
 
+    //Next screen navigation
     private fun navigateToNextScreen(){
         Handler(Looper.getMainLooper()).postDelayed({
             // Determine next destination based on user profile status
