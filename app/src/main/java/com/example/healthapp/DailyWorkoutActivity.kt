@@ -38,7 +38,7 @@ class DailyWorkoutActivity : AppCompatActivity() {
         val resetButton: MaterialButton = findViewById(R.id.btn_reset_workout)
         val startWorkoutButton: MaterialButton = findViewById(R.id.btn_start_workout)
 
-        // DEBUG: Check if we can find the CardView
+        // Check if we can find the CardView
         val workoutInfoCard: CardView? = findViewById(R.id.card_workout_info)
         Log.d("Navigation", "Workout info card found: ${workoutInfoCard != null}")
 
@@ -49,13 +49,13 @@ class DailyWorkoutActivity : AppCompatActivity() {
             finish()
         }
 
-        // SIMPLE APPROACH: Add click listener directly to the CardView
+        // Add click listener directly to the CardView
         workoutInfoCard?.setOnClickListener {
             Log.d("Navigation", "Workout info card clicked - navigating to WorkoutDetails")
             navigateToWorkoutDetails()
         }
 
-        // ALTERNATIVE: Also make the title and description clickable
+        // Also make the title and description clickable
         val tvWorkoutTitle: TextView? = findViewById(R.id.tv_workout_title)
         val tvWorkoutDescription: TextView? = findViewById(R.id.tv_workout_description)
 

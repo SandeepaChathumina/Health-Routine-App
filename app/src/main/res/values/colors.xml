@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Primary Blue Colors -->
+    <color name="primary_blue">#0077B6</color>
+
+    <!-- Light Blue Tones -->
+    <color name="accent_light_blue">#48CAE4</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#F0F9FF</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_background_light">#E6F7FF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#03045E</color>
+    <color name="text_tertiary">#999999</color>
+
+    <!-- BMI colors -->
+    <color name="bmi_blue">#60A5FA</color>
+    <color name="bmi_green">#10B981</color>
+    <color name="bmi_orange">#F59E0B</color>
+    <color name="bmi_red">#EF4444</color>
+
 
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
@@ -30,18 +51,5 @@
     <color name="light_red">#FEE2E2</color>
     <color name="light_green">#D1FAE5</color>
 
-    <!-- Primary Blue Colors -->
-    <color name="primary_blue">#0077B6</color>
 
-    <!-- Light Blue Tones -->
-    <color name="accent_light_blue">#48CAE4</color>
-
-    <!-- Background Colors -->
-    <color name="background_light">#F0F9FF</color>
-    <color name="card_background">#FFFFFF</color>
-    <color name="card_background_light">#E6F7FF</color>
-
-    <!-- Text Colors -->
-    <color name="text_primary">#03045E</color>
-    <color name="text_tertiary">#999999</color>
 </resources>

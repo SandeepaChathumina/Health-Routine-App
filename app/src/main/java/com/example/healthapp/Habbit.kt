@@ -6,7 +6,7 @@ data class Habit(
     val title: String,
     val category: String,
     val currentStreak: Int,
-    val targetCount: Int, // How many times per day (e.g., eat 3 times)
+    val targetCount: Int, // How many times per day
     val completedCount: Int, // How many times completed today
     val isCompleted: Boolean = false
 ) : Serializable {

@@ -207,10 +207,6 @@ class BmiCalculatorActivity : AppCompatActivity() {
     // Optional: Clear inputs when returning to the activity
     override fun onResume() {
         super.onResume()
-        // Uncomment the lines below if you want to clear inputs when activity resumes
-        // etHeight.text?.clear()
-        // etWeight.text?.clear()
-        // tvBmiResult.text = "--"
-        // tvBmiCategory.text = "Enter your details above"
+
     }
 }
